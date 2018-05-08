@@ -1,0 +1,126 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Template for displaying products list widget
+ *
+ * @var $block \Magento\CatalogWidget\Block\Product\ProductsList
+ */
+?>
+<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())):?>
+<?php
+    $type = 'widget-product-grid';
+
+    $mode = 'grid';
+
+    $image = 'new_products_content_widget_grid';
+    $title = $block->getTitle() ? __($block->getTitle()) : '';
+    $items = $block->getProductCollection()->getItems();
+
+    $showWishlist = true;
+    $showCompare = true;
+    $showCart = true;
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::DEFAULT_VIEW;
+    $description = false;
+?>
+<style>
+  .section-hot-deal .main-title {
+     font-size: 22px;
+  }
+  .shop_now_link a{
+	  color: #fff !important;position: relative;left: 99px;top: 13px;font-size: 19px;
+  }
+ .shop_now_link a:hover {color:#4c668 !important;text-decoration:underline;}
+ .deal_price .old-price{
+	 color: #fff !important;
+ }
+</style>
+
+<h2 class="super-title left">Weekly Deal!</h2>
+<?php foreach ($items as $_item): ?>
+    <h1 class="title main-title" style="max-width:411px;"><?php echo $block->escapeHtml($_item->getName()) ?></h1>
+    <span class="deal_price">
+        <span class="price" style="color: #fff;font-size: 17px;font-weight: bold;position: relative;bottom: 21px;"> <?php echo $block->getProductPriceHtml($_item, $type); ?></span>
+     </span>
+	
+	 <div class="ms-cowntdown-deal">
+	 
+	  <script type="text/javascript">
+								
+				var time_now_server,time_now_client,time_end,time_server_client,timerID;
+
+				//time_end=new Date("2018/10/06 23:59:59");
+				time_end=new Date("<?php echo date("Y/m/d 23:59:59",strtotime($_item->getSpecialToDate())); ?>");
+				time_end=time_end.getTime();
+				 
+				time_now_server=new Date();
+				time_now_server=time_now_server.getTime();
+				time_now_client=new Date();
+				time_now_client=time_now_client.getTime();
+				 
+				time_server_client=time_now_server-time_now_client;
+
+				setTimeout("show_time()",1000);
+
+				function show_time(){
+					 var timer = document.getElementById("timer");
+					 if(!timer){
+					  return ;
+					 }
+					 timer.innerHTML =time_server_client;
+
+					 var time_now,time_distance,str_time;
+					 var int_day,int_hour,int_minute,int_second;
+					 var time_now=new Date();
+					 time_now=time_now.getTime()+time_server_client;
+					 time_distance=time_end-time_now;
+					 if(time_distance>0){
+						  int_day=Math.floor(time_distance/86400000)
+						  time_distance-=int_day*86400000;
+						  int_hour=Math.floor(time_distance/3600000)
+						  time_distance-=int_hour*3600000;
+						  int_minute=Math.floor(time_distance/60000)
+						  time_distance-=int_minute*60000;
+						  int_second=Math.floor(time_distance/1000)
+					 
+						  if(int_hour<10)
+						   int_hour="0"+int_hour;
+						  if(int_minute<10)
+						   int_minute="0"+int_minute;
+						  if(int_second<10)
+						   int_second="0"+int_second;
+						  if(int_day>1){
+									//str_time=int_day+" days "+int_hour+":"+int_minute+":"+int_second;
+									str_time='<span class="day">'+int_day+'<span>days</span></span> <span class="hour">'+int_hour+'<span>hours</span></span> <span class="minute">'+int_minute+'<span>mins</span></span> <span class="second">'+int_second+'<span>secs</span></span>';
+							   }else if(int_day==1){
+									//str_time=int_day+" day "+int_hour+":"+int_minute+":"+int_second;
+                                      str_time='<span class="day">'+int_day+'<span>day</span></span> <span class="hour">'+int_hour+'<span>hours</span></span> <span class="minute">'+int_minute+'<span>mins</span></span> <span class="second">'+int_second+'<span>secs</span></span>';									
+							   }else{
+									//str_time=int_hour+":"+int_minute+":"+int_second;
+									str_time='<span class="hour">'+int_hour+'<span>hours</span></span> <span class="minute">'+int_minute+'<span>mins</span></span> <span class="second">'+int_second+'<span>secs</span></span>';
+							   }
+						 
+						   timer.innerHTML=str_time;
+						  setTimeout("show_time()",1000);
+					 }else{
+					  timer.innerHTML =timer.innerHTML;
+					  clearTimeout(timerID)
+					 }
+				}
+     </script>
+	 
+	    <div class="cp-countdown" id="timer">
+		   <!--<span class="day">1<span>days</span></span> <span class="hour">0<span>hours</span></span> <span class="minute">0<span>mins</span></span> <span class="second">0<span>secs</span></span>-->
+		</div>
+	 </div>
+
+     <span class="shop_now_link"><a href="<?php /* @escapeNotVerified */ echo $block->getProductUrl($_item) ?>">Shop Now</a></span>
+ <?php endforeach ?>
+<?php endif;?>
