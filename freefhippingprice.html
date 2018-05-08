@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0041)https://www.uusouq.com/sku_and_price.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>GetSku and ChangePrice</title>
+<style>
+.button_span{
+	
+	border-width: 1px;
+    border-style: solid;
+    border-color: #ed6502 #a04300 #a04300 #ed6502;
+    padding: 10px 7px 7px 7px;
+    background: #FFAC47!important;
+    color: #fff;
+    font: bold 12px arial, helvetica, sans-serif;
+    cursor: pointer;
+    text-align: center !important;
+    white-space: nowrap;
+}
+.content_zz{ width:600px; margin:0 auto;}
+select,input{ height:28px;}
+</style></head>
+
+
+<body>
+
+<div class="content_zz">
+          <!-- <select name="prefixSelect" id="prefixSelect" style="width:157px;"><option>--Select Origin--</option>
+					<option value="C">China</option>
+		   </select>
+		   
+		   <select name="suffixSelect" id="suffixSelect" style="width:157px;"><option>--Select Caterory--</option>
+					<option value="CCR">Case &amp; Covers</option>
+					<option value="SPR">Screen Protector</option>
+					<option value="HHP">Headset &amp; Headphones</option>
+					<option value="USB">USB Drive</option>
+					<option value="MEC">Memory Cards</option>
+					<option value="WTS">Watches</option>
+					<option value="UCE">USB Cable</option>
+					<option value="CAE">Cameras Accessories</option>
+					<option value="FLT">Flashlight</option>
+					<option value="TOY">Toy</option>
+                    <option value="STO">Sports Toys &amp; Outdoor</option>
+                    <option value="HKC"> Home &amp; Kitchen </option>
+                    <option value="CLM">Clothes Male</option>
+                    <option value="CLF">Clothes Female</option>
+                    <option value="CLK">Clothes Kid</option>
+		   </select>
+		   
+		   <input type="text" id="skumodel" value="" size="4" style="width:60px;" title="Generate or enter yourself">
+		   <input type="button" class="button_span" value="Generate" title="Generate or enter yourself" onclick="rolldice()">
+		   <span title="Get the Sku" class="button_span" onclick="ajaxGetSku()">getSku</span>
+		   <p>Sku Name:<input type="text" id="sku" value="">
+		      <span><input type="button" value="Copy" onclick="setTxt1()"></span>
+		   </p>-->
+		   
+		    <p>Product Weight:<input type="text" id="weight" value=""></p>
+			<p>Product(USD):<input type="text" id="price_base" value=""></p>
+			<p>Change Price(USD):<input type="text" id="price" value="" onclick="evnCld();">
+			  <span><input type="button" value="Copy" onclick="setTxt2()"></span>
+			</p>
+
+</div>
+
+
+<script type="text/javascript">
+
+	function ajaxGetSku(){
+		if(document.getElementById('skumodel').value==''){
+		  alert('Sku product model cannot be empty!');
+		  return false;
+		}
+		if(document.getElementById('skumodel').value.length>5){
+		  alert('Sku product model can not be more than 5');
+		  return false;
+		}
+		var var1 = document.getElementById('prefixSelect').value;
+		var var2 = document.getElementById('suffixSelect').value;
+		var var3 = document.getElementById('skumodel').value;
+		document.getElementById('sku').value = var1 + "" + var2 + "" + var3;
+	}
+	function rolldice(){
+		
+		var data=["0","1","2","3","4","5","6","7","8","9"]; 
+		var rand="";
+		  for(var i=0;i<5;i++){ 
+			 r=Math.floor(Math.random()*10);  
+			 rand+=data[r];
+		} 
+		document.getElementById('skumodel').value=rand; 
+	}
+	
+	function evnCld(){
+		if(document.getElementById('price_base').value > 0){
+				var var1 = document.getElementById('weight').value;
+				var var2 = document.getElementById('price_base').value;
+				var var3 = var1*var2;
+				document.getElementById('price').value = parseInt(var3/6.3)+parseInt(var2);
+				//document.getElementById('price').value=document.getElementById('rnb').value/6.3;
+		}
+	}
+	 var bObjprice = document.getElementById("price");
+	 bObjprice.setAttribute("onclick", "evnCld();");
+	 
+	 function setTxt1(){
+	　　var t=document.getElementById("sku");
+	　　t.select();
+	　　//window.clipboardData.setData('text',t.createTextRange().text);
+		document.execCommand("Copy");
+		alert('Copy success!'); 
+   }
+   
+   function setTxt2(){
+	　　var t=document.getElementById("price");
+	　　t.select();
+	　　//window.clipboardData.setData('text',t.createTextRange().text);
+		document.execCommand("Copy");
+		alert('Copy success!'); 
+   }
+</script>
+
+
+
+
+</body></html>

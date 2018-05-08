@@ -1,0 +1,4 @@
+Sitemap: https://www.upettools.com/sitemap/sitemap.xml
+Sitemap: https://www.upettools.com/sitemap/new_sitemap.xml
+Sitemap: https://www.upettools.com/pub/sitemap/new_sitemap.xml
+Sitemap: https://www.upettools.com/pub/sitemap/sitemap.xml

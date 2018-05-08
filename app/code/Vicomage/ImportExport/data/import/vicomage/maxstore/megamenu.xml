@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <megamenu>
+    <item>
+      <item_id><![CDATA[11]]></item_id>
+      <label><![CDATA[Categories]]></label>
+      <menu_type><![CDATA[2]]></menu_type>
+      <url><![CDATA[#]]></url>
+      <position><![CDATA[0]]></position>
+      <columns><![CDATA[1]]></columns>
+      <custom_class><![CDATA[]]></custom_class>
+      <html_label><![CDATA[]]></html_label>
+      <status><![CDATA[1]]></status>
+      <store><![CDATA[0]]></store>
+      <category_id><![CDATA[0]]></category_id>
+      <top_content><![CDATA[]]></top_content>
+      <bottom_content><![CDATA[]]></bottom_content>
+      <left_content><![CDATA[]]></left_content>
+      <left_col><![CDATA[0]]></left_col>
+      <right_content><![CDATA[]]></right_content>
+      <right_col><![CDATA[0]]></right_col>
+      <menu_ef><![CDATA[2]]></menu_ef>
+      <static_width><![CDATA[]]></static_width>
+      <category_label><![CDATA[hot]]></category_label>
+      <fake_name><![CDATA[Categories]]></fake_name>
+      <subcategory_columns><![CDATA[1]]></subcategory_columns>
+      <main_content><![CDATA[<div class="content-hot-category">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="block-cat up">
+				<a href="#" class="button button_cat">shop category</a>
+				<div class="thumb">
+					<a href="#" class="thumb-cat">
+						<img class="img-responsive" src="{{media url='wysiwyg/vicomage/megamenu/hotmenu1.jpg'}}" alt="" />
+					</a>
+					<h3 class="title title_cat"><a href="#"><span class="content-cat">Accessories</span><span class="count count_cat">( 11 items )</span></a></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="block-cat down">
+				<div class="thumb">
+					<a href="#" class="thumb-cat">
+						<img class="img-responsive" src="{{media url='wysiwyg/vicomage/megamenu/hotmenu2.jpg'}}" alt="" />
+					</a>
+					<h3 class="title title_cat"><a href="#"><span class="content-cat">Shoes</span><span class="count count_cat">( 2 items )</span></a></h3>
+				</div>
+				<a href="#" class="button button_cat">shop category</a>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="block-cat up">
+				<a href="#" class="button button_cat">shop category</a>
+				<div class="thumb">
+					<a href="#" class="thumb-cat">
+						<img class="img-responsive" src="{{media url='wysiwyg/vicomage/megamenu/hotmenu3.jpg'}}" alt="" />
+					</a>
+					<h3 class="title title_cat"><a href="#"><span class="content-cat">Sunglasses</span><span class="count count_cat">( 6 items )</span></a></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="block-cat down">
+				<div class="thumb">
+					<a href="#" class="thumb-cat">
+						<img class="img-responsive" src="{{media url='wysiwyg/vicomage/megamenu/hotmenu4.jpg'}}" alt="" />
+					</a>
+					<h3 class="title title_cat"><a href="#"><span class="content-cat">Bicycle</span><span class="count count_cat">( 10 items )</span></a></h3>
+				</div>
+				<a href="#" class="button button_cat">shop category</a>
+			</div>
+		</div>
+	</div>
+</div>]]></main_content>
+    </item>
+  </megamenu>
+</root>
