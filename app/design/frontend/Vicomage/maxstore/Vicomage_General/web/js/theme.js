@@ -60,6 +60,7 @@ define([
 		});
 	});
 	
+	$('.page-header .header.links').clone().appendTo('#store\\.links');
 	
 	//parallax
     $(document).ready(function($) {
