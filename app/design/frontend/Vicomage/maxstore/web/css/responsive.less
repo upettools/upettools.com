@@ -226,6 +226,13 @@
 		}
 	} 
 }
+//footer middle
+.footer-middle .footer-information .block-content-statick{text-align: center;margin: 40px 0 -50px 0;}
+.footer-middle .footer-information .block-content-statick ul li{display: inline-block;margin:0 7px;}
+.footer-middle .footer-information .block-content-statick ul li:nth-child(n+3) a::before{
+	content: '|';position: absolute;left: -10px; top: 0px;font-size: 10px;color: #808080;}
+.footer-middle .footer-information .block-content-statick ul li a:hover{margin-left:0;}
+.footer-middle .col-lg-3.footer-custom-middle{padding-left:48px;}
 
 
 
@@ -234,6 +241,9 @@
 
 
 @media (max-width: 768px) {
+.default-effect:hover::before {
+	opacity: 0;
+}
 .header-type1{
 	.header-content-type {
 		padding: 0 20px;
@@ -246,6 +256,45 @@
     position: static;
     transform: inherit;
 } 
+/* - content-banner*/
+.content-banner .banner-inner-height .inner-banner {
+	min-height: initial;
+	padding: 8px 0 0;
+	.title-banner{
+		font-size: 22px;
+		line-height: 28px;
+		padding: 0 0 5px;
+		&::after{
+			bottom: 2px;
+		}
+	}
+	.des-banner {
+		margin-bottom: -5px;
+		opacity: 0.9;
+		transition: all 0.2s linear;
+	}
+}
+/* content-banner -> */
+/* <- comage-slider */
+.slick-dotted.slick-slider{
+	margin-bottom:10px;
+}
+.slick-dots li button{
+	@slick_size : 8px;
+	width: @slick_size;
+	height: @slick_size;
+}
+/* comage-slider -> */
+/* <- social-login-popup */
+.form-customer-create .actions-toolbar .secondary a.action{color:#fff;}
+/* social-login-popup -> */
+/* <- footer-middle */
+.heading .fa-caret-down.visible-xs {display: inline-block !important;margin-right:15px;}
+.footer-middle .block-content-statick ul{padding: 0 0 0 24px;}
+/* footer-middle -> */
+/* <- section-hot-deal*/
+.section-hot-deal .super-title{padding: 0;margin: 0 0 4px;}
+/*section-hot-deal ->*/
 	.header-menu .nav-sections {
 		background: #ffffff none repeat scroll 0 0;
 	}
@@ -330,7 +379,11 @@
   }
 
 .footer-middle .heading {
-    margin-top: 15px;
+	margin-top: 15px;
+	/*new*/
+	font-size: 14px;
+	margin: 8px 0 8px;
+	opacity: .9;
 }
 .footer-bottom .copyright {
     margin-bottom: 10px;
@@ -481,7 +534,7 @@
     transform: translate(-50%, -50%);
 }
 .vicomage-slider .slick-active .slide-caption.slide-caption-right {
-    left: 50%;
+    left: 65%;//50%
     right: inherit;
     transform: translate(-50%, -50%);
 	text-align: center;
