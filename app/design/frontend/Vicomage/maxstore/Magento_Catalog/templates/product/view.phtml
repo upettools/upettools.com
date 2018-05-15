@@ -6,7 +6,14 @@
 
 // @codingStandardsIgnoreFile
 ?>
-
+<!-- new add at product view -->
+<style type="text/css" media="all">
+	@media only screen and (min-width: 769px) {
+		.product-info-main .page-title-wrapper h1 {
+			font-size: 24px;
+		}
+	}
+</style>
 <?php
 	$vico_helper = $this->helper('Vicomage\General\Helper\Data');
 	$product_config = $vico_helper->getConfig('vicomage_general_config/product');	
