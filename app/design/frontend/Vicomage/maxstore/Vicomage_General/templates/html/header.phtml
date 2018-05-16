@@ -3,9 +3,12 @@
 ?>
 <!-- new add at header -->
 <style type="text/css" media="all">
+	@media only screen and (min-width: 769px) and (max-width: 898px) {
+		.header-container-fixed #mainMenu>li:first-child{display: none;}
+	}
 	@media only screen and (max-width: 768px) {
 		.page-header .header-search {
-			top: 25px;
+			top: 25px;left: 60px;
 		}
 		.form-customer-create .actions-toolbar .secondary a.action ,
 		.form-password-forget .actions-toolbar .secondary a.action{
