@@ -1,3 +1,35 @@
+<style type="text/css" media="all">
+@media (min-width: 769px) and (max-width: 998px), print{
+    .sidebar .section-featured-sidebar .vigoproduct-list .products-list .product-item-info .product-img-hover
+    {width:100%;}
+    .sidebar .section-featured-sidebar .product-items .product-item-info .product-item-photo{width: 100%;margin: 0;}
+    .sidebar .section-featured-sidebar .product-items .product-item-details{width: 100%;padding: 0;}
+}
+@media (min-width: 769px), print{
+    .sidebar .product-items .product-item-details {
+        padding: 0 0 0 10px;
+    }
+    .sidebar .product-items .product-item-info .product-item-photo{margin: 0;}
+}
+@media only screen and (max-width:768px){
+    .sidebar .section-featured-sidebar .product-items .product-item-info .product-item-photo
+    {width: 100%;position: relative;}
+    .sidebar .section-featured-sidebar .vigoproduct-list .products-list .product-item-details
+    {padding: 0 10px 0;margin: 0;width: 70%;float: right;}
+    .sidebar .section-featured-sidebar .vigoproduct-list .products-list .product-item-details .product-item-name
+    {white-space: normal;}
+}
+@media (max-width: 640px) {}
+@media (max-width: 480px) {
+    .sidebar .section-featured-sidebar .product-items .product-item-info .product-item-photo{width: auto;position: absolute;}
+    .sidebar .section-featured-sidebar .vigoproduct-list .products-list .product-item-details{padding: 0 10px 0 34px;}
+}
+@media (max-width: 400px) {
+    .sidebar .section-featured-sidebar .product-items .product-item-info .product-item-photo{width: 30%;position: absolute;}
+    .sidebar .section-featured-sidebar .vigoproduct-list .products-list .product-item-details{padding: 0 10px 0;}
+    .sidebar .section-featured-sidebar .vigoproduct-list .products-list .product-item-details .product-item-name{white-space: nowrap;}
+}
+</style>
 <?php
 $vico_helper = $this->helper('Vicomage\General\Helper\Data');
 $categoryView = $vico_helper->getConfig('vicomage_general_config/category');
