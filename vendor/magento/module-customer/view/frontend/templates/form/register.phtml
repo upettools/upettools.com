@@ -131,6 +131,14 @@
     <?php endif; ?>
     <fieldset class="fieldset create account" data-hasrequired="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('* Required Fields')) ?>">
         <legend class="legend"><span><?php echo $block->escapeHtml(__('Sign-in Information')) ?></span></legend><br>
+		
+		 <div class="field">
+            <label for="email_referee" class="label"><span><?php echo $block->escapeHtml(__('Referee Email')) ?></span></label>
+            <div class="control">
+                <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
+            </div>
+        </div>
+		
         <div class="field required">
             <label for="email_address" class="label"><span><?php echo $block->escapeHtml(__('Email')) ?></span></label>
             <div class="control">
