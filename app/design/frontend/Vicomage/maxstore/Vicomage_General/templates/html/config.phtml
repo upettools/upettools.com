@@ -103,10 +103,10 @@ require([
 	$( document ).ready(function() {
 		if($('.header-sticker').hasClass('sticker')){
 			$(window).scroll(function () {
+				//window.console.log($(this).scrollTop());
 				if ($(this).scrollTop() > 500) {
 					$('.header-sticker').addClass('header-container-fixed');
-				}
-				else{
+				}else if($(this).scrollTop() < 350 ) {
 					$('.header-sticker').removeClass('header-container-fixed');
 				}
 				return false;
