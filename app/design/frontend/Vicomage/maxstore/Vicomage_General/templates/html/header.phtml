@@ -10,6 +10,7 @@
 		.page-header .header-search {
 			top: 25px;left: 60px;
 		}
+		.page-header .switcher .options ul.dropdown{left: 0;}
 		.form-customer-create .actions-toolbar .secondary a.action ,
 		.form-password-forget .actions-toolbar .secondary a.action{
 			color: #fff;
@@ -18,11 +19,27 @@
 	/* --- common style --- */
 	.toolbar select{padding-left: 10px;}
 	.swatch-option{border: 1px solid rgba(0, 0, 0, 0.2);}
-	.page-header .header-top-right,.page-header .switcher .options .action.toggle:after{line-height:30px;}
+	.page-header .header-top-right,.page-header #switcher-currency .action.toggle:after{line-height:30px;}
+	.account .page-wrapper .column.main a{color: #4c6689;}
+	.account .page-wrapper .column.main a:hover{color: #2a6ac1;text-decoration: underline;}
 	@media only screen and (max-width: 768px) {
+		.page-header .switcher .options .action.toggle:after{line-height:20px;}
 		.product-label {
 			top: 5px;
 			left: 8px;
+		}
+		.vicomage-slider .slick-slide[data-slick-index="0"] .text-slide .caption1{color: #c24343;
+		text-shadow: -1px 0px 1px #fff, 2px -1px 2px rgba(0,0,0,.8);}
+		.vicomage-slider .slick-active .slide-caption .caption1{
+			font-family: Gabriola;
+			font-style: italic;
+			font-weight: 700;
+		}
+		.vicomage-slider .slick-active .slide-caption .caption2,
+		.vicomage-slider .slick-active .slide-caption .caption3{
+			text-transform: capitalize;
+			font-size: 14px;
+			font-weight: normal;
 		}
 	}
 </style>
