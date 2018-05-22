@@ -22,11 +22,14 @@ class EmailReferee extends \Magento\Framework\App\Action\Action
     private $storeManager;
 
 	private $request;
+	
+	protected $resultJsonFactory;
 
     public function __construct(
        \Magento\Framework\App\Action\Context $context,
 	   \Magento\Store\Model\StoreManagerInterface $storeManager,
-	   \Magento\Framework\App\Request\Http $request
+	   \Magento\Framework\App\Request\Http $request,
+	   \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
 	   )
     {
 		
@@ -34,6 +37,7 @@ class EmailReferee extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
 		$this->storeManager = $storeManager;
 		$this->request = $request;
+		$this->resultJsonFactory = $resultJsonFactory;
     }
 	
     /**
@@ -49,9 +53,10 @@ class EmailReferee extends \Magento\Framework\App\Action\Action
 		
 		$emailReferee = $this->request->getParam('email_referee');
 		$resultPage = $this->getPostReferee($emailReferee);
-		echo $resultPage;
-		// echo 'Hello World';
-        exit;
+		
+		$resultJson = $this->resultJsonFactory->create();
+		
+        return $resultJson->setData(['status' => $resultPage]);
     }
 	
 	public function getPostReferee($emailReferee){
