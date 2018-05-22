@@ -78,7 +78,7 @@ class CustomerRegisterSuccess implements ObserverInterface
 		
 		//print_r($userId);exit;
 
-       // $name = [$customer->getFirstname(), $customer->getLastname()];
+        // $name = [$customer->getFirstname(), $customer->getLastname()];
         $name = [$CustomerModel->getFirstname(), $CustomerModel->getLastname()];
         try {
             $points = $this->helper->getRegistrationRulePoints();
