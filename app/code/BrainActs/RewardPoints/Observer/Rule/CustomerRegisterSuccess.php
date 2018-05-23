@@ -74,8 +74,11 @@ class CustomerRegisterSuccess implements ObserverInterface
 		$CustomerModel = $objectManager->create('Magento\Customer\Model\Customer');
 		$CustomerModel->setWebsiteId($this->storeManager->getStore()->getId());// **//Here 1 means Store ID**
 		$CustomerModel->loadByEmail($emailReferee);
-		$userId = $CustomerModel->getId();
-		
+        $userId = $CustomerModel->getId();
+        
+		if($userId>0){
+
+       
 		//print_r($userId);exit;
 
        // $name = [$customer->getFirstname(), $customer->getLastname()];
@@ -108,6 +111,7 @@ class CustomerRegisterSuccess implements ObserverInterface
         } catch (\Exception $e) {
             $this->loger->critical($e);
         }
+    }
         return $this;
     }
 }
