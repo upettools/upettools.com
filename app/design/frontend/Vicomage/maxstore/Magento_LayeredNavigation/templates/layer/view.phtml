@@ -15,6 +15,9 @@
 ?>
 
 <?php if ($block->canShowBlock()): ?>
+<style>
+    .swatch-attribute.size .swatch-option{max-width: initial;}
+</style>
     <div class="block filter" id="layered-filter-block" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
         <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
         <div class="block-title filter-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
