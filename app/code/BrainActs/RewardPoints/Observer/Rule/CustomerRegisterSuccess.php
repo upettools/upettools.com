@@ -93,8 +93,9 @@ class CustomerRegisterSuccess implements ObserverInterface
              */
             $model = $this->historyFactory->create();
             $model->setCustomerId($userId);
-            $model->setCustomerName(implode(', ', $name));
-            $model->setPoints($points);
+            $model->setCustomerName($CustomerModel->getEmail());
+            //$model->setCustomerName(implode(', ', $name));
+            $model->setPoints(0);
             $model->setRuleName(__('Referee Registration'));
             $model->setStoreId($this->storeManager->getStore()->getId());
             $model->setTypeRule(3);
