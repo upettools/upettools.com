@@ -68,21 +68,7 @@ class CustomerRegisterSuccess implements ObserverInterface
     {
         $customer = $observer->getData('customer');
 		
-		$emailReferee = $this->request->getPost('email_referee');
-		
-		$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
-		$CustomerModel = $objectManager->create('Magento\Customer\Model\Customer');
-		$CustomerModel->setWebsiteId($this->storeManager->getStore()->getId());// **//Here 1 means Store ID**
-		$CustomerModel->loadByEmail($emailReferee);
-        $userId = $CustomerModel->getId();
-        
-		//if($userId>0){
-
-       
-		//print_r($userId);exit;
-
-        // $name = [$customer->getFirstname(), $customer->getLastname()];
-        $name = [$CustomerModel->getFirstname(), $CustomerModel->getLastname()];
+        $name = [$customer->getFirstname(), $customer->getLastname()];
         try {
             $points = $this->helper->getRegistrationRulePoints();
             if (empty($points)) {
@@ -92,7 +78,7 @@ class CustomerRegisterSuccess implements ObserverInterface
              * @var \BrainActs\RewardPoints\Model\History $model
              */
             $model = $this->historyFactory->create();
-            $model->setCustomerId($userId);
+            $model->setCustomerId($customer->getId());
             $model->setCustomerName(implode(', ', $name));
             $model->setPoints($points);
             $model->setRuleName(__('Referee Registration'));
@@ -100,18 +86,10 @@ class CustomerRegisterSuccess implements ObserverInterface
             $model->setTypeRule(3);
             $model->save();
 			
-			// $model = $this->historyFactory->create();
-            // $model->setCustomerId($customer->getId());
-            // $model->setCustomerName(implode(', ', $name));
-            // $model->setPoints($points);
-            // $model->setRuleName(__('Registration'));
-            // $model->setStoreId($this->storeManager->getStore()->getId());
-            // $model->setTypeRule(3);
-            // $model->save();
         } catch (\Exception $e) {
             $this->loger->critical($e);
         }
-   // }
+ 
         return $this;
     }
 }
