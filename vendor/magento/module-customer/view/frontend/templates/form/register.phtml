@@ -153,9 +153,9 @@
          <div class="field email_referce hidden">
             <label for="email_referee" class="label"><span><?php echo $block->escapeHtml(__('Referee Email')) ?></span></label>
             <div class="control">
-                <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
+                <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee111" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
             </div>
-            <a id="check_email_referee" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
+            <a id="check_email_referee111" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
         </div>
 		
         <div class="field required">
@@ -289,7 +289,7 @@ require([
         var event = event || window.event;
         event.preventDefault(); // Compatible standard Browsers
         window.event.returnValue = false; // Compatible IE6~8
-        if(!$('#check_email_referee').hasClass('hidden')){
+         if(!$('#check_email_referee').hasClass('hidden')){
             $('#email_referee').val('');
         }
         $('#form-validate').submit();
