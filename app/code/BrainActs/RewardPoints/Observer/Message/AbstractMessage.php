@@ -52,7 +52,7 @@ class AbstractMessage
     public function getBeforeRegistrationMessage()
     {
         $points = $this->helper->getRegistrationRulePoints();
-        if (!empty($points)) {
+        if (empty($points)) {
             return __('You will receive %1 points after registration.', $points);
         }
 
