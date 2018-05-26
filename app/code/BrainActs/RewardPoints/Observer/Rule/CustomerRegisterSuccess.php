@@ -76,7 +76,7 @@ class CustomerRegisterSuccess implements ObserverInterface
 		$CustomerModel->loadByEmail($emailReferee);
         $userId = $CustomerModel->getId();
         
-		if($userId>0){
+		//if($userId>0){
 
        
 		//print_r($userId);exit;
@@ -111,7 +111,7 @@ class CustomerRegisterSuccess implements ObserverInterface
         } catch (\Exception $e) {
             $this->loger->critical($e);
         }
-    }
+   // }
         return $this;
     }
 }
