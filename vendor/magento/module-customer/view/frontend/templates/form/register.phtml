@@ -144,18 +144,18 @@
 		
 		 <div class="field notice">
             <p>Notice: if someone has recommended you to register 'upettools.com', 
-            you can help him (or her) to get points by click the below button to fill his(or her) email address.
-            And also you can recommend others to get your points.
-                <span style="color:#0373bd;text-decoration:underline;">Make sure to check the referee email address.</span>
+            you can help him (or her) to get points by click the below button to fill his(or her) email address,
+            and also you can recommend others to get your points.<br/>
+                <span style="color:#0373bd;font-style: italic;">Make sure to check the referee email address.<br/>And we will verify your information and recharge points to your account within two business days.</span>
             </p>
             <a id="show_email_referce" href="javascript:void(0);">FILL REFERCE EMAIL</a>
          </div>
          <div class="field email_referce hidden">
             <label for="email_referee" class="label"><span><?php echo $block->escapeHtml(__('Referee Email')) ?></span></label>
             <div class="control">
-                <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee111" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
+                <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
             </div>
-            <a id="check_email_referee111" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
+            <a id="check_email_referee" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
         </div>
 		
         <div class="field required">
@@ -254,7 +254,7 @@ require([
                     var _status = data.status;
                     if(_status == '1'){
                         $('#check_notice').removeClass('warning').addClass('success').html('<i class="fa fa-check-circle" aria-hidden="true"></i>Congratulations, email address verification passed!');
-                        $('#email_referee').attr('disabled','disabled');
+                        $('#email_referee').attr('readonly','readonly');
                         $('#check_email_referee').addClass('hidden');$('#update_email_referee').removeClass('hidden');
                     }else if(_status == '0'){
                         $('#check_notice').removeClass('success').addClass('warning')
@@ -277,13 +277,13 @@ require([
             .html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please check the email address !');
         }
     });
-    $('#email_referee').blur(function(){
-        $('#check_email_referee').click();
-    });
+    // $('#email_referee').blur(function(){
+    //     $('#check_email_referee').click();
+    // });
     $('#update_email_referee').click(function(){
         $(this).addClass('hidden');
         $('#check_email_referee').removeClass('hidden');
-        $('#email_referee').removeAttr('disabled');
+        $('#email_referee').removeAttr('readonly');
     });
     $('#form-validate .submit').click(function(event){
         var event = event || window.event;
