@@ -71,7 +71,7 @@ define(
                 initSlider: function () {
                     var maxValue = Math.round(window.checkoutConfig.reward.available_points*20)/100,
                     value = 0;//parseInt(window.checkoutConfig.reward.selected_points);
-
+					setRewardPointsAction(0, isApplied);
                     $("#reward-slider").slider(
                         {
                             classes: {
