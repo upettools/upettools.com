@@ -32,7 +32,15 @@
                     <input type="hidden" name="success_url" value="<?php echo $block->getSuccessUrl() ?>"/>
                     <input type="hidden" name="error_url" value="<?php echo $block->getErrorUrl() ?>"/>
                     <?php echo $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
-                    
+                    <div class="field required">
+                        <label for="email_address" class="label"><span><?php echo __('Email') ?></span></label>
+                        <div class="control">
+                            <input type="email" name="email" id="email_address_create"
+                                   value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>"
+                                   title="<?php echo __('Email') ?>" class="input-text"
+                                   data-validate="{required:true, 'validate-email':true}"/>
+                        </div>
+                    </div>
                     <?php if ($block->isNewsletterEnabled()): ?>
                         <div class="field choice newsletter">
                             <input type="checkbox" class="checkbox" name="is_subscribed"
@@ -55,7 +63,7 @@
                         <?php echo $_gender->setGender($block->getFormData()->getGender())->toHtml() ?>
                     <?php endif ?>
                 </fieldset>
-                <?php if (!$block->getShowAddressFields()): ?>
+                <?php if ($block->getShowAddressFields()): ?>
                     <fieldset class="fieldset address">
                         <legend class="legend"><span><?php echo __('Address Information') ?></span></legend><br>
                         <input type="hidden" name="create_address" value="1"/>
@@ -152,15 +160,6 @@
                     </fieldset>
                 <?php endif; ?>
                 <fieldset class="fieldset create account" data-hasrequired="<?php echo __('* Required Fields') ?>">
-				    <div class="field required">
-                        <label for="email_address" class="label"><span><?php echo __('Email') ?></span></label>
-                        <div class="control">
-                            <input type="email" name="email" id="email_address_create"
-                                   value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>"
-                                   title="<?php echo __('Email') ?>" class="input-text"
-                                   data-validate="{required:true, 'validate-email':true}"/>
-                        </div>
-                    </div>
                     <div class="field password required">
                         <label for="password" class="label"><span><?php echo __('Password') ?></span></label>
                         <div class="control">
