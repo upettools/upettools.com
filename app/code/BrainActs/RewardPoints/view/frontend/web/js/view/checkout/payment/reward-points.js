@@ -46,13 +46,13 @@ define(
                  * RP application procedure
                  */
                 apply: function () {
-                    if($("#reward-points").val() <= window.checkoutConfig.reward.available_points*0.2){
+                    if($("#reward-points").val() <= window.checkoutConfig.reward.available_points*0.20){
 
                         if (this.validate()) {
                             setRewardPointsAction(rewardPoints(), isApplied);
                         }
                     }else{
-                        window.alert("Error: you can spend maximum 2.04 point(s)");
+                        window.alert("Error: you can spend maximum "+ Math.round(window.checkoutConfig.reward.available_points*20)/100 +" point(s)");
                     }
 
                 },
