@@ -18,9 +18,12 @@
 <?php /* Extensions placeholder */ ?>
 <?php echo $block->getChildHtml('customer.form.register.extra')?>
 <style>
-    .field.notice p{ border: 1px solid #ea9246;padding: 10px 8px;font-size: 14px;font-family: Gadugi;}
-    #show_email_referce,#check_email_referee,#update_email_referee{ display: inline-block;background: #4c6689;
+    .field.notice{ border: 1px solid #ea9246;padding: 10px 8px;font-size: 14px;font-family: Gadugi;}
+    #show_email_referce,#check_email_referee,#update_email_referee,#hide_email_referce{ display: inline-block;background: #4c6689;
     color: #fff;padding: 10px 20px;border-radius: 2px;} 
+    #show_email_referce{margin: 5px 0;}
+    #hide_email_referce{background: #333;margin: 5px 5px 5px 0;padding: 4px 10px;border-radius: 4px;}
+    
     #check_email_referee,#update_email_referee{margin: 10px 0 0 0;}
     #check_notice{ display: inline-block;margin-left: 30px;padding: 10px 20px;}
     #check_notice.warning{background: #fdf0d5;color: #6f4400;}
@@ -149,14 +152,19 @@
                 <span style="color:#0373bd;font-style: italic;">Make sure to check the referee email address.<br/>And we will verify your information and recharge points to your account within two business days.</span>
             </p>
             <a id="show_email_referce" href="javascript:void(0);">FILL REFERCE EMAIL</a>
-         </div>
-         <div class="field email_referce hidden">
-            <label for="email_referee" class="label"><span><?php echo $block->escapeHtml(__('Referee Email')) ?></span></label>
-            <div class="control">
-                <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
+            <div>
+                <a id="hide_email_referce" class="hidden" href="javascript:void(0);">NO REFERCE EMAIL</a><span id="hide_email_text" class="hidden">If you don't have referee email, please click button to hide it.</span>
             </div>
-            <a id="check_email_referee" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
-        </div>
+            <div class="field email_referce hidden">
+                <div class="email_referee_header">
+                    <label for="email_referee" class="label"><span><?php echo $block->escapeHtml(__('Referee Email')) ?></span></label>
+                </div>
+                <div class="control">
+                    <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Referee Email')) ?>" class="input-text" >
+                </div>
+                <a id="check_email_referee" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
+            </div>
+         </div>
 		
         <div class="field required">
             <label for="email_address" class="label"><span><?php echo $block->escapeHtml(__('Email')) ?></span></label>
@@ -232,7 +240,20 @@ require([
     <?php endif ?>
     }).find('input:text').attr('autocomplete', 'off');
     //show referce email
-    $('#show_email_referce').click(function(){ $(this).hide(); $('.field.email_referce').toggleClass('hidden');});
+    $('#show_email_referce').click(function(){ $(this).addClass('hidden'); $('#hide_email_referce,#hide_email_text').removeClass('hidden');$('.field.email_referce').toggleClass('hidden');});
+    $('#hide_email_referce').click(function(){
+        //init
+        $(this).addClass('hidden');
+        $('#hide_email_text').addClass('hidden');
+        $('#show_email_referce,check_email_referee').removeClass('hidden');
+        $('.field.email_referce').toggleClass('hidden');
+        $('#email_referee').val('');
+        if(!$('#update_email_referee').hasClass('hidden')){ 
+            $('#update_email_referee').addClass('hidden');
+        }
+        $('#email_referee').removeAttr('readonly');
+        $('#check_notice').removeClass('warning success').html('');
+    });
     <?php 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
@@ -290,10 +311,16 @@ require([
         var event = event || window.event;
         event.preventDefault(); // Compatible standard Browsers
         window.event.returnValue = false; // Compatible IE6~8
-         if(!$('#check_email_referee').hasClass('hidden')){
-            $('#email_referee').val('');
+        if($('#email_referee').val().length > 0 && !$('#check_email_referee').hasClass('hidden')){ //error referee email
+            dataForm.mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+             }).find('input:text').attr('autocomplete', 'off');
+            $('#email_referee').focus();
+        }else if($('#email_referee').val().length <= 0 || $('#check_email_referee').hasClass('hidden')){
+            
+            $('#form-validate').submit();
         }
-        $('#form-validate').submit();
+
     });
 });
 </script>
