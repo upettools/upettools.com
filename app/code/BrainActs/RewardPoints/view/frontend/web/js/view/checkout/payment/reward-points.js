@@ -69,7 +69,7 @@ define(
                 },
 
                 initSlider: function () {
-                    var maxValue = parseInt(window.checkoutConfig.reward.available_points*0.2),
+                    var maxValue = Math.round(window.checkoutConfig.reward.available_points*20)/100,
                     value = 0;//parseInt(window.checkoutConfig.reward.selected_points);
 
                     $("#reward-slider").slider(
@@ -97,7 +97,7 @@ define(
                 getCurrentPointsText: function(){
                     return $.mage.__('You have %1 point(s). You can spend maximum %2 point(s).')
                         .replace('%1', window.checkoutConfig.reward.max_points)
-                        .replace('%2', window.checkoutConfig.reward.available_points*0.2);
+                        .replace('%2',Math.round(window.checkoutConfig.reward.available_points*20)/100);
                     //return $t('You have %1 points.(%2)', 1,2);
                 }
             }
