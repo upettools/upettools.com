@@ -133,7 +133,7 @@ class Apply extends Cart
         $exchange = $rule->getPoints() / $rule->getAmount();
 
         $amount = round($points / $exchange, 2);
-        if ($amount >= $subtotal_use) {
+        if ($amount > $subtotal_use) {
             return false;
         }
 
