@@ -128,11 +128,11 @@ class Apply extends Cart
         $this->rule = $rule;
         $subtotal = $this->_checkoutSession->getQuote()->getSubtotal();
 		
-        $subtotal_use = $subtotal*0.2;
+        $subtotal_use = round($subtotal*0.2,2);
 
         $exchange = $rule->getPoints() / $rule->getAmount();
 
-        $amount = round($points / $exchange, 3);
+        $amount = round($points / $exchange, 2);
         if ($amount > $subtotal_use) {
             return false;
         }
