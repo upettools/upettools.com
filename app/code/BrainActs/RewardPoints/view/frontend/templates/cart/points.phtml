@@ -14,7 +14,7 @@
         <strong id="block-reward-points-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo __('Reward Points') ?></strong>
     </div>
     <div class="content" data-role="content" aria-labelledby="block-reward-points-heading" style="display:block;">
-        <p><?php /* @escapeNotVerified */ echo __('You have %1 points.', $block->getCustomerPoints())  ?> (<?php /* @escapeNotVerified */ echo $block->getMoney()?>)</p>
+        <p><?php /* @escapeNotVerified */ echo __('You have %1 points.', $block->getCustomerPoints())  ?> (<?php /* @escapeNotVerified */ echo $block->getMoney()?>), And you can use <?php echo $block->getMaxPoints() ?> point(s) for this order.</p>
 
         <form id="reward-points-form"
               action="<?php /* @escapeNotVerified */ echo $block->getUrl('points/cart/apply') ?>"

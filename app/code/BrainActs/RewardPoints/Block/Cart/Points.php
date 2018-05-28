@@ -152,7 +152,7 @@ class Points extends \Magento\Checkout\Block\Cart\AbstractCart
         $rule = $this->getConvertRule();
 
         $exchange = $rule->getPoints() / $rule->getAmount();
-        $maxPoints = $subtotal * $exchange;
+        $maxPoints = ($subtotal * $exchange)*0.2;
         return $maxPoints;
     }
 
