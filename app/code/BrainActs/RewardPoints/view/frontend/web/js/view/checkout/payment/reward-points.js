@@ -46,9 +46,15 @@ define(
                  * RP application procedure
                  */
                 apply: function () {
-                    if (this.validate()) {
-                        setRewardPointsAction(rewardPoints(), isApplied);
+                    if($("#reward-points").val() <= window.checkoutConfig.reward.available_points*0.2){
+
+                        if (this.validate()) {
+                            setRewardPointsAction(rewardPoints(), isApplied);
+                        }
+                    }else{
+                        window.alert("Error: you can spend maximum 2.04 point(s)");
                     }
+
                 },
 
                 /**
@@ -63,8 +69,8 @@ define(
                 },
 
                 initSlider: function () {
-                    var maxValue = parseInt(window.checkoutConfig.reward.available_points),
-                    value = parseInt(window.checkoutConfig.reward.selected_points);
+                    var maxValue = parseInt(window.checkoutConfig.reward.available_points*0.2),
+                    value = 0;//parseInt(window.checkoutConfig.reward.selected_points);
 
                     $("#reward-slider").slider(
                         {
@@ -91,7 +97,7 @@ define(
                 getCurrentPointsText: function(){
                     return $.mage.__('You have %1 point(s). You can spend maximum %2 point(s).')
                         .replace('%1', window.checkoutConfig.reward.max_points)
-                        .replace('%2', window.checkoutConfig.reward.available_points);
+                        .replace('%2', window.checkoutConfig.reward.available_points*0.2);
                     //return $t('You have %1 points.(%2)', 1,2);
                 }
             }
