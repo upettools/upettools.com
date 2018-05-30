@@ -42,6 +42,9 @@
         <referenceContainer name="content">
 			<block class="Magento\Catalog\Block\Product\View" name="product.view.container" template="product/view.phtml">
 				<container name="product.view" htmlTag="div" htmlClass="product-view-content" before="-">
+
+                    <container name="related.product" htmlTag="div" htmlClass="related-wrapper"></container>
+				    <container name="upsell.product" htmlTag="div" htmlClass="upsell-wrapper"></container>
 					<container name="product.view.row" htmlTag="div" htmlClass="row">
 						<container name="product.info.media" htmlTag="div" htmlClass="product media product-img-box clearfix col-md-5 col-sm-5 col-xs-12" before="product.info.main">
 							<block class="Magento\Catalog\Block\Product\View\Gallery" name="product.info.media.image" template="product/view/gallery.phtml"/>
@@ -147,8 +150,7 @@
 						</arguments>
 					</block>
 				</container>
-				<container name="related.product" htmlTag="div" htmlClass="related-wrapper"></container>
-				<container name="upsell.product" htmlTag="div" htmlClass="upsell-wrapper"></container>
+				
 				<container name="compare.sidebar.detail" htmlTag="div" htmlClass="compare-sidebar">
 					<block class="Magento\Framework\View\Element\Template" name="catalog.compare.sidebar"
 						   template="Magento_Catalog::product/compare/sidebar.phtml">

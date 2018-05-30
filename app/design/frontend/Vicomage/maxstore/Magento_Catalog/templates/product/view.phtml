@@ -9,16 +9,59 @@
 <!-- new add at product view -->
 <style type="text/css" media="all">
 	.fieldset .review-legend.legend strong{font-size: 14px;}
+	.fixToBottom .towishlist{display: none;}
 	@media only screen and (min-width: 769px) {
 		.product-info-main .page-title-wrapper h1 {
 			font-size: 24px;
 		}
+		.fixToBottom{margin-bottom: 0;}
+	}
+	@media only screen and (max-width: 768px){
+		.page-title-wrapper h1{font-size: 16px;}
+		.fixToBottom{
+			width: 100%;
+			margin: 0 -15px;
+			padding: 10px 15px;
+			position: fixed;
+			z-index: 99;
+			bottom: 0;
+			background: #fff;
+			border-top: 1px solid rgb(238, 238, 238);
+			box-shadow: 0 -1px 2px rgba(238,238,238,1);
+		}
+		.fixToBottom .towishlist{
+			display:block;    
+			float: right;
+			color: #f9f9f9;
+			font-size: 0;
+			padding: 0 6px;
+			height: 50px;
+			border-color: #ca7c1b #be751a #a56616;
+			background: #f2ad58;
+			background: -webkit-linear-gradient(top,#f6c88f,#ed9220);
+			background: linear-gradient(to bottom,#f6c88f,#ed9220);}
+		.fixToBottom .towishlist .flaticon-heart1{font-size:30px;}
+		.fixToBottom .field.qty .input-text.qty{text-align: center;width: 100px;}
+		.fixToBottom .towishlist:active{background-color: #ed9220;background-image: none;}
+		.fixToBottom .field.qty .items.increase,.fixToBottom .field.qty .items.reduced{top: 0;height: 50px;}
+		.fixToBottom .field.qty .items.increase{left:0;border-right: 1px solid #bbb;}
+		.fixToBottom .field.qty .items.increase .fa::before{content:"\f067";}
+		.fixToBottom .field.qty .items.reduced{right:0;border-left: 1px solid #bbb;}
+		.fixToBottom .field.qty .items.reduced .fa::before{content: "\f068";}
+		.footer-bottom{margin: 0 0 40px 0;}
 	}
 	@media only screen and (max-width: 639px){
 	 .prev-next-products .product-nav .product-pop .product-name{word-wrap: break-word;}
 		.product-info-price>*:last-child {
 			padding-left: 10px;
 		}
+	}
+	@media only screen and (min-width:374px) and (max-width:415px){
+		.fixToBottom .field.qty .input-text.qty{width: 120px;}
+		.fixToBottom .field.qty{margin: 0 20px 0 0;}
+	}
+	@media only screen and (max-width: 330px){
+		.fixToBottom .field.qty .input-text.qty{width: 90px;}
 	}
 	/*relate and upsell*/
 	.block.related{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;min-width: 120px;}
