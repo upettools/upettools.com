@@ -448,7 +448,9 @@ require([
 	if(count_items > 6){
 		count_items = 6;
 	}
-	$("#productsliderelated").css({'width':count_items*160 + 'px'});	
+	if($(window).width() > 992){
+		$("#productsliderelated").css({'width':count_items*160 + 'px'});
+	}	
 	$("#productslide<?php echo $type ?>").slick({
 			dots: false,
 			arrows: true,
