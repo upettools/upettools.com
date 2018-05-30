@@ -20,6 +20,43 @@
 			padding-left: 10px;
 		}
 	}
+	/*relate and upsell*/
+	.block.related{border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;min-width: 120px;}
+	.related .title-page{text-align: left;margin: 8px 0 20px 0;}
+	.related .title-page .subtitle{color: #333!important;font-size: 21px!important;text-transform: capitalize;
+		font-weight: 400!important;font-family: arial,verdana,helvetica,sans-serif!important;}
+	.related .title-page .subtitle::before{display: none;}
+	#productslideupsell .price-container .price{color: #4c6689;}
+	.related .product-item-link,
+	.upsell-wrapper .product-item-link{display: block;font-size: 12px;line-height: 14px;font-weight: normal!important;}
+	@media(min-width: 768px) and (max-width:991px){
+		/* #productsliderelated{width: ;} */
+	}
+	@media(min-width: 992px){
+		#productsliderelated{margin:0 40px;}
+		#productsliderelated .slick-prev{left: -35px;}
+		#productsliderelated .slick-next{right: -35px;}
+		#productsliderelated .slick-prev,#productsliderelated .slick-next{opacity: 1;-webkit-transform: translate(0px, -50%);
+			-ms-transform: translate(0px, -50%);transform: translate(0px, -50%);visibility: visible;}
+		
+	}
+		
+	@media(min-width:1200px){
+		.upsell-wrapper  {display:none;}
+		.upsell-wrapper .title-page{margin: 0;}
+		.upsell-wrapper .title-page .subtitle{font-size:18px;font-weight:normal;}
+		.upsell-wrapper .products-custom.products-grid .product-item{float:none;margin-bottom: 6px;}
+		.products-custom.products-grid{margin: 0;}
+		.upsell-wrapper .product-image-container{width:auto!important}
+		.upsell-wrapper .product-item-details{padding-top: 0;}
+		.upsell-wrapper .products-custom.products-grid,.upsell-wrapper .product-item-name,.upsell-wrapper .product-item .price-box{margin: 0;}
+		#productslideupsell{width: 120px;;overflow: hidden;}
+		.upsell-wrapper .slick-prev{left: 0;}
+		.upsell-wrapper .slick-next{right: 0;}
+	}
+	@media(max-width:1199px){
+		.upsell-wrapper  {display:none;}
+	}
 </style>
 <?php
 	$vico_helper = $this->helper('Vicomage\General\Helper\Data');

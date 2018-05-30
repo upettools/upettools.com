@@ -222,20 +222,7 @@ switch ($type = $block->getType()) {
 ?>
 
 <?php if ($exist):?>
-	<style>
-	@media(min-width:1200px){
-		.upsell-wrapper  {display:none;}
-		.upsell-wrapper .title-page{margin: 0;}
-		.upsell-wrapper .title-page .subtitle{font-size:14px;font-weight:normal;}
-		.upsell-wrapper .products-custom.products-grid .product-item{float:none;margin-bottom: 6px;}
-		.products-custom.products-grid{margin: 0;}
-		.upsell-wrapper .product-image-container{width:auto!important}
-		.upsell-wrapper .product-item-details{padding-top: 0;}
-		.upsell-wrapper .products-custom.products-grid,.upsell-wrapper .product-item-name,.upsell-wrapper .product-item .price-box{margin: 0;}
-		.upsell-wrapper .product-item-link{display: block;font-size: 12px;line-height: 14px;font-weight: normal!important;}
-		#productslideupsell{width: 120px;;overflow: hidden;}
-	}
-	</style>
+
     <?php if ($type == 'related' || $type == 'upsell'): ?>
         <?php if ($type == 'related'): ?>
             <div class="block <?php /* @escapeNotVerified */ echo $class; ?>" data-mage-init='{"relatedProducts":{"relatedCheckbox":".related.checkbox"}}' data-limit="<?php /* @escapeNotVerified */ echo $limit; ?>" data-shuffle="<?php /* @escapeNotVerified */ echo $shuffle; ?>">
@@ -280,7 +267,7 @@ switch ($type = $block->getType()) {
 						<?php echo $vico_helper->getProductLabel($_item) ?>
 						<a class="vicomage-quickview btn-quickview" data-quickview-url="<?php echo $this->getUrl('vicomage_quickview/catalog_product/view/'); ?>id/<?php echo $_item->getId(); ?>" href="javascript:void(0);"><span><i class="fa fa-eye"></i><?php /* @escapeNotVerified */ echo __('Quick View') ?></span></a>
 						<div class="product-inner-grid">
-							<?php if ($showWishlist || $showCompare ): ?>
+							<?php if (1 == 0): ?>
                                 <div class="product actions product-item-actions">
                                     
 
@@ -384,7 +371,8 @@ switch ($type = $block->getType()) {
 <?php if($type == 'upsell'): ?>
 //adjust upsell's size
 require([
-	'jquery'
+	'jquery',
+    'slick'
 ],function($){
 	jQuery(document).ready(function(){
 		var $_container = $('.column .product-view');
@@ -398,9 +386,8 @@ require([
 		$(window).resize(function(){
 			var	_doc_width = $(window).width();
 			if(_doc_width > 1400){
-				var right = (_doc_width - $_inner.width()) / 2 - 120;
-				window.console.log(right);
-				$_upsell_wrapper.css({'right': right +'px'}).show();
+				var position = getPosition();
+				$_upsell_wrapper.css({'width':'120px','position': 'absolute','right': position.right +'px','top': position.top + 'px'}).show();
 			}else{
 				$_upsell_wrapper.hide();
 			}
@@ -456,7 +443,12 @@ require([
 require([
     'jquery',
 	'slick'
-], function ($) {	
+], function ($) {
+	var count_items = <?php echo $item_slide ?>;
+	if(count_items > 6){
+		count_items = 6;
+	}
+	$("#productsliderelated").css({'width':count_items*160 + 'px'});	
 	$("#productslide<?php echo $type ?>").slick({
 			dots: false,
 			arrows: true,
