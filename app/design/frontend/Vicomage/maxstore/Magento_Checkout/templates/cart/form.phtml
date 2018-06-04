@@ -11,7 +11,7 @@
 <?php $mergedCells = ($this->helper('Magento\Tax\Helper\Data')->displayCartBothPrices() ? 2 : 1); ?>
 <?php echo $block->getChildHtml('form_before') ?>
 <style>
-    .cart-summary #block-discount,#block-reward-points{display: none;}
+    .cart-summary #block-discount,.cart-summary #block-reward-points{display: none;}
     .cart-summary-top{float: none;position: static;}
 </style>
 <form action="<?php /* @escapeNotVerified */ echo $block->getUrl('checkout/cart/updatePost') ?>"

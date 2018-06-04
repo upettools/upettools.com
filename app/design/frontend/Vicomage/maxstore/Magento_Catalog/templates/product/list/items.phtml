@@ -266,35 +266,6 @@ switch ($type = $block->getType()) {
 						<?php // Product Label ?>
 						<?php echo $vico_helper->getProductLabel($_item) ?>
 						<a class="vicomage-quickview btn-quickview" data-quickview-url="<?php echo $this->getUrl('vicomage_quickview/catalog_product/view/'); ?>id/<?php echo $_item->getId(); ?>" href="javascript:void(0);"><span><i class="fa fa-eye"></i><?php /* @escapeNotVerified */ echo __('Quick View') ?></span></a>
-						<div class="product-inner-grid">
-							<?php if (1 == 0): ?>
-                                <div class="product actions product-item-actions">
-                                    
-
-                                     <?php if ($showWishlist || $showCompare): ?>
-                                        <div class="secondary-addto-links actions-secondary" data-role="add-to-links">
-                                            <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showWishlist): ?>
-                                                <a href="#" data-post='<?php /* @escapeNotVerified */ echo $block->getAddToWishlistParams($_item); ?>'  class="action towishlist" data-action="add-to-wishlist" title="<?php /* @escapeNotVerified */ echo __('Add to Wish List') ?>">
-                                                    <span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
-                                                </a>
-                                            <?php endif; ?>
-                                            <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
-                                                <?php
-                                                $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
-                                                ?>
-                                                <a href="#" class="action tocompare"
-                                                   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_item);?>'
-                                                   data-role="add-to-links"
-                                                   title="<?php /* @escapeNotVerified */ echo __('Add to Compare'); ?>">
-                                                    <span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
-                                                </a>
-                                            <?php endif; ?>
-											
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-						</div>
 					</div>
                    
                     <div class="product details product-item-details">
@@ -308,9 +279,18 @@ switch ($type = $block->getType()) {
 							   <?php endif; ?>
 							</a>
                         </strong>
-
-                        <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
-
+						<?php 
+						  $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of Object Manager
+						  $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+						  $formattedCurrencyValue = $priceHelper->currency($_item->getFinalPrice(), true, false);
+						?>
+						<div class="price-box price-final_price" data-role="priceBox">
+							<span class="price-container price-final_price tax weee">
+								<spandata-price-type="finalPrice" class="price-wrapper">
+									<span class="price"><?php /* @escapeNotVerified */ echo $formattedCurrencyValue; ?></span>    
+								</span>
+							</span>
+						</div>
                             <?php if ($templateType): ?>
                                 <?php echo $block->getReviewsSummaryHtml($_item, $templateType) ?>
                             <?php endif; ?>
@@ -367,79 +347,45 @@ switch ($type = $block->getType()) {
         </div>
     </div>
 </div>
-<script type="text/javascript">
 <?php if($type == 'upsell'): ?>
-//adjust upsell's size
+<script type="text/javascript">
 require([
-	'jquery',
-    'slick'
-],function($){
-	jQuery(document).ready(function(){
-		var $_container = $('.column .product-view');
-		var $_inner = $('.column .product-view .product-view-content');
-		var $_upsell_wrapper= $('.upsell-wrapper');
+    'jquery',
+	'slick'
+], function ($) {	
+	//var $upsell = $("#productslide<?php echo $type ?>");
+	var $upsell_wrapper = $('#<?php echo $type ?>-wrapper');
+	var myUpsell = new new_upsell('#productslideupsell');
+	myUpsell.init();
+	function new_upsell(id){
+		this.id = id;
+		this.init = function(){
+			var $el_slider = $(id);
+			var length = $el_slider.find('.item').length;
+			var new_html = '';
+			if(length > 2){
+				for(var i = 1; i <= (length+1) / 2; i++){
+					new_html += '<div class="product-group" data-group-index="'+ i +'">';
+					new_html += '<div class="item product product-item">' + $el_slider.find('.item').eq(i * 2 - 2).html() + '</div>';
 
-		if($(window).width() > 1400){
-			showUpsell();
-		}
-
-		$(window).resize(function(){
-			var	_doc_width = $(window).width();
-			if(_doc_width > 1400){
-				var position = getPosition();
-				$_upsell_wrapper.css({'width':'120px','position': 'absolute','right': position.right +'px','top': position.top + 'px'}).show();
-			}else{
-				$_upsell_wrapper.hide();
-			}
-		});
-		function getPosition(){
-			var	_doc_width = $(window).width();
-			var _tmpP = {
-				top: 0,
-				right: 0
-			};
-			_tmpP.top = $_container.offset().top;
-			_tmpP.right = (_doc_width - $_inner.width()) / 2 - 120;
-			return _tmpP;
-		}
-		function showUpsell(){
-			var position = getPosition();
-			$_upsell_wrapper.css({'width':'120px','position': 'absolute','right': position.right +'px','top': position.top + 'px'}).show();
-			var myUpsell = new upsell_slider('#productslideupsell');
-			myUpsell.init();
-		}
-		function upsell_slider(id){
-			this.id = id;
-			this.init = function(){
-				var $el = $(id);
-				var length = $el.find('.item').length;
-				var _dom = '';
-				if(length > 2){
-					for(var i = 1; i <= (length+1) / 2  ;i++){
-						_dom += '<div class="product-group" data-group-index="'+ i +'">';
-						_dom += $el.find('.item').eq(i * 2 - 2).html();
-
-						if(i * 2 <= length){
-							_dom += $el.find('.item').eq(i * 2 - 1).html();
-						}
-
-						_dom += '</div>';
+					if(i * 2 <= length){
+						new_html += '<div class="item product product-item">' + $el_slider.find('.item').eq(i * 2 - 1).html() + '</div>';
 					}
+					new_html += '</div>';
 				}
-				$el.html('<div id="upsell-inner">'+ _dom +'</div>');
-				$el.find('#upsell-inner').slick({
+				$el_slider.html(new_html).slick({
 					arrows: true,
 					speed: 300,
 					slidesToShow: 1,
 					slidesToScroll: 1
 				});
 			}
-
-		}
-	});
-	
+		};
+	}
 });
+</script>
 <?php else: ?>
+<script type="text/javascript">
 require([
     'jquery',
 	'slick'
@@ -448,9 +394,7 @@ require([
 	if(count_items > 6){
 		count_items = 6;
 	}
-	if($(window).width() > 992){
-		$("#productsliderelated").css({'width':count_items*160 + 'px'});
-	}	
+	$("#productsliderelated").css({'width':count_items*132 + 'px'});
 	$("#productslide<?php echo $type ?>").slick({
 			dots: false,
 			arrows: true,
@@ -487,7 +431,6 @@ require([
 			]
         });
 });
-<?php endif;?>
 </script>
-
+<?php endif; ?>
 <?php endif;?>
