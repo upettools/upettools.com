@@ -272,8 +272,8 @@ switch ($type = $block->getType()) {
                         <strong class="product name product-item-name"><a class="product-item-link" title="<?php echo $block->escapeHtml($_item->getName()) ?>" href="<?php /* @escapeNotVerified */ echo $block->getProductUrl($_item) ?>">
                             
 							<?php //echo $block->escapeHtml($_item->getName()) ?>
-							<?php if(strlen($block->escapeHtml($_item->getName()))>47): ?>
-							        <?php echo substr($block->escapeHtml($_item->getName()),0,47).'...'; ?>
+							<?php if(strlen($block->escapeHtml($_item->getName()))>27): ?>
+							        <?php echo substr($block->escapeHtml($_item->getName()),0,27).'...'; ?>
 							   <?php else: ?>
 							        <?php echo $block->escapeHtml($_item->getName()); ?>
 							   <?php endif; ?>
