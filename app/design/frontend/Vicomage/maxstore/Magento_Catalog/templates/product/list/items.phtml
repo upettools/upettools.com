@@ -348,6 +348,7 @@ switch ($type = $block->getType()) {
     </div>
 </div>
 <?php if($type == 'upsell'): ?>
+<?php if($type !=='upsell'): ?>
 <script type="text/javascript">
 require([
     'jquery',
@@ -384,6 +385,7 @@ require([
 	}
 });
 </script>
+<?php endif; ?>
 <?php else: ?>
 <script type="text/javascript">
 require([

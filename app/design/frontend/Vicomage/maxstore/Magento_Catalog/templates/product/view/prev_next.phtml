@@ -10,16 +10,26 @@
 ?>
 <?php if($prev_product || $next_product):?>
 <div class="prev-next-products">
+    <div class="title-page">
+        <h2 class="subtitle">Viewed Products</h2>
+    </div>
     <?php if($prev_product): ?>
     <?php
         $productImage = $_imagehelper->init($prev_product, 'category_page_grid')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(80);
         $productImageUrl = $productImage->getUrl();
     ?>
     <div class="product-nav product-prev">
-        <a href="<?php echo $prev_product->getProductUrl(); ?>" title="<?php echo __('Previous Product'); ?>"><i aria-hidden="true" class="fa fa-angle-left"></i></a>
         <div class="product-pop theme-border-color">
-            <img class="product-image" src="<?php echo $productImageUrl; ?>" alt="<?php echo $productImage->getLabel(); ?>"/>
-            <h3 class="product-name"><?php echo $prev_product->getName(); ?></h3>
+            <a href="<?php echo $prev_product->getProductUrl(); ?>" title="<?php echo $prev_product->getName(); ?>">
+                <img class="product-image" src="<?php echo $productImageUrl; ?>" alt="<?php echo $productImage->getLabel(); ?>"/>
+                <h3 class="product-name">
+                    <?php if(strlen($prev_product->getName())>27): ?>
+                        <?php echo substr($prev_product->getName(),0,27).'...'; ?>
+                    <?php else: ?>
+                        <?php echo $prev_product->getName(); ?>
+                    <?php endif; ?>
+                </h3>
+            </a>
         </div>
     </div>
     <?php endif; ?>
@@ -29,10 +39,17 @@
         $productImageUrl = $productImage->getUrl();
     ?>
     <div class="product-nav product-next">
-        <a href="<?php echo $next_product->getProductUrl(); ?>" title="<?php echo __('Next Product'); ?>"><i aria-hidden="true" class="fa fa-angle-right"></i></a>
         <div class="product-pop theme-border-color">
-            <img class="product-image" src="<?php echo $productImageUrl; ?>" alt="<?php echo $productImage->getLabel(); ?>"/>
-            <h3 class="product-name"><?php echo $next_product->getName(); ?></h3>
+            <a href="<?php echo $next_product->getProductUrl(); ?>" title="<?php echo $next_product->getName(); ?>">
+                <img class="product-image" src="<?php echo $productImageUrl; ?>" alt="<?php echo $productImage->getLabel(); ?>"/>
+                <h3 class="product-name">
+                    <?php if(strlen($next_product->getName())>27): ?>
+                        <?php echo substr($next_product->getName(),0,27).'...'; ?>
+                    <?php else: ?>
+                        <?php echo $next_product->getName(); ?>
+                    <?php endif; ?>
+                </h3>
+            </a>
         </div>
     </div>
     <?php endif; ?>
