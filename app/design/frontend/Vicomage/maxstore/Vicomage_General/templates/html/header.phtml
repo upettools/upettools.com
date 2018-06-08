@@ -3,51 +3,56 @@
 ?>
 <!-- new add at header -->
 <style type="text/css" media="all">
-	@media all and (min-width: 769px), print {
-		/* .ie9 .page-main {width: 100%;} */
-		html.ie8,.ie8 body,
-		html.ie9,.ie9 body,
-		html.ie10,.ie10 body,
-		html.ie11,.ie11 body{height:auto;}
-	}
-	@media only screen and (min-width: 769px) and (max-width: 898px) {
-		.header-container-fixed #mainMenu>li:first-child{display: none;}
-	}
-	@media only screen and (max-width: 768px) {
-		.page-header .header-search {
-			top: 25px;left: 60px;
-		}
-		.page-header .switcher .options ul.dropdown{left: 0;}
-		.form-customer-create .actions-toolbar .secondary a.action ,
-		.form-password-forget .actions-toolbar .secondary a.action{
-			color: #fff;
-		}
-	}
 	/* --- common style --- */
 	.toolbar select{padding-left: 10px;}
 	.swatch-option{border: 1px solid rgba(0, 0, 0, 0.2);}
 	.page-header .header-top-right,.page-header #switcher-currency .action.toggle:after{line-height:30px;}
 	.account .page-wrapper .column.main a{color: #4c6689;}
 	.account .page-wrapper .column.main a:hover{color: #2a6ac1;text-decoration: underline;}
-	@media only screen and (max-width: 768px) {
+	#fixedWholesale{display:none;}
+	@media all and (min-width: 769px), print {
+		html.ie8,.ie8 body,html.ie9,.ie9 body,html.ie10,.ie10 body,html.ie11,.ie11 body{height:auto;}/*IE hack*/
+		.header-content-menu{position: relative;}
+		#fixedWholesale{display:block;position:absolute;right:0;top:10px;color:#fff;font-size:14px;
+			text-shadow: 0 4px 4px rgba(0,0,0,0.6);
+			padding: 2px 4px;border-radius: 5px;border-width: 3px;border-style: solid;
+			border-color: #0584bb #03577b #094f6d #106286;
+			background: #106286;
+			background: -webkit-linear-gradient(to bottom,#0584bb,#4c6689);
+			background: linear-gradient(to bottom,#0584bb,#4c6689);
+			-webkit-transition: all 0.1s linear;
+			transition: all 0.1s linear;
+		}
+		#fixedWholesale:hover{
+			text-decoration: none;
+			border-color: #006f9e #03577b #094f6d #106286;
+			background: -webkit-linear-gradient(to bottom,#07506f,#577092);
+			background: linear-gradient(to bottom,#07506f,#577092);
+			
+		}
+		#fixedWholesale:active{
+			text-decoration: none;
+			border-color: #1496cc #03577b #0a5777 #106286;
+			background: -webkit-linear-gradient(to bottom,#0f688e,#0f80af);
+			background: linear-gradient(to bottom,#0f688e,#0f80af);
+		}
+		.header-container-fixed #fixedWholesale{display:none;}
+		
+	}
+	@media only screen and (min-width: 769px) and (max-width: 898px), print {
+		.header-container-fixed #mainMenu>li:first-child{display: none;}
+	}
+	@media only screen and (max-width: 768px), print{
+		.page-header .header-search {top: 25px;left: 60px;}
+		.page-header .switcher .options ul.dropdown{left: 0;}
+		.form-customer-create .actions-toolbar .secondary a.action ,
+		.form-password-forget .actions-toolbar .secondary a.action{color: #fff;}
 		.page-header .switcher .options .action.toggle:after{line-height:20px;}
-		.product-label {
-			top: 5px;
-			left: 8px;
-		}
-		.vicomage-slider .slick-slide[data-slick-index="0"] .text-slide .caption1{color: #c24343;
-		text-shadow: -1px 0px 1px #fff, 2px -1px 2px rgba(0,0,0,.8);}
-		.vicomage-slider .slick-active .slide-caption .caption1{
-			font-family: Gabriola;
-			font-style: italic;
-			font-weight: 700;
-		}
+		.product-label {top: 5px;left: 8px;}
+		.vicomage-slider .slick-slide[data-slick-index="0"] .text-slide .caption1{color: #c24343;text-shadow: -1px 0px 1px #fff, 2px -1px 2px rgba(0,0,0,.8);}
+		.vicomage-slider .slick-active .slide-caption .caption1{font-family: Gabriola;font-style: italic;font-weight: 700;}
 		.vicomage-slider .slick-active .slide-caption .caption2,
-		.vicomage-slider .slick-active .slide-caption .caption3{
-			text-transform: capitalize;
-			font-size: 14px;
-			font-weight: normal;
-		}
+		.vicomage-slider .slick-active .slide-caption .caption3{text-transform: capitalize;font-size: 14px;font-weight: normal;}
 	}
 </style>
 <header class="page-header header-type<?php echo $header_type; ?>">
@@ -785,4 +790,11 @@
 		</div>
 	</div>
 	<?php endif; ?>
+	<script>
+		require([
+			'jquery'
+		],function($){
+			$('.header-content-menu').append('<a id="fixedWholesale" href="/dropshipping-and-wholesale">Wholesale and Dropshipping</a>');
+		});	
+	</script>
 </header>
