@@ -3,6 +3,13 @@
 ?>
 <!-- new add at header -->
 <style type="text/css" media="all">
+	@media all and (min-width: 769px), print {
+		/* .ie9 .page-main {width: 100%;} */
+		html.ie8,.ie8 body,
+		html.ie9,.ie9 body,
+		html.ie10,.ie10 body,
+		html.ie11,.ie11 body{height:auto;}
+	}
 	@media only screen and (min-width: 769px) and (max-width: 898px) {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
 	}
