@@ -197,6 +197,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->addColumn('price', ['header' => __('Shipping Price'), 'index' => 'price']);
 		
 		$this->addColumn('cost', ['header' => __('Cost'), 'index' => 'cost']);
+		
+		$this->addColumn('store_id', ['header' => __('Store Id'), 'index' => 'store_id']);
 
         $this->addColumn(
             'shipping_method',

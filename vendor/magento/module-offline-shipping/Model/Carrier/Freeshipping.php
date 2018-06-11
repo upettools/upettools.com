@@ -35,6 +35,11 @@ class Freeshipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
      * @var \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory
      */
     protected $_rateMethodFactory;
+	
+	/**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -48,12 +53,14 @@ class Freeshipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
+		\Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
         array $data = []
     ) {
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
+		$this->storeManager = $storeManager;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -73,11 +80,11 @@ class Freeshipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
         $result = $this->_rateResultFactory->create();
 
         $this->_updateFreeMethodQuote($request);
-
-        if ($request->getFreeShipping() || $request->getBaseSubtotalInclTax() >= $this->getConfigData(
+        $storeId = $this->storeManager->getStore()->getId();
+        if (($request->getFreeShipping() || $request->getBaseSubtotalInclTax() >= $this->getConfigData(
             'free_shipping_subtotal'
         )
-        ) {
+        )&& $storeId!=8) {
             /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
             $method = $this->_rateMethodFactory->create();
 
