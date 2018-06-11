@@ -206,7 +206,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 					
                     $shippingPriceRate = $this->getFinalPriceWithHandlingFee($rate['price']) + ($oldWeight/0.5)*$rate['cost'];
 					$storeId = $this->storeManager->getStore()->getId();
-					if($storeId==8){
+					if($storeId==2){
 						 $shippingPrice = $shippingPriceRate;
 					}else{
 						 $shippingPrice = $shippingPriceRate*0.7;

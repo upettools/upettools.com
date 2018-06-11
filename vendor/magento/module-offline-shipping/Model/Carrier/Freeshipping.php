@@ -84,7 +84,7 @@ class Freeshipping extends \Magento\Shipping\Model\Carrier\AbstractCarrier imple
         if (($request->getFreeShipping() || $request->getBaseSubtotalInclTax() >= $this->getConfigData(
             'free_shipping_subtotal'
         )
-        )&& $storeId!=8) {
+        )&& $storeId!=2) {
             /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
             $method = $this->_rateMethodFactory->create();
 

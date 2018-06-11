@@ -94,7 +94,7 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
 
         $shippingPrice = $this->getShippingPrice($request, $freeBoxes);
 
-        if ($shippingPrice !== false && $request->getBaseSubtotalInclTax()<25 && $storeId !=8) {
+        if ($shippingPrice !== false && $request->getBaseSubtotalInclTax()<25 && $storeId !=2) {
             $method = $this->createResultMethod($shippingPrice);
             $result->append($method);
         }
