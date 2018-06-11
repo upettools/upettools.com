@@ -40,6 +40,12 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
      * @var ItemPriceCalculator
      */
     private $itemPriceCalculator;
+	
+	 /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -54,6 +60,7 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
+		\Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
         \Magento\OfflineShipping\Model\Carrier\Flatrate\ItemPriceCalculator $itemPriceCalculator,
@@ -62,6 +69,7 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
         $this->itemPriceCalculator = $itemPriceCalculator;
+		$this->storeManager = $storeManager;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -73,6 +81,7 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
      */
     public function collectRates(RateRequest $request)
     {
+		$storeId = $this->storeManager->getStore()->getId();
         if (!$this->getConfigFlag('active')) {
             return false;
         }
@@ -85,7 +94,7 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
 
         $shippingPrice = $this->getShippingPrice($request, $freeBoxes);
 
-        if ($shippingPrice !== false && $request->getBaseSubtotalInclTax()<25) {
+        if ($shippingPrice !== false && $request->getBaseSubtotalInclTax()<25 && $storeId !=8) {
             $method = $this->createResultMethod($shippingPrice);
             $result->append($method);
         }
@@ -132,28 +141,29 @@ class Flatrate extends AbstractCarrier implements CarrierInterface
     private function getShippingPrice(RateRequest $request, $freeBoxes)
     {
         $shippingPrice = false;
+		
+		$configPrice = $this->getConfigData('price');
+		if ($this->getConfigData('type') === 'O' && $request->getBaseSubtotalInclTax()<25) {
+			// per order
+			$shippingPrice = $this->itemPriceCalculator->getShippingPricePerOrder($request, $configPrice, $freeBoxes);
+		} elseif ($this->getConfigData('type') === 'I') {
+			// per item
+			$shippingPrice = $this->itemPriceCalculator->getShippingPricePerItem($request, $configPrice, $freeBoxes);
+		}
 
-        $configPrice = $this->getConfigData('price');
-        if ($this->getConfigData('type') === 'O' && $request->getBaseSubtotalInclTax()<25) {
-            // per order
-            $shippingPrice = $this->itemPriceCalculator->getShippingPricePerOrder($request, $configPrice, $freeBoxes);
-        } elseif ($this->getConfigData('type') === 'I') {
-            // per item
-            $shippingPrice = $this->itemPriceCalculator->getShippingPricePerItem($request, $configPrice, $freeBoxes);
-        }
-
-       // $shippingPrice = $this->getFinalPriceWithHandlingFee($shippingPrice);
+	   // $shippingPrice = $this->getFinalPriceWithHandlingFee($shippingPrice);
 	   $shippingPrice = $this->itemPriceCalculator->getShippingPricePerOrder($request, $configPrice, $freeBoxes);
-        if($request->getBaseSubtotalInclTax()<25){
+		if($request->getBaseSubtotalInclTax()<25){
 			$shippingPrice = $this->getFinalPriceWithHandlingFee($shippingPrice);
 		}
 
-        if ($shippingPrice !== false && $request->getBaseSubtotalInclTax()<25 && (
-                $request->getFreeShipping() === true || $request->getPackageQty() == $freeBoxes
-            )
-        ) {
-            $shippingPrice = '0.00';
-        }
+		if ($shippingPrice !== false && $request->getBaseSubtotalInclTax()<25 && (
+				$request->getFreeShipping() === true || $request->getPackageQty() == $freeBoxes
+			)
+		) {
+			$shippingPrice = '0.00';
+		}
+		
         return $shippingPrice;
     }
 

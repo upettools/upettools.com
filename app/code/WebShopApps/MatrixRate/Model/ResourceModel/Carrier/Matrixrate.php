@@ -203,9 +203,9 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $adapter = $this->getConnection();
         $shippingData=[];
         $postcode = $request->getDestPostcode();
-        if ($zipRangeSet && is_numeric($postcode)) {
+        if (!$zipRangeSet && is_numeric($postcode)) {
             #  Want to search for postcodes within a range
-            $zipSearchString = ' AND :postcode BETWEEN dest_zip AND dest_zip_to ';
+            $zipSearchString = ' AND :postcode BETWEEN dest_zip AND dest_zip_to  OR :postcode LIKE dest_zip';
         } else {
             $zipSearchString = " AND :postcode LIKE dest_zip ";
         }
@@ -214,8 +214,9 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $select = $adapter->select()->from(
                 $this->getMainTable()
             )->where(
-                'website_id = :website_id'
-            )->order(
+                  'store_id= :store_id'
+            )
+			->order(
                 ['dest_country_id DESC', 'dest_region_id DESC', 'dest_zip DESC', 'condition_from_value DESC']
             );
 
@@ -284,6 +285,10 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $select->where($zoneWhere);
 
             $bind[':website_id'] = (int)$request->getWebsiteId();
+			$objectManager =  \Magento\Framework\App\ObjectManager::getInstance();    
+            $storeManager = $objectManager->create("\Magento\Store\Model\StoreManagerInterface");
+			
+            $bind[':store_id'] = $this->storeManager->getStore()->getId();
             $bind[':condition_name'] = $request->getConditionMRName();
             $bind[':condition_value'] = $request->getData($request->getConditionMRName());
 
@@ -490,7 +495,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _getImportRow($row, $rowNumber = 0)
     {
         // validate row
-        if (count($row) < 8) {
+        if (count($row) < 9) {
             $this->importErrors[] =
                 __('Please correct Matrix Rates format in Row #%1. Invalid Number of Rows', $rowNumber);
             return false;
@@ -576,16 +581,22 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         // validate Cost
          $cost = $this->_parseDecimalValue($row[8]);
-        if ($price === false) {
+        if ($cost === false) {
             $this->importErrors[] = __('Please correct Shipping Price "%1" in Row #%2.', $row[8], $rowNumber);
             return false;
         }
 		
-		 if ($row[9] == '*' || $row[9] == '') {
-            $this->importErrors[] = __('Please correct Shipping Method "%1" in Row #%2.', $row[9], $rowNumber);
+		$storeId = $this->_parseDecimalValue($row[9]);
+        if ($storeId === false) {
+            $this->importErrors[] = __('Please correct Store Id "%1" in Row #%2.', $row[9], $rowNumber);
+            return false;
+        }
+		
+		 if ($row[10] == '*' || $row[10] == '') {
+            $this->importErrors[] = __('Please correct Shipping Method "%1" in Row #%2.', $row[10], $rowNumber);
             return false;
         } else {
-            $shippingMethod = $row[9];
+            $shippingMethod = $row[10];
         }
 
         // protect from duplicate
@@ -628,6 +639,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $valueTo,                   // condition_value To
             $price,                     // price
             $cost,                      // cost
+            $storeId,                      // store Id
             $shippingMethod
         ];
     }
@@ -653,6 +665,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 'condition_to_value',
                 'price',
 				'cost',
+				'store_id',
                 'shipping_method',
             ];
             $this->getConnection()->insertArray($this->getMainTable(), $columns, $data);

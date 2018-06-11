@@ -73,6 +73,12 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory
      */
     protected $matrixrateFactory;
+	
+	 /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -88,6 +94,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
+		\Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory,
         \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory,
@@ -97,6 +104,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         $this->resultMethodFactory = $resultMethodFactory;
         $this->matrixrateFactory = $matrixrateFactory;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
+		$this->storeManager = $storeManager;
         foreach ($this->getCode('condition_name') as $k => $v) {
             $this->conditionNames[] = $k;
         }
@@ -197,11 +205,18 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
                 } else {
 					
                     $shippingPriceRate = $this->getFinalPriceWithHandlingFee($rate['price']) + ($oldWeight/0.5)*$rate['cost'];
-                    $shippingPrice = $shippingPriceRate*0.7;
+					$storeId = $this->storeManager->getStore()->getId();
+					if($storeId==8){
+						 $shippingPrice = $shippingPriceRate;
+					}else{
+						 $shippingPrice = $shippingPriceRate*0.7;
+					}
+                   
                 }
 
                 $method->setPrice($shippingPrice);
                 $method->setCost($rate['cost']);
+                $method->setStoreId($rate['store_id']);
 
                 $result->append($method);
                 $foundRates = true; // have found some valid rates
