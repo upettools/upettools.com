@@ -1,0 +1,72 @@
+<style xml="space">
+.h4blue{color:#4c6689;margin-top:40px;}
+#wholesale-form .fieldset>.field, .fieldset>#wholesale-form .fields>.field{margin: 0 0 5px;}
+@media(min-width: 769px), print{ 
+#wholesale-form{min-width: 600px;width: 50%;margin: 60px 0 0 0;}
+}
+</style>
+<h3 style="color: #4c6689;">Become Wholesale or dropshipping Parnter</h3>
+<h4 class="h4blue">About Upettools</h4>
+<p>Upettools is a global supplier of professional aquarium equipment that provides box&amp;water brand products which contains Aquariums &amp; Tanks,Aquarium Pump, Aquarium Thermometers, Aquarium Air Pumps etc. Upettools is committed to providing the most professional products, the most appropriate price and the most rigorous quality test and the best shopping experience for the global aquarium and ornamental fish lovers !</p>
+<!--p>We committed to providing the world's aquarium lovers with the highest quality and most innovative aquarium equipment through integrating our own Research and development team and aquarium industry equipment manufacturers.</p-->
+<h4 class="h4blue">Products</h4>
+<p>We supply:</p>
+<ul>
+<li><a href="/fish-aquatic/aquarium-filter.html">Aquarium Filter</a></li>
+<li><a href="/fish-aquatic/aquarium-lights.html">Aquarium Lights</a></li>
+<li><a href="/fish-aquatic/air-pumps-accessories.html">Air Pumps &amp; Accessories</a></li>
+<li><a href="/fish-aquatic/aquariums-tanks-cleaning-tools.html">Cleaning Tools</a></li>
+<li><a href="/fish-aquatic/aquarium-device.html">Aquarium Devices</a></li>
+<li><a href="/fish-aquatic/aquariums-tanks-temperature-control-products.html">Temperature Control Products</a></li>
+<li><a href="/fish-aquatic/aquarium-water-treatment.html">Aquarium Water Treatment</a></li>
+</ul>
+<h4 class="h4blue">Enjoy The Discount</h4>
+<p>After becoming our business partner, you will enjoy a lot of benefits.</p>
+<p>We can offer more favorable prices, faster shipping and newer products.</p>
+<p>We can also customize different products, such as size, color, power or with other functions</p>
+<h4 class="h4blue">Contact Us</h4>
+<p>Upettools is very interested in working with new distribution partners.</p>
+<p>If your company is interested in the distribution of our products, please send email to <a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a> or fill out the contact form below.</p>
+<form id="wholesale-form" action="/wholesale" method="post"><fieldset class="fieldset personal"><legend class="legend"> <span>Personal Information</span> </legend>
+<div class="field field-name-firstname required"><label class="label" for="firstname"> <span>First Name</span> </label>
+<div class="control"><input id="firstname" class="input-text required-entry" title="First Name" autocomplete="off" name="firstname" type="text" value="" data-validate="{required:true}" /></div>
+</div>
+<div class="field field-name-lastname required"><label class="label" for="lastname"> <span>Last Name</span> </label>
+<div class="control"><input id="lastname" class="input-text required-entry" title="Last Name" autocomplete="off" name="lastname" type="text" value="" data-validate="{required:true}" /></div>
+</div>
+<div class="field field-eamil required"><label class="label" for="email"> <span>Email</span> </label>
+<div class="control"><input id="email" class="input-text required-entry" title="email" autocomplete="off" name="email" type="email" value="" data-validate="{required:true}" /></div>
+</div>
+<div class="field telephone required"><label class="label" for="telephone"> <span>Phone Number</span> </label>
+<div class="control"><input id="telephone" class="input-text  required-entry" title="Phone Number" autocomplete="off" name="telephone" type="text" value="" /></div>
+</div>
+</fieldset><fieldset class="fieldset company"><legend class="legend"> <span>Company Information</span> </legend>
+<div class="field company"><label class="label" for="company"> <span>Company</span> </label>
+<div class="control"><input id="company" class="input-text" title="Company" autocomplete="off" name="company" type="text" value="" /></div>
+</div>
+<div class="field interested-categories required"><label class="label" for="interested-categories"> <span>Interested categories</span> </label>
+<div class="control"><input id="interested-categories" class="input-text required-entry" title="interested-categories" autocomplete="off" name="interested-categories" type="number" value="" /></div>
+</div>
+<div class="field sales-area required"><label class="label" for="sales-area"> <span>Sales to where</span> </label>
+<div class="control"><input id="sales-area" class="input-text required-entry" title="sales-area" autocomplete="off" name="sales-area" type="text" value="" /></div>
+</div>
+<div class="field sales-amount required"><label class="label" for="sales-amount"> <span>Sales target amount</span> </label>
+<div class="control"><input id="sales-amount" class="input-text required-entry" title="sales-amount" autocomplete="off" name="sales-amount" type="number" value="" /></div>
+</div>
+</fieldset>
+<div class="actions-toolbar">
+<div class="primary"><button class="action submit primary" title="Submit" type="submit"> <span>Submit</span> </button></div>
+</div>
+</form>
+<script type="text/javascript" xml="space">
+	require([
+		'jquery',
+		'mage/mage'
+	], function ($) {
+		var dataForm = $('#wholesale-form');
+		var ignore = null;
+		dataForm.mage('validation', {
+			ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+		}).find('input:text').attr('autocomplete', 'off');
+	});
+</script>
