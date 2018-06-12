@@ -9,6 +9,38 @@
 	.page-header .header-top-right,.page-header #switcher-currency .action.toggle:after,.page-header #switcher-language .action.toggle:after{line-height:30px;}
 	.account .page-wrapper .column.main a{color: #4c6689;}
 	.account .page-wrapper .column.main a:hover{color: #2a6ac1;text-decoration: underline;}
+	#switcher-language a{color: #fff;font-size: 12px;text-shadow: 0 4px 4px rgba(0,0,0,0.6);padding: 2px 4px;
+		border-radius: 5px;border-width: 3px;border-style: solid;
+		border-color: #e69468 #d25b1d #ba4000 #ba4000;
+		background: #e8773b;
+		background: -webkit-linear-gradient(to bottom,#e8773b,#ba4000);
+		background: linear-gradient(to bottom,#e8773b,#ba4000);
+		-webkit-transition: all 0.1s linear;
+		transition: all 0.1s linear;}
+	#switcher-language a.current{
+		cursor:default;
+		text-decoration: none;
+		border-color: #e66e2e #bb4508 #b1521e #b54a11;
+		background: -webkit-linear-gradient(to bottom,#d6530d,#e06422);
+		background: linear-gradient(to bottom,#d6530d,#e06422);
+	}
+	#switcher-language a.lang{
+		border-color: #e66e2e #d25b1d #ba4000 #ba4000;
+	}
+	#switcher-language a.lang:hover{
+		text-decoration: none;
+		text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+		border-color: #d86c32 #d25b1d #ba4000 #ba4000;
+		background: -webkit-linear-gradient(to bottom,#d6530d,#ba4000);
+		background: linear-gradient(to bottom,#d6530d,#ba4000);
+	}
+	#switcher-language a.lang:active{
+		text-decoration: none;
+		text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+		border-color: #da5d1a #9c3d0c #b3490f #b54a11;
+		background: -webkit-linear-gradient(to bottom,#bb531b,#ec8650);
+		background: linear-gradient(to bottom,#bb531b,#ec8650);
+	}
 	#fixedWholesale{display:none;}
 	@media all and (min-width: 769px), print {
 		html.ie8,.ie8 body,html.ie9,.ie9 body,html.ie10,.ie10 body,html.ie11,.ie11 body{height:auto;}/*IE hack*/

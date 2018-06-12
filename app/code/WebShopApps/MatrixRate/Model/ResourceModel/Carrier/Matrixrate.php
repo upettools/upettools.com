@@ -203,7 +203,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $adapter = $this->getConnection();
         $shippingData=[];
         $postcode = $request->getDestPostcode();
-        if (!$zipRangeSet && is_numeric($postcode)) {
+        if ($zipRangeSet && is_numeric($postcode)) {
             #  Want to search for postcodes within a range
             $zipSearchString = ' AND :postcode BETWEEN dest_zip AND dest_zip_to  OR :postcode LIKE dest_zip';
         } else {
