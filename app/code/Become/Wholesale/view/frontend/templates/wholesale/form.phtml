@@ -130,6 +130,7 @@
 		}
 		#upload_message .red,#verify_message {
 			color: #e02b27;
+			font-size: 12px;
 		}
 	}
 </style>
@@ -339,6 +340,8 @@
 					}else{
 						$('#upload_message .red').text("");
 					}
+				}else{
+					$('#upload_message span').text("");
 				}
 				if (!$('#verify_box').hasClass('success')) {
 					$('#verify_message').text("Please slide it to validate!");
