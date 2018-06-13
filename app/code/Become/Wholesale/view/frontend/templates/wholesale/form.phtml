@@ -51,6 +51,7 @@
 		#file {
 			display: inline-block;
 		}
+		#check{padding:0 2px;}
 	}
 </style>
 <?php 
@@ -107,7 +108,7 @@
 <p>Upettools is very interested in working with new distribution partners.</p>
 <p>If your company is interested in the distribution of our products, please send email to
 	<a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a>or fill out the contact form below.</p>
-<form id="wholesale-form" action="/wholesale" method="post">
+<form id="wholesale-form" action="/wholesale" method="post" enctype="multipart/form-data">
 	<fieldset class="fieldset personal">
 		<legend class="legend">
 			<span>Personal Information</span>
@@ -207,11 +208,11 @@
 				<span>Upload file</span>
 			</label>
 			<p class="small">We look forward to your uploading these documents: company photos, shop pictures, or other things that allow us to better
-				understand you.File format like *.rar, *.zip.File does not exceeding 5M!
+				understand you.File does not exceeding 5 MB，formating like *.rar, *.zip.
 			</p>
 			<div class="control">
 				<input id="file" title="file" autocomplete="off" name="file" type="file" value="" />
-				<input id="upload" type="button" value="Upload" />
+				<input id="check" type="button" value="Check" />
 			</div>
 		</div>
 		<p id="upload_message"></p>
@@ -231,8 +232,13 @@
 			dataForm.mage('validation', {
 				ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
 			}).find('input:text').attr('autocomplete', 'off');
+
 			var $message = $('#upload_message');
-			$('#upload').click(function () {
+			$('#check').click(function () {
+				var fileSize = document.getElementById("file").files[0].size / 1024 /1024;
+				if(fileSize > 5){  
+					alert("File size exceeds 5MB!");  
+				}  
 				if ($.ajax) {
 					$.ajax({
 						type: 'post',
