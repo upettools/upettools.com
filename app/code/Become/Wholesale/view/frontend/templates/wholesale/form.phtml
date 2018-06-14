@@ -1,11 +1,10 @@
 <style xml="space">
 	.h4blue {
 		color: #4c6689;
-		margin-top: 40px;
+		margin-top: 20px;
 	}
 
-	#wholesale-form .fieldset>.field,
-	.fieldset>#wholesale-form .fields>.field {
+	#wholesale-form .fieldset>.field {
 		margin: 0 0 5px;
 	}
 
@@ -29,7 +28,7 @@
 	}
 
 	#verify_box {
-		display:inline-block;
+		display: inline-block;
 		width: 240px;
 		height: 40px;
 		text-align: center;
@@ -77,13 +76,14 @@
 		background-color: rgba(235, 54, 38, 1);
 		color: #ffffff;
 	}
-
+	@media(max-width: 768px){
+		.supplyList li{background: none!important;}
+	}
 	@media(min-width: 769px),
 	print {
+		.col-form{border-left: 1px solid #ccc;}
 		#wholesale-form {
-			min-width: 600px;
-			width: 50%;
-			margin: 60px 0 0 0;
+			margin: 20px 0 0 0;
 		}
 		#wholesale-form input[type='text']:focus,
 		#wholesale-form input[type='email']:focus,
@@ -95,6 +95,10 @@
 		#wholesale-form .fieldset>.fields>.field>.label {
 			margin: 0 0 4px;
 		}
+		.supplyList li{display:inline-block;margin: 0 20px 8px 0; padding: 4px 6px;border-radius: 2px;background:#2e80cc;transition:all linear 0.2s;}
+		.supplyList li:hover{background:#124a7d;}
+		.supplyList li:active{background:#555555;}
+		.supplyList li a{color:#fff;}
 		.field.col-2 {
 			display: inline-block;
 			width: 48%;
@@ -128,7 +132,8 @@
 			margin-top: 7px;
 			font-size: 1.2rem;
 		}
-		#upload_message .red,#verify_message {
+		#upload_message .red,
+		#verify_message {
 			color: #e02b27;
 			font-size: 12px;
 		}
@@ -149,177 +154,186 @@
 	</ul>
 </div>
 <h3 style="color: #4c6689;">Become Wholesale or dropshipping Parnter</h3>
-<h4 class="h4blue">About Upettools</h4>
-<p>Upettools is a global supplier of professional aquarium equipment that provides box&amp; water brand products which contains
-	Aquariums &amp; Tanks, Aquarium Pump, Aquarium Thermometers, Aquarium Air Pumps etc. Upettools is committed to providing
-	the most professional products, the most appropriate price and the most rigorous quality test and the best shopping experience
-	for the global aquarium and ornamental fish lovers !</p>
-<h4 class="h4blue">Products</h4>
-<p>We supply:</p>
-<ul>
-	<li>
-		<a href="/fish-aquatic/aquarium-filter.html">Aquarium Filter</a>
-	</li>
-	<li>
-		<a href="/fish-aquatic/aquarium-lights.html">Aquarium Lights</a>
-	</li>
-	<li>
-		<a href="/fish-aquatic/air-pumps-accessories.html">Air Pumps &amp; Accessories
-		</a>
-	</li>
-	<li>
-		<a href="/fish-aquatic/aquariums-tanks-cleaning-tools.html">Cleaning Tools</a>
-	</li>
-	<li>
-		<a href="/fish-aquatic/aquarium-device.html">Aquarium Devices</a>
-	</li>
-	<li>
-		<a href="/fish-aquatic/aquariums-tanks-temperature-control-products.html">Temperature Control Products</a>
-	</li>
-	<li>
-		<a href="/fish-aquatic/aquarium-water-treatment.html">Aquarium Water Treatment</a>
-	</li>
-</ul>
-<h4 class="h4blue">Enjoy The Discount</h4>
-<p>After becoming our business partner, you will enjoy a lot of benefits.</p>
-<p>We can offer more favorable prices, faster shipping and newer products.</p>
-<p>We can also customize different products, such as size, color, power or with other functions.</p>
-<h4 class="h4blue">Contact Us</h4>
-<p>Upettools is very interested in working with new distribution partners.</p>
-<p>If your company is interested in the distribution of our products, please send email to
-	<a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a>or fill out the contact form below.</p>
-<form id="wholesale-form" action="/dropshipping-and-wholesale" method="post" enctype="multipart/form-data">
-	<fieldset class="fieldset personal">
-		<legend class="legend">
-			<span>Personal Information</span>
-		</legend>
-		<div class="field col-2 field-name-firstname required">
-			<label class="label" for="firstname">
-				<span>First Name</span>
-			</label>
-			<div class="control">
-				<input id="firstname" class="input-text required-entry" title="First Name" autocomplete="off" name="firstname" type="text"
-				    value="" data-validate="{required:true}" />
-			</div>
-		</div>
-		<div class="field col-2 col-r field-name-lastname required">
-			<label class="label" for="lastname">
-				<span>Last Name</span>
-			</label>
-			<div class="control">
-				<input id="lastname" class="input-text required-entry" title="Last Name" autocomplete="off" name="lastname" type="text" value=""
-				    data-validate="{required:true}" />
-			</div>
-		</div>
-		<div class="field col-2 field-eamil required">
-			<label class="label" for="email">
-				<span>Email</span>
-			</label>
-			<div class="control">
-				<input id="email" class="input-text required-entry" title="email" autocomplete="off" name="email" type="email" value="" data-validate="{required:true}"
-				/>
-			</div>
-		</div>
-		<div class="field col-2 col-r telephone required">
-			<label class="label" for="telephone">
-				<span>Phone Number</span>
-			</label>
-			<div class="control">
-				<input id="telephone" class="input-text  required-entry" title="Phone Number" autocomplete="off" name="phone_number" type="text"
-				    value="" />
-			</div>
-		</div>
-	</fieldset>
-	<fieldset class="fieldset company">
-		<legend class="legend">
-			<span>Additonal Information</span>
-		</legend>
-		<div class="field col-2 additonal">
-			<label class="label" for="additionalCategory">
-				<span>Organization</span>
-			</label>
-			<div class="control">
-				<select name="additionalcategory" id="additionalCategory">
-					<option value="0">Please Choose</option>
-					<option value="1">Aqua Company</option>
-					<option value="2">Aquarium</option>
-					<option value="3">Dropshipping</option>
-				</select>
-			</div>
-		</div>
-		<div class="field col-2 col-r additionalname">
-			<label class="label" for="additionalname">
-				<span>Additional Name</span>
-			</label>
-			<div class="control">
-				<input id="additionalname" class="input-text" title="Additional Name" autocomplete="off" name="additionalname" type="text"
-				    value="" />
-			</div>
-		</div>
-		<div class="field sales-amount required">
-			<label class="label" for="sales-amount">
-				<span>Sales target amount</span>
-			</label>
-			<div class="control">
-				<input id="sales-amount" class="input-text required-entry" title="sales-amount" autocomplete="off" name="sales_amount" type="number"
-				    value="" />
-			</div>
-		</div>
-		<div class="field sales-area required">
-			<label class="label" for="sales-area">
-				<span>Sales to where</span>
-			</label>
-			<div class="control">
-				<input id="sales-area" class="input-text required-entry" title="sales-area" autocomplete="off" name="sales_area" type="text"
-				    value="" />
-			</div>
-		</div>
-		<div class="field interested-categories required">
-			<label class="label" for="interested-categories">
-				<span>Interested categories</span>
-			</label>
-			<div class="control">
-				<input id="interested-categories" class="input-text required-entry" title="interested-categories" autocomplete="off" name="interested_categories"
-				    type="text" value="" />
-			</div>
-		</div>
-		<div class="field file">
-			<label class="label" for="file">
-				<span>Upload file</span>
-			</label>
-			<p class="small">We look forward to your uploading these documents: company photos, shop pictures, or other things that allow us to better
-				understand you.File does not exceeding 5 MB，formating like *.rar, *.zip.
-			</p>
-			<div class="control">
-				<input id="file" title="file" autocomplete="off" name="files_name_url" type="file" value="" />
-				<p id="upload_message"><span class="size"></span><span class="red"></span></p>
-			</div>
-		</div>
-		<div class="field verify required">
-			<label class="label">
-				<span>Required Verify</span>
-			</label>
-			<div class="verify">
-				<div id="verify_box">
-					<div id="verify_xbox">
-						<div id="btn">
-							<img src="./pub/media/customize/slider.png">
-						</div>
-					</div>
-					<span>Slide To Right</span>
-				</div>
-				<p id="verify_message"></p>
-			</div>
-		</div>
-	</fieldset>
-	<div class="actions-toolbar">
-		<div class="primary">
-			<button class="action submit primary" title="Submit" type="submit">
-				<span>Submit</span>
-			</button>
-		</div>
+<div class="row">
+	<div class="col-12 col-md-6">
+		<h4 class="h4blue">About Upettools</h4>
+		<p>Upettools is a global supplier of professional aquarium equipment that provides box&amp; water brand products which contains
+			Aquariums &amp; Tanks, Aquarium Pump, Aquarium Thermometers, Aquarium Air Pumps etc. Upettools is committed to providing
+			the most professional products, the most appropriate price and the most rigorous quality test and the best shopping experience
+			for the global aquarium and ornamental fish lovers !</p>
+		<h4 class="h4blue">Products</h4>
+		<p>We supply:</p>
+		<ul class="supplyList">
+			<li>
+				<a href="/fish-aquatic/aquarium-filter.html" title="Aquarium Filter">Aquarium Filter</a>
+			</li>
+			<li>
+				<a href="/fish-aquatic/aquarium-lights.html" title="Aquarium Lights">Aquarium Lights</a>
+			</li>
+			<li>
+				<a href="/fish-aquatic/air-pumps-accessories.html" title="Air Pumps &amp; Accessories">Air Pumps &amp; Accessories</a>
+			</li>
+			<li>
+				<a href="/fish-aquatic/aquariums-tanks-cleaning-tools.html" title="Cleaning Tools">Cleaning Tools</a>
+			</li>
+			<li>
+				<a href="/fish-aquatic/aquarium-device.html" title="Aquarium Devices">Aquarium Devices</a>
+			</li>
+			<li>
+				<a href="/fish-aquatic/aquariums-tanks-temperature-control-products.html" title="Temperature Control Products">Temperature Control Products</a>
+			</li>
+			<li>
+				<a href="/fish-aquatic/aquarium-water-treatment.html" title="Aquarium Water Treatment">Aquarium Water Treatment</a>
+			</li>
+		</ul>
+		<h4 class="h4blue">Enjoy The Discount</h4>
+		<p>After becoming our business partner, you will enjoy a lot of benefits.
+		<br/>We can offer more favorable prices, faster shipping and newer products.
+		<br/>We can also customize different products, such as size, color, power or with other functions.</p>
+		<h4 class="h4blue">Contact Us</h4>
+		<p>Upettools is very interested in working with new distribution partners.</p>
+		<p>If your company is interested in the distribution of our products, please send email to
+			<a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a>or fill out the contact form.
+		</p>
 	</div>
-</form>
+	<div class="col-12 col-md-5 col-md-offset-1 col-form">
+		<form id="wholesale-form" action="/dropshipping-and-wholesale" method="post" enctype="multipart/form-data">
+			<fieldset class="fieldset personal">
+				<legend class="legend">
+					<span>Personal Information</span>
+				</legend>
+				<div class="field col-2 field-name-firstname required">
+					<label class="label" for="firstname">
+						<span>First Name</span>
+					</label>
+					<div class="control">
+						<input id="firstname" class="input-text required-entry" title="First Name" autocomplete="off" name="firstname" type="text"
+						    value="" data-validate="{required:true}" />
+					</div>
+				</div>
+				<div class="field col-2 col-r field-name-lastname required">
+					<label class="label" for="lastname">
+						<span>Last Name</span>
+					</label>
+					<div class="control">
+						<input id="lastname" class="input-text required-entry" title="Last Name" autocomplete="off" name="lastname" type="text" value=""
+						    data-validate="{required:true}" />
+					</div>
+				</div>
+				<div class="field col-2 field-eamil required">
+					<label class="label" for="email">
+						<span>Email</span>
+					</label>
+					<div class="control">
+						<input id="email" class="input-text required-entry" title="email" autocomplete="off" name="email" type="email" value="" data-validate="{required:true}"
+						/>
+					</div>
+				</div>
+				<div class="field col-2 col-r telephone required">
+					<label class="label" for="telephone">
+						<span>Phone Number</span>
+					</label>
+					<div class="control">
+						<input id="telephone" class="input-text  required-entry" title="Phone Number" autocomplete="off" name="phone_number" type="text"
+						    value="" />
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset company">
+				<legend class="legend">
+					<span>Additonal Information</span>
+				</legend>
+				<div class="field col-2 additonal">
+					<label class="label" for="additionalCategory">
+						<span>Organization</span>
+					</label>
+					<div class="control">
+						<select name="additionalcategory" id="additionalCategory">
+							<option value="0">Select</option>
+							<option value="1">Aqua Company</option>
+							<option value="2">Aquarium</option>
+							<option value="3">Dropshipping</option>
+						</select>
+					</div>
+				</div>
+				<div class="field col-2 col-r additionalname">
+					<label class="label" for="additionalname">
+						<span>Additional Name</span>
+					</label>
+					<div class="control">
+						<input id="additionalname" class="input-text" title="Additional Name" autocomplete="off" name="additionalname" type="text"
+						    value="" />
+					</div>
+				</div>
+				<div class="field sales-amount required">
+					<label class="label" for="sales-amount">
+						<span>Sales target amount</span>
+					</label>
+					<div class="control">
+						<input id="sales-amount" class="input-text required-entry" title="sales-amount" autocomplete="off" name="sales_amount" type="number"
+						    value="" />
+					</div>
+				</div>
+				<div class="field sales-area required">
+					<label class="label" for="sales-area">
+						<span>Sales to where</span>
+					</label>
+					<div class="control">
+						<input id="sales-area" class="input-text required-entry" title="sales-area" autocomplete="off" name="sales_area" type="text"
+						    value="" />
+					</div>
+				</div>
+				<div class="field interested-categories required">
+					<label class="label" for="interested-categories">
+						<span>Interested categories</span>
+					</label>
+					<div class="control">
+						<input id="interested-categories" class="input-text required-entry" title="interested-categories" autocomplete="off" name="interested_categories"
+						    type="text" value="" />
+					</div>
+				</div>
+				<div class="field file">
+					<label class="label" for="file">
+						<span>Upload file</span>
+					</label>
+					<p class="small">We look forward to your uploading these documents: company photos, shop pictures, or other things that allow us to better
+						understand you.File does not exceeding 5 MB，formating like *.rar, *.zip.
+					</p>
+					<div class="control">
+						<input id="file" title="file" autocomplete="off" name="files_name_url" type="file" value="" />
+						<p id="upload_message">
+							<span class="size"></span>
+							<span class="red"></span>
+						</p>
+					</div>
+				</div>
+				<div class="field verify required">
+					<label class="label">
+						<span>Required Verify</span>
+					</label>
+					<div class="verify">
+						<div id="verify_box">
+							<div id="verify_xbox">
+								<div id="btn">
+									<img src="./pub/media/customize/slider.png">
+								</div>
+							</div>
+							<span>Slide To Right</span>
+						</div>
+						<p id="verify_message"></p>
+					</div>
+				</div>
+			</fieldset>
+			<div class="actions-toolbar">
+				<div class="primary">
+					<button class="action submit primary" title="Submit" type="submit">
+						<span>Submit</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 <script type="text/javascript" xml="space">
 	require(['jquery', 'mage/mage'], function ($) {
 			var dataForm = $('#wholesale-form');
@@ -328,26 +342,27 @@
 				ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
 			}).find('input:text').attr('autocomplete', 'off');
 
+			//customize validation
 			$('.submit').click(function (event) {
 				$('#wholesale-form').mage('validation', {});
-				if(document.getElementById("file").files[0]){
+				if (document.getElementById("file").files[0]) {
 					var fileSize = document.getElementById("file").files[0].size / 1024 / 1024;
 					$('#upload_message .size').text(fileSize.toFixed(2) + ' MB.');
 					if (fileSize > 5) {
 						$('#upload_message .red').text("File size exceeds 5MB!");
-						dataForm.validation('isValid');// prevent submit
+						dataForm.validation('isValid'); // prevent submit
 						return false;
-					}else{
+					} else {
 						$('#upload_message .red').text("");
 					}
-				}else{
+				} else {
 					$('#upload_message span').text("");
 				}
 				if (!$('#verify_box').hasClass('success')) {
 					$('#verify_message').text("Please slide it to validate!");
 					dataForm.validation('isValid');
 					return false;
-				}else{
+				} else {
 					$('#verify_message').text('');
 				}
 			});
