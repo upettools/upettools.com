@@ -259,7 +259,7 @@ $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface'
                 <span>上传文件</span>
             </label>
             <p class="small">想更快展开交流与合作，请在这里提交相关文件：可包括公司相关图片、产品介绍、产品报价或画册等。
-                <br/>请将文件以压缩包的格式提交。文件不得大于5M。(如文件超出限制，请发附件至
+                <br/>请将文件以压缩包的格式提交。文件不得大于100M。(如文件超出限制，请发附件至
                 <a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a>。)</p>
             <div class="control">
                 <input id="file" class="input-text" title="file" autocomplete="off" name="files_name_url" type="file" value="" />
@@ -309,8 +309,8 @@ $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface'
             if(document.getElementById("file").files[0]){
                 var fileSize = document.getElementById("file").files[0].size / 1024 / 1024;
                 $('#upload_message .size').text(fileSize.toFixed(2) + ' MB.');
-                if (fileSize > 5) {
-                    $('#upload_message .red').text("文件超过 5MB!");
+                if (fileSize > 100) {
+                    $('#upload_message .red').text("文件超过 100MB!");
                     dataForm.validation('isValid');// prevent submit
                     return false;
                 }else{
