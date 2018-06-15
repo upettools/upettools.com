@@ -1,0 +1,369 @@
+<style xml="space">
+    .h4blue {
+        color: #4c6689;
+        margin-top: 20px;
+    }
+
+    #supply-form .fieldset>.field {
+		margin: 0 0 5px;
+	}
+
+    /*verify box*/
+
+	.field.verify {
+		margin: 20px 0 0 0;
+	}
+
+	.verify>span {
+		width: 38px;
+		height: 40px;
+		font-size: 16px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: 40px;
+		letter-spacing: 0px;
+		color: #333;
+		margin-right: 23px;
+	}
+
+	#verify_box {
+		display:inline-block;
+		width: 240px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		font-size: 14px;
+		color: #fff;
+		background-color: rgba(212, 212, 212, 1);
+	}
+
+	#verify_xbox {
+		width: 54px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		font-size: 14px;
+		color: #fff;
+		position: absolute;
+		background: #7BBB55;
+	}
+
+	#btn {
+		cursor: pointer;
+		width: 54px;
+		height: 40px;
+		background-color: rgba(255, 255, 255, 1);
+		border: solid 1px rgba(212, 212, 212, 1);
+		float: right;
+	}
+
+	#btn>img {
+		margin: -2px 0 0 0;
+	}
+
+	.continue {
+		width: 120px;
+		height: 40px;
+		background-color: rgba(212, 212, 212, 1);
+		margin: 0 70px;
+		border: none;
+		color: #302f41;
+		font-size: 16px;
+	}
+
+	.continue:hover {
+		background-color: rgba(235, 54, 38, 1);
+		color: #ffffff;
+	}
+
+    @media (min-width: 769px),
+    print {
+        .col-form{border-left: 1px solid #ccc;}
+        #supply-form {
+            margin: 20px 0 0 0;
+        }
+        #supply-form input[type='text']:focus,
+        #supply-form input[type='email']:focus,
+        #supply-form input[type='number']:focus,
+        #supply-form select:focus {
+            border-color: #68a8e0;
+        }
+        #supply-form .fieldset>.field>.label,
+        #supply-form .fieldset>.fields>.field>.label {
+            margin: 0 0 4px;
+        }
+        .supplyList li{display:inline-block;margin: 0 20px 8px 0; padding: 4px 6px;border-radius: 2px;background:#2e80cc;transition:all linear 0.2s;}
+		.supplyList li:hover{background:#124a7d;}
+		.supplyList li:active{background:#555555;}
+		.supplyList li a{color:#fff;}
+        .fieldset.company {
+            margin: 0 0 10px;
+        }
+        #file {
+            display: inline-block;
+        }
+        .field.file .small {
+            border-top: 1px solid #ccc;
+        }
+        .field.col-2 {
+            display: inline-block;
+            width: 48%;
+        }
+        .field.col-r {
+            float: right;
+        }
+        #file {
+			display: inline-block;
+		}
+		#upload_message {
+			display: inline-block;
+			margin-top: 7px;
+			font-size: 1.2rem;
+		}
+		#upload_message .red,#verify_message {
+			color: #e02b27;
+			font-size: 12px;
+		}
+    }
+</style>
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+?>
+<div class="breadcrumbs" style="padding-left:0;">
+	<ul class="items">
+		<li class="item home">
+			<a href="<?php echo $storeManager->getStore()->getBaseUrl();?>" title="Go to Home Page"> Home </a>
+		</li>
+		<li class="item cms_page">
+			<strong>成为供应商</strong>
+		</li>
+	</ul>
+</div>
+<h3 style="color: #4c6689;">成为供应商</h3>
+<div class="row">
+<div class="col-xs-12 col-md-6">
+<h4 class="h4blue">关于Upettools</h4>
+<p>Upettools 是一家专业的水族设备全球供应商，现经营一系列水族产品：水族箱、空气泵、水循环泵、加温棒及各种配件等。</p>
+<p>Upettool拥有一支全球销售团队，产品持续销往世界各地，致力于打造最全面，最专业的水族器材。</p>
+<p>Upettools致力于为全球水族馆和观赏鱼爱好者提供最专业的产品，最合适的价格以及最严格的质量测试和最佳的购物体验！</p>
+<p>我们真心希望得到广大观赏鱼爱好者的认可和支持！</p>
+<h4 class="h4blue">主营类目</h4>
+<ul class="supplyList">
+    <li>
+        <a href="/fish-aquatic/aquarium-filter.html">水族过滤器类</a>
+    </li>
+    <li>
+        <a href="/fish-aquatic/aquarium-lights.html">水族灯类</a>
+    </li>
+    <li>
+        <a href="/fish-aquatic/air-pumps-accessories.html">空气泵和配件类</a>
+    </li>
+    <li>
+        <a href="/fish-aquatic/aquariums-tanks-cleaning-tools.html">清洁工具类</a>
+    </li>
+    <li>
+        <a href="/fish-aquatic/aquarium-device.html">水族器械类</a>
+    </li>
+    <li>
+        <a href="/fish-aquatic/aquariums-tanks-temperature-control-products.html">水族温度控制类</a>
+    </li>
+    <li>
+        <a href="/fish-aquatic/aquarium-water-treatment.html">水族水治理类</a>
+    </li>
+</ul>
+<h4 class="h4blue">成为供应商</h4>
+<p>现在，我们诚邀您加入 Upettools.com 伙伴供应商，共同开拓全球市场！</p>
+<p>Upettools非常乐意与新的供应商伙伴合作。</p>
+<p>如果您或公司对我们感兴趣，请发送邮件至
+    <a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a>或填写右侧的信息表格。</p>
+<p>在两至三个工作日内，我们会有专业的人员去联系您。</p>
+</div>
+<div class="col-xs-12 col-md-5 col-md-offset-1 col-form">
+<form id="supply-form" action="/become-a-supplier" method="post" enctype="multipart/form-data">
+    <fieldset class="fieldset personal">
+        <legend class="legend">
+            <span>个人信息</span>
+        </legend>
+        <div class="field col-2 field-name-lastname required">
+            <label class="label" for="lastname">
+                <span>姓</span>
+            </label>
+            <div class="control">
+                <input id="lastname" class="input-text required-entry" title="Last Name" autocomplete="off" name="lastname" type="text" value=""
+                    data-validate="{required:true}" />
+            </div>
+        </div>
+        <div class="field col-2 col-r field-name-firstname required">
+            <label class="label" for="firstname">
+                <span>名</span>
+            </label>
+            <div class="control">
+                <input id="firstname" class="input-text required-entry" title="First Name" autocomplete="off" name="firstname" type="text"
+                    value="" data-validate="{required:true}" />
+            </div>
+        </div>
+        <div class="field col-2 field-eamil required">
+            <label class="label" for="email">
+                <span>邮箱</span>
+            </label>
+            <div class="control">
+                <input id="email" class="input-text required-entry" title="email" autocomplete="off" name="email" type="email" value="" data-validate="{required:true}"
+                />
+            </div>
+        </div>
+        <div class="field col-2 col-r telephone required">
+            <label class="label" for="telephone">
+                <span>电话号码</span>
+            </label>
+            <div class="control">
+                <input id="telephone" class="input-text  required-entry" title="Phone Number" autocomplete="off" name="telephone" type="text"
+                    value="" />
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="fieldset company required">
+        <legend class="legend">
+            <span>附加信息</span>
+        </legend>
+        <div class="field company required">
+            <label class="label" for="company">
+                <span>公司名称</span>
+            </label>
+            <div class="control">
+                <input id="company" class="input-text required-entry" title="Company" autocomplete="off" name="company" type="text" value=""
+                />
+            </div>
+        </div>
+        <div class="field address required">
+            <label class="label" for="address">
+                <span>公司地址</span>
+            </label>
+            <div class="control">
+                <input id="address" class="input-text required-entry" title="address" autocomplete="off" name="address" type="text" value=""
+                />
+            </div>
+        </div>
+        <div class="field categories required">
+            <label class="label" for="categories">
+                <span>生产类目</span>
+            </label>
+            <div class="control">
+                <input id="categories" class="input-text required-entry" title="categories" autocomplete="off" name="categories" type="text"
+                    value="" />
+            </div>
+        </div>
+        <div class="field file">
+            <label class="label" for="file">
+                <span>上传文件</span>
+            </label>
+            <p class="small">想更快展开交流与合作，请在这里提交相关文件：可包括公司相关图片、产品介绍、产品报价或画册等。
+                <br/>请将文件以压缩包的格式提交。文件不得大于5M。(如文件超出限制，请发附件至
+                <a style="color: #4c6689;" href="mailto:info@upettools.com">info@upettools.com</a>。)</p>
+            <div class="control">
+                <input id="file" class="input-text" title="file" autocomplete="off" name="files_name_url" type="file" value="" />
+                <p id="upload_message"><span class="size"></span><span class="red"></span></p>
+            </div>
+        </div>
+        <div class="field verify required">
+			<label class="label">
+				<span>必须验证</span>
+			</label>
+			<div class="verify">
+				<div id="verify_box">
+					<div id="verify_xbox">
+						<div id="btn">
+							<img src="./pub/media/customize/slider.png">
+						</div>
+					</div>
+					<span>滑动至右侧</span>
+				</div>
+				<p id="verify_message"></p>
+			</div>
+		</div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button class="action submit primary" title="Submit" type="submit">
+                <span>提交</span>
+            </button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+<script type="text/javascript" xml="space">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function ($) {
+        var dataForm = $('#supply-form');
+        var ignore = null;
+        dataForm.mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        }).find('input:text').attr('autocomplete', 'off');
+       
+        $('.submit').click(function (event) {
+            $('#supply-form').mage('validation', {});
+            if(document.getElementById("file").files[0]){
+                var fileSize = document.getElementById("file").files[0].size / 1024 / 1024;
+                $('#upload_message .size').text(fileSize.toFixed(2) + ' MB.');
+                if (fileSize > 5) {
+                    $('#upload_message .red').text("文件超过 5MB!");
+                    dataForm.validation('isValid');// prevent submit
+                    return false;
+                }else{
+                    $('#upload_message .red').text("");
+                }
+            }else{
+                $('#upload_message span').text("");
+            }
+            if (!$('#verify_box').hasClass('success')) {
+                $('#verify_message').text("请滑动验证");
+                dataForm.validation('isValid');
+                return false;
+            }else{
+                $('#verify_message').text('');
+            }
+        });
+        //Verify box
+        var box = document.getElementById('verify_box');
+        var xbox = document.getElementById('verify_xbox');
+        var element = document.getElementById('btn');
+        var b = box.offsetWidth;
+        var o = element.offsetWidth;
+        element.ondragstart = function () {
+            return false;
+        };
+        element.onselectstart = function () {
+            return false;
+        };
+        element.onmousedown = function (e) {
+            var disX = e.clientX - element.offsetLeft;
+            document.onmousemove = function (e) {
+                var l = e.clientX - disX + o;
+                if (l < o) {
+                    l = o
+                }
+                if (l > b) {
+                    l = b
+                }
+                xbox.style.width = l + 'px';
+            };
+            document.onmouseup = function (e) {
+                var l = e.clientX - disX + o;
+                if (l < b) {
+                    l = o
+                } else {
+                    l = b;
+                    xbox.innerHTML = '验证通过<div id="btn"><img src="./pub/media/customize/success.png"/></div>';
+                    box.className = 'success';
+                }
+                xbox.style.width = l + 'px';
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        }
+    });
+</script>

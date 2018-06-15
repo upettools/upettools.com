@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+	    <add id="Become_Supplier::supplier" title="Supplier" module="Become_Supplier" sortOrder="111" parent="Vicomage_Core::vicomage_manage" resource="Become_Supplier::supplier"/>
+		<add id="Become_Supplier::supplier_supplier" title="supplier" module="Become_Supplier" sortOrder="10" parent="Become_Supplier::supplier" action="supplier/supplier" resource="Become_Supplier::supplier_supplier"/>
+    </menu>
+</config>

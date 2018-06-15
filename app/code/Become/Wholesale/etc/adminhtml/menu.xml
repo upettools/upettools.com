@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+	    <add id="Become_Wholesale::wholesale" title="Wholesale And Dropshipping" module="Become_Wholesale" sortOrder="110" parent="Vicomage_Core::vicomage_manage" resource="Become_Wholesale::wholesale"/>
+		<add id="Become_Wholesale::wholesale_wholesale" title="Wholesale" module="Become_Wholesale" sortOrder="10" parent="Become_Wholesale::wholesale" action="wholesale/wholesale" resource="Become_Wholesale::wholesale_wholesale"/>
+    </menu>
+</config>

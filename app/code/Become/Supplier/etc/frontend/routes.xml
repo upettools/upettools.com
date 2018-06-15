@@ -2,8 +2,8 @@
  
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-        <route id="wholesale" frontName="dropshipping-and-wholesale">
-            <module name="Become_Wholesale" />
+        <route id="supplier" frontName="become-a-supplier">
+            <module name="Become_Supplier" />
         </route>
     </router>
 </config>

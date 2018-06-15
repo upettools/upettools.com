@@ -1,6 +1,6 @@
 <?php
  
-namespace Become\Wholesale\Controller\Index;
+namespace Become\Supplier\Controller\Index;
  
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
@@ -66,8 +66,8 @@ class Index extends \Magento\Framework\App\Action\Action
 		try{
 			if($post){
 				
-				$additionalname = $post['additionalname'];
-				$target = $this->_mediaDirectory->getAbsolutePath('wholesale/files/'.$additionalname.'');        
+				$company = $post['company'];
+				$target = $this->_mediaDirectory->getAbsolutePath('supplier/files/'.$company.'');        
 				/** @var $uploader \Magento\MediaStorage\Model\File\Uploader */
 				$uploader = $this->_fileUploaderFactory->create(['fileId' => 'files_name_url']);
 				/** Allowed extension types */
@@ -78,7 +78,7 @@ class Index extends \Magento\Framework\App\Action\Action
 				$result = $uploader->save($target);
 				// $name = explode('.',$result['file']);
 				// $newName = $post['email'].date('Ymdhis').'.'.$name[1];
-				$post['files_name_url'] = 'wholesale/files/'.$additionalname.'/'.$result['file'];
+				$post['files_name_url'] = 'supplier/files/'.$company.'/'.$result['file'];
 			
 			}
 			
@@ -107,7 +107,7 @@ class Index extends \Magento\Framework\App\Action\Action
             // }
 
             $storeViewId = $this->getRequest()->getParam('store');
-		    $model = $this->_objectManager->create('Become\Wholesale\Model\Shopwholesale');
+		    $model = $this->_objectManager->create('Become\Supplier\Model\Shopsupplier');
 		   //$model->setData($post);
 		    $model->setData($post)->setStoreViewId($storeViewId);
             $model->save();
@@ -129,16 +129,16 @@ class Index extends \Magento\Framework\App\Action\Action
             // $transport->sendMessage();
             // $this->inlineTranslation->resume();
             $this->messageManager->addSuccess(
-                __('The information is submitted successfully! We\'ll respond to you very soon.')
+                __('您已成功提交信息！')
             );
-            $this->_redirect('wholesale');
+            $this->_redirect('supplier');
             return;
         } catch (\Exception $e) {
             //$this->inlineTranslation->resume();
             $this->messageManager->addError(
-                __('Information submission failed!')
+                __('信息提交失败!')
             );
-            $this->_redirect('wholesale');
+            $this->_redirect('supplier');
             return;
         }
     }
