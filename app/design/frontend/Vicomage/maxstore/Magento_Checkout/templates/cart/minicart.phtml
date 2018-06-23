@@ -8,7 +8,18 @@
 
 /** @var $block \Magento\Checkout\Block\Cart\Sidebar */
 ?>
-
+<style type="text/css" rel="stylesheet">
+#mini-cart .product-item-name>a{display: inline-block;line-height: 18px;text-transform: capitalize;color: #555;}
+#mini-cart .product-item-name>a:hover{color:#4c6689;}
+#mini-cart .options .content>.options{margin: 0;}
+@media (min-width: 769px),print{
+#mini-cart .product-item-pricing .price-container,
+#mini-cart .product-item-pricing .details-qty{display:inline-block;vertical-align: middle;}
+#mini-cart .product-item-pricing .details-qty{margin: 0;}
+.minicart-items .product-item-pricing .label{width:auto;margin: 0 2px 0 10px;}
+.block-minicart .subtotal .price{font-size:24px;}
+}
+</style>
 <div data-block="minicart" class="minicart-wrapper">
     <a class="action showcart" href="<?php /* @escapeNotVerified */ echo $block->getShoppingCartUrl(); ?>"
        data-bind="scope: 'minicart_content'">
