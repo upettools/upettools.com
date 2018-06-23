@@ -76,7 +76,16 @@
 		background-color: rgba(235, 54, 38, 1);
 		color: #ffffff;
 	}
-
+    #mobile_verify_box>label{vertical-align: top;padding: 0 0 0 14px;}
+    #verify_message {
+			color: #e02b27;
+			font-size: 12px;
+		}
+    @media (max-width: 768px){
+        #verify_message {
+            padding-left:27px;
+        } 
+    }
     @media (min-width: 769px),
     print {
         .col-form{border-left: 1px solid #ccc;}
@@ -121,7 +130,7 @@
 			margin-top: 7px;
 			font-size: 1.2rem;
 		}
-		#upload_message .red,#verify_message {
+		#upload_message .red{
 			color: #e02b27;
 			font-size: 12px;
 		}
@@ -271,7 +280,7 @@ $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface'
 				<span>必须验证</span>
 			</label>
 			<div class="verify">
-				<div id="verify_box">
+				<div id="verify_box" class="hidden-xs">
 					<div id="verify_xbox">
 						<div id="btn">
 							<img src="/pub/media/customize/slider.png">
@@ -279,6 +288,9 @@ $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface'
 					</div>
 					<span>滑动至右侧</span>
 				</div>
+                <div id="mobile_verify_box" class="visible-xs hidden-md">
+                    <input type="checkbox" id="mobile_verify"><label for="mobile_verify">不是机器人</label>
+                </div>
 				<p id="verify_message"></p>
 			</div>
 		</div>
@@ -303,8 +315,9 @@ $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface'
         dataForm.mage('validation', {
             ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
         }).find('input:text').attr('autocomplete', 'off');
-       
+
         $('.submit').click(function (event) {
+            var windowWidth = $(document).width();
             $('#supply-form').mage('validation', {});
             if(document.getElementById("file").files[0]){
                 var fileSize = document.getElementById("file").files[0].size / 1024 / 1024;
@@ -319,13 +332,26 @@ $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface'
             }else{
                 $('#upload_message span').text("");
             }
-            if (!$('#verify_box').hasClass('success')) {
-                $('#verify_message').text("请滑动验证");
-                dataForm.validation('isValid');
-                return false;
+            if(windowWidth > 768){
+                $('input#mobile_verify').attr({"disabled":"disabled"});//remove this input
+                if (!$('#verify_box').hasClass('success')) {
+                    $('#verify_message').text("请滑动验证");
+                    dataForm.validation('isValid');
+                    return false;
+                }else{
+                    $('#verify_message').text('');
+                }
             }else{
-                $('#verify_message').text('');
+                if($("#mobile_verify_box input[type='checkbox']:checked").length <= 0){
+                    $('#verify_message').text("请选中");
+                    dataForm.validation('isValid');
+                    return false;
+                }else{
+                    $('#verify_message').text('');
+                    $('input#mobile_verify').attr({"disabled":"disabled"});
+                }
             }
+            
         });
         //Verify box
         var box = document.getElementById('verify_box');

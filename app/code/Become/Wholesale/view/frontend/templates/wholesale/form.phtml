@@ -76,8 +76,16 @@
 		background-color: rgba(235, 54, 38, 1);
 		color: #ffffff;
 	}
+	#mobile_verify_box>label{vertical-align: top;padding: 0 0 0 14px;}
+    #verify_message {
+		color: #e02b27;
+		font-size: 12px;
+	}
 	@media(max-width: 768px){
 		.supplyList li{background: none!important;}
+		#verify_message {
+            padding-left:27px;
+        }
 	}
 	@media(min-width: 769px),
 	print {
@@ -132,8 +140,7 @@
 			margin-top: 7px;
 			font-size: 1.2rem;
 		}
-		#upload_message .red,
-		#verify_message {
+		#upload_message .red{
 			color: #e02b27;
 			font-size: 12px;
 		}
@@ -312,13 +319,16 @@
 						<span>Required Verify</span>
 					</label>
 					<div class="verify">
-						<div id="verify_box">
+						<div id="verify_box" class="hidden-xs">
 							<div id="verify_xbox">
 								<div id="btn">
 									<img src="/pub/media/customize/slider.png">
 								</div>
 							</div>
 							<span>Slide To Right</span>
+						</div>
+						<div id="mobile_verify_box" class="visible-xs hidden-md">
+							<input type="checkbox" id="mobile_verify"><label for="mobile_verify">not a robot</label>
 						</div>
 						<p id="verify_message"></p>
 					</div>
@@ -344,6 +354,7 @@
 
 			//customize validation
 			$('.submit').click(function (event) {
+				var windowWidth = $(document).width();
 				$('#wholesale-form').mage('validation', {});
 				if (document.getElementById("file").files[0]) {
 					var fileSize = document.getElementById("file").files[0].size / 1024 / 1024;
@@ -358,13 +369,26 @@
 				} else {
 					$('#upload_message span').text("");
 				}
-				if (!$('#verify_box').hasClass('success')) {
-					$('#verify_message').text("Please slide it to validate!");
-					dataForm.validation('isValid');
-					return false;
-				} else {
-					$('#verify_message').text('');
+				if(windowWidth > 768){
+					$('input#mobile_verify').attr({"disabled":"disabled"});//remove this input
+					if (!$('#verify_box').hasClass('success')) {
+						$('#verify_message').text("Please slide it to validate!");
+						dataForm.validation('isValid');
+						return false;
+					} else {
+						$('#verify_message').text('');
+					}
+				}else{
+					if($("#mobile_verify_box input[type='checkbox']:checked").length <= 0){
+						$('#verify_message').text("please select");
+						dataForm.validation('isValid');
+						return false;
+            		 }else{
+						$('#verify_message').text('');
+						$('input#mobile_verify').attr({"disabled":"disabled"});
+					}
 				}
+				
 			});
 			//Verify box
 			var box = document.getElementById('verify_box');
