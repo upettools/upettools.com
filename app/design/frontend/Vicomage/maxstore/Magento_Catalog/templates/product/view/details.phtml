@@ -20,7 +20,7 @@
         <?php $layout = $block->getLayout(); ?>
  <?php if(!$tab_style || $tab_style != "vertical"): ?>
         <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
-            <?php foreach ($detailedInfoGroup as $name):?>
+            <?php foreach ($detailedInfoGroup as $key =>  $name):?>
                 <?php
                     $html = $layout->renderElement($name);
                     if (!trim($html)) {
@@ -40,7 +40,7 @@
                         <?php /* @escapeNotVerified */ echo $label; ?>
                     </a>
                 </div>
-                <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content">
+                <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content" style="<?php if($key > 0) echo 'display:none;';?>">
                     <?php /* @escapeNotVerified */ echo $html; ?>
                 </div>
             <?php endforeach;?>
