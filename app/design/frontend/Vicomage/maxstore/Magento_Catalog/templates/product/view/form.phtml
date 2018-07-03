@@ -36,6 +36,37 @@
         <?php endif;?>
         <?php echo $block->getChildHtml('form_bottom'); ?>
 		
+		
+		<script src='http://connect.facebook.net/en_US/all.js'></script>
+			<p><a onclick='postToFeed(); return false;'>Share Facebook</a></p>
+			<p id='msg'></p>
+
+			<script> 
+			  FB.init({appId: "1701850953406444", status: true, cookie: true});
+
+			  function postToFeed() {
+
+				// calling the API ...
+				var obj = {
+				  method: 'feed',
+				  redirect_uri:'https://www.facebook.com/cryswashington?fref=ts',
+				  link:'https://developers.facebook.com/docs/reference/dialogs/',
+				  picture: 'http://fbrell.com/f8.jpg',
+				  name: 'Facebook Dialogs',
+				  caption: 'Reference Documentation',
+				  description: 'Using Dialogs to interact with users.'
+				};
+
+				function callback(response) {
+
+				document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+				}
+
+				FB.ui(obj, callback);
+			  }
+
+		</script>
+		
 		<!--<div class="product-addit">
 			 <div class="product-social-links clearfix">
 				<div class="so-facebook so-social-share">
