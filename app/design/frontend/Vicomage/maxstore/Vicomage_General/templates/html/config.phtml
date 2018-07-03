@@ -138,3 +138,19 @@ require([
 
   gtag('config', 'UA-117277065-1');
 </script>
+
+<?php 
+   $objectManager = \Magento\Framework\App\ObjectManager::getInstance()->get('\Magento\Framework\Registry');
+   $getCurrentProduct = $objectManager->registry('current_product');
+  // print_r($getCurrentProduct);exit;
+  
+?>
+ <?php if($getCurrentProduct): ?>
+	  <meta property="og:type"          content="og:product" />
+	  <meta property="og:title"         content="<?php echo $currentProduct->getName(); ?>" />
+	  <meta property="og:description"   content="<?php echo $currentProduct->getShortDescription(); ?>" />
+	  <meta property="og:image"         content="<?php echo $currentProduct->getImage(); ?>" />
+	  <meta property="og:url"           content="<?php echo $currentProduct->getProductUrl(); ?>" /> 
+   <?php endif; ?>
+   
+
