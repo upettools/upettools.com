@@ -7,6 +7,7 @@
 	.toolbar select{padding-left: 10px;}
 	.swatch-option{border: 1px solid rgba(0, 0, 0, 0.2);}
 	.header-top .header-top-right,.page-header #switcher-currency .action.toggle:after{line-height:30px;}
+	.links-header-dropdown .link.wishlist .qty>i{font-style:normal;}
 	.account .page-wrapper .column.main a{color: #4c6689;}
 	.account .page-wrapper .column.main a:hover{color: #2a6ac1;text-decoration: underline;}
 	#switcher-language a{color: #fff;font-size: 12px;text-shadow: 0 4px 4px rgba(0,0,0,0.6);padding: 2px 4px;
@@ -39,8 +40,9 @@
 	.product-item-actions .actions-primary .stock.unavailable{
 	padding: 0 15px;font-weight: 700;font-size: 12px;line-height: 30px;background:#ffffff;}
 	.product-item-actions .actions-primary .stock.unavailable span{text-decoration: underline;}
-	#backtotop{bottom: 40px;right: 12px;background-color: #0584bb;border-radius: 4px;}
+	#backtotop{right: 12px;background-color: #0584bb;border-radius: 4px;}
 	#backtotop:hover{background:#333333;}
+	.minicart-items .item-qty{width:40px;padding:0;}
 	@media all and (min-width: 769px), print {
 		html.ie8,.ie8 body,html.ie9,.ie9 body,html.ie10,.ie10 body,html.ie11,.ie11 body{height:auto;}/*IE hack*/
 		.header-content-menu{position: relative;}
@@ -68,7 +70,7 @@
 			background: linear-gradient(to bottom,#0f688e,#0f80af);
 		}
 		.header-container-fixed #fixedWholesale{display:none;}
-		
+		#backtotop{bottom:40px;}
 	}
 	@media only screen and (min-width: 769px) and (max-width: 898px), print {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
@@ -84,6 +86,23 @@
 		.vicomage-slider .slick-active .slide-caption .caption1{font-family: Gabriola;font-style: italic;font-weight: 700;}
 		.vicomage-slider .slick-active .slide-caption .caption2,
 		.vicomage-slider .slick-active .slide-caption .caption3{text-transform: capitalize;font-size: 14px;font-weight: normal;}
+		#backtotop{bottom:60px;right:14px;opacity:0.8;}
+		.catalog-product-view #backtotop{bottom: 114px;}
+		body>.zopim{bottom: 70px!important;opacity: 0.88;}
+		.page-header .wishlist-header .wishlist>a{position:relative;}
+		.wishlist-header .qty{position:absolute;top: -5px;right: -12px;min-width:20px;height:20px;
+		line-height:20px;text-align:center;background:#4c6689;color:#fff;font-size:12px;
+		border-radius: 50%;overflow: hidden;}
+		.wishlist-header .qty>span{font-size:12px;}
+		.wishlist-header .qty>i{display:none;}
+
+		/*hide slick hover*/
+		.slick-slider:hover .slick-prev, 
+		.slick-slider:hover .slick-next{display:none!important;}
+		/*hide non-sense links*/
+		.nav-sections .header.links:nth-child(n+2) {display: none;}
+		.nav-sections .header.links .qty>i{font-style:normal;}
+		.vicomage-megamenu li.level0 .submenu .content-hot-category .block-cat .thumb .title_cat .content-cat{text-decoration:none;}
 	}
 </style>
 <header class="page-header header-type<?php echo $header_type; ?>">
@@ -180,7 +199,7 @@
 								<span data-bind="scope: 'wishlist'" class="link wishlist">
 								<a href="<?php echo $this->getUrl('wishlist') ?>">
 									<span class="flaticon-heart1"></span> 
-									<!-- ko if: wishlist().counter --><span data-bind="text: wishlist().counter" class="counter qty"></span><!-- /ko -->
+									<!-- ko if: wishlist().counter --><span data-bind="html: wishlist().counter" class="counter qty"></span><!-- /ko -->
 								</a>
 							</div>
 							<script type="text/x-magento-init">
@@ -211,6 +230,7 @@
 					<?php echo $this->getChildHtml("navigation.sections"); ?>
 				</div>
 			</div>
+			<a id="fixedWholesale" href="/dropshipping-and-wholesale">Wholesale and Dropshipping</a>
 		</div>
 	</div>
 	
@@ -821,11 +841,4 @@
 		</div>
 	</div>
 	<?php endif; ?>
-	<script>
-		require([
-			'jquery'
-		],function($){
-			$('.header-content-menu').append('<a id="fixedWholesale" href="/dropshipping-and-wholesale">Wholesale and Dropshipping</a>');
-		});	
-	</script>
 </header>

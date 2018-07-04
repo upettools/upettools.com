@@ -14,7 +14,7 @@
             <block class="Magento\Newsletter\Block\Subscribe" name="newsletter_popup" template="subscribe_popup.phtml" before="-"/>
         </referenceContainer>
 		<referenceBlock name="header.links">
-			<block class="Magento\Framework\View\Element\Template" name="catalog.compare.link" before="-"
+			<block class="Magento\Framework\View\Element\Template" name="catalog.compare.link" after="wish-list-link"
                    template="Magento_Catalog::product/compare/link.phtml">
                 <arguments>
                     <argument name="jsLayout" xsi:type="array">
@@ -38,12 +38,12 @@
                     <argument name="path" xsi:type="string">checkout</argument>
                 </arguments>
             </block>
-            <block class="Magento\Wishlist\Block\Link" name="wish-list-link" after="catalog.compare.link">
+            <block class="Magento\Wishlist\Block\Link" name="wish-list-link" after="my-link">
 				<arguments>
 					<argument name="label" xsi:type="string" translate="true">My Wish List</argument>
 				</arguments>
 			</block>
-			<block class="Magento\Customer\Block\Account\Link" name="my-account-link">
+			<block class="Magento\Customer\Block\Account\Link" name="my-account-link" before='-'>
 				<arguments>
 					<argument name="label" xsi:type="string" translate="true">My Account</argument>
 				</arguments>

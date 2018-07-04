@@ -84,9 +84,9 @@ class Wishlist implements SectionSourceInterface
     protected function createCounter($count)
     {
         if ($count > 1) {
-            return __('%1 items', $count);
+            return __('<span>%1</span> <i>items</i>', $count);
         } elseif ($count == 1) {
-            return __('1 item');
+            return __('<span>1</span> <i>item</i>');
         }
         return null;
     }
