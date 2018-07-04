@@ -128,17 +128,6 @@ require([
 </script>
 <!--End of Zendesk Chat Script-->
 
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117277065-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-117277065-1');
-</script>
-
 <?php 
    $objectManager = \Magento\Framework\App\ObjectManager::getInstance()->get('\Magento\Framework\Registry');
    $getCurrentProduct = $objectManager->registry('current_product');
