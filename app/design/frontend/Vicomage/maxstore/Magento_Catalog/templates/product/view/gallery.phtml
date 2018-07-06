@@ -130,7 +130,7 @@ require([
 ], function ($) {
     
 	$(document).ready(function () {
-		//if(($( window ).width() > 768 )){
+		if(($( window ).width() > 768 )){
 			$('.gallery-placeholder').hover(function () {
 			$('.zoomContainer').remove();
 			$(".fotorama__stage__frame.fotorama__active .fotorama__img").elevateZoom({
@@ -214,7 +214,7 @@ require([
 				cursor: 'pointer'
 			});
 		});
-		//}
+		}
 	});
 	
 });
