@@ -10,8 +10,77 @@ if ($block->hasRequiredOptions()) {
     $required = ' data-hasrequired="' . __('* Required Fields') . '"';
 }
 ?>
-<div class="product-options-wrapper" id="product-options-wrapper"<?php /* @escapeNotVerified */ echo $required; ?>>
-    <div class="fieldset" tabindex="0">
-        <?php echo $block->getChildHtml('', true);?>
+<style>
+@media all and (min-width:769px),print{
+    #optionsBox{border:0;margin:0;padding:0;}
+    #optionsBox-close{display:none;}
+}
+@media (max-width:768px),print{
+    #optionsBox{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 71px;
+        left: 0;
+        z-index: 1050;
+        display: none;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+        background: rgba(0, 0, 0, 0.6);
+        -webkit-transition: all .15s linear;
+        -o-transition: all .15s linear;
+        transition: all .15s linear;
+    }
+    #optionsBox>.modal-dialog{
+        position:absolute;
+        bottom:0;
+        width: 100%;
+        margin:0;
+        padding: 10px;
+        border-radius: 10px 10px 0 0;
+        background: #fff;}
+    #optionsBox-close{
+        display: inline-block;
+        margin: -10px 0 0 -5px;
+        padding: 3px 5px;
+        border-radius: 6px;
+        font-size: 12px;
+        background-color: #777777;
+        color: #fff;}
+}
+</style>
+<div id="optionsBox" class="optionsBox">
+    <div class="modal-dialog">
+        <div id="optionsBox-close" class="optionsBox-close">Close</div>
+        <div class="product-options-wrapper" id="product-options-wrapper"<?php /* @escapeNotVerified */ echo $required; ?>>
+            <div class="fieldset" tabindex="0">
+                <?php echo $block->getChildHtml('', true);?>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    require(
+        [
+            'jquery'
+        ],function($){
+            $(document).ready(function(){
+                $('#product-addtocart-button').click(function(){
+                    if($('div#product-options-wrapper').length > 0){
+                        $('#optionsBox').show(500,function(){
+                            $('#optionsBox .modal-dialog').fadeIn(200);
+                        });
+                    }
+                });
+                
+                $(document).click(function (e){
+                    if ($(e.target).hasClass("optionsBox")||
+                        $(e.target).hasClass("optionsBox-close")){
+                        $('#optionsBox').fadeOut();
+                    }
+                });
+            });
+        }
+    );
+</script>
