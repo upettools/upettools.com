@@ -27,6 +27,15 @@
 		.fixToBottom{ margin-bottom: 0;}
 	}
 	@media only screen and (max-width: 768px){
+		.product-info-main .product-reviews-summary.empty{display:none;}
+		.product-info-main .product-info-price,.product-info-main .product-add-form,
+		.product-info-main .product-options-bottom .box-tocart{margin:0;padding:0;}
+		.product-info-main .attribute.overview{display:none;}
+		.product-options-wrapper{padding-bottom:0;}
+		.product-addto-links .action{line-height:20px;}
+		.product-info-main .stock.available,.product-info-main .attribute.sku{display:inline-block;}
+		.product-info-main .attribute.sku::before{content:'/';font-size:14px;color:#757575;}
+		.product-info-main .product-info-price{width:initial!important;border-bottom:1px solid #ddd;}
 		.description table{display: block;overflow: hidden;overflow-x: scroll;}
 		.page-title-wrapper h1{font-size: 16px;}
 		.fixToBottom{
@@ -70,6 +79,9 @@
 	@media only screen and (min-width:374px) and (max-width:415px){
 		.fixToBottom .field.qty .input-text.qty{width: 120px;}
 		.fixToBottom .field.qty{margin: 0 20px 0 0;}
+	}
+	@media(max-width: 480px){
+		.product-addto-links{margin:0;}
 	}
 	@media only screen and (max-width: 330px){
 		.fixToBottom .field.qty .input-text.qty{width: 90px;}
@@ -120,7 +132,7 @@
 	}
 	@media(max-width:900px){
 		.upsell-wrapper  {display:none;}
-		#productsliderelated{width: auto!important;}
+		#productsliderelated{width: auto!important;margin:0;}
 	}
 </style>
 <?php

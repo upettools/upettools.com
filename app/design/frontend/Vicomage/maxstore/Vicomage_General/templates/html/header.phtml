@@ -78,6 +78,23 @@
 	@media only screen and (max-width: 768px), print{
 		.page-header .header-search {top: 25px;left: 60px;}
 		.page-header .switcher .options ul.dropdown{left: 0;}
+		.columns .column.main{padding-bottom:0;}
+		#switcher-language-nav,#switcher-currency-nav {border-bottom:1px solid #d1d1d1;}
+		#switcher-language-nav a{display:inline-block;font-weight:normal;}
+		#switcher-language-nav a.lang{padding:5px 15px;}
+		#switcher-language-nav a.lang::before {content: '\e608';font-family: 'luma-icons';-webkit-font-smoothing: antialiased;font-size: 8px;
+		line-height: 20px;color: inherit;margin: 0;vertical-align: top;display: inline-block;font-weight: normal;overflow: hidden;speak: none;text-align: center;}
+		#switcher-currency-nav ul.dropdown{box-shadow:none;background:none;}
+		#switcher-currency-nav .options.active ul.dropdown{position:initial;}
+		.page-header .switcher .options ul.dropdown li:hover{background:none;}
+		.navigation .submenu > li{border-top: 1px solid #ddd;}
+		.prolist-feature-top .title-page{margin:10px 0;}
+		.products-grid .product-item{margin-bottom:10px;}
+		.product-item-details{padding-top:0;}
+		.product-item-name{margin:2px 0;}
+		.product-item-name, .product.name a{font-size:12px;}
+		.product-reviews-summary{margin:0;line-height:0;}
+		.rating-summary .rating-result[title="0%"] {display: none;}
 		.form-customer-create .actions-toolbar .secondary a.action ,
 		.form-password-forget .actions-toolbar .secondary a.action{color: #fff;}
 		.page-header .switcher .options .action.toggle:after{line-height:20px;}
@@ -88,7 +105,8 @@
 		.vicomage-slider .slick-active .slide-caption .caption3{text-transform: capitalize;font-size: 14px;font-weight: normal;}
 		#backtotop{bottom:60px;right:14px;opacity:0.8;}
 		.catalog-product-view #backtotop{bottom: 114px;}
-		.catalog-product-view>.zopim{bottom: 70px!important;opacity: 0.88;}
+		.zopim{top:initial;bottom:0!important;opacity:0.88;}
+		.catalog-product-view>.zopim{bottom: 70px!important;}
 		.page-header .wishlist-header .wishlist>a{position:relative;}
 		.wishlist-header .qty{position:absolute;top: -5px;right: -12px;min-width:20px;height:20px;
 		line-height:20px;text-align:center;background:#4c6689;color:#fff;font-size:12px;
