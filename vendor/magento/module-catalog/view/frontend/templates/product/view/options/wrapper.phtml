@@ -16,6 +16,7 @@ if ($block->hasRequiredOptions()) {
     #optionsBox-close{display:none;}
 }
 @media (max-width:768px),print{
+    #optionsBox,#optionsBox-close{cursor: pointer;}
     #optionsBox{
         position: fixed;
         top: 0;
@@ -42,12 +43,13 @@ if ($block->hasRequiredOptions()) {
         background: #fff;}
     #optionsBox-close{
         display: inline-block;
-        margin: -10px 0 0 -5px;
+        margin: 0 0 0 -5px;
         padding: 3px 5px;
         border-radius: 6px;
         font-size: 12px;
         background-color: #777777;
-        color: #fff;}
+        color: #fff;
+        float:right;}
 }
 </style>
 <div id="optionsBox" class="optionsBox">
