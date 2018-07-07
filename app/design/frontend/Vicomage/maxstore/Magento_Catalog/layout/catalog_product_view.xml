@@ -46,9 +46,9 @@
                     <container name="related.product" htmlTag="div" htmlClass="related-wrapper"></container>
 				    <container name="upsell.product" htmlTag="div" htmlClass="upsell-wrapper"></container>
 					<container name="product.view.row" htmlTag="div" htmlClass="row">
-						<container name="product.info.media" htmlTag="div" htmlClass="product media product-img-box clearfix col-md-5 col-sm-5 col-xs-12" before="product.info.main">
+						<!--<container name="product.info.media" htmlTag="div" htmlClass="product media product-img-box clearfix col-md-5 col-sm-5 col-xs-12" before="product.info.main">
 							<block class="Magento\Catalog\Block\Product\View\Gallery" name="product.info.media.image" template="product/view/gallery.phtml"/>
-						</container>
+						</container>-->
 						 <container name="product.info.main" htmlTag="div" htmlClass="product-info-main product-shop col-md-7 col-sm-7 col-xs-12" before="-">
 							<container name="product.info.price" label="Product info auxiliary container" htmlTag="div" htmlClass="product-info-price" after="product.info.review">
 								<container name="product.info.stock.sku" label="Product auxiliary info" htmlTag="div" htmlClass="product-info-stock-sku">
