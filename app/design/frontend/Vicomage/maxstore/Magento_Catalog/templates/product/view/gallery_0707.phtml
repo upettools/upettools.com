@@ -1,0 +1,134 @@
+<?php
+    $thumbwidth = $block->getImageAttribute('product_page_image_small', 'width');
+    $thumbheight = $block->getImageAttribute('product_page_image_small', 'height');         
+?>
+<?php
+    $images = $block->getGalleryImagesJson();
+    //print_r($images);exit;
+    $imagesData = json_decode($images,true);
+    $mainImage = '';
+    $mainMainImageTitle = '';
+    $mainThumbHtml = '';
+    $mainThumbHtmlcount = 0;
+    if(count($imagesData)>0){
+        foreach($imagesData as $key=>$value){
+            if(isset($value['isMain']) && $value['isMain'] == 1){
+                $mainImage = $value['img'];
+                $mainThumb = $value['thumb'];
+                $mainFull = $value['full'];
+                $mainMainImageTitle = $value['caption'];
+
+                $mainThumbHtml.='<div class="fotorama__nav__frame fotorama__nav__frame--thumb fotorama__active" tabindex="0" role="button" data-gallery-role="nav-frame" data-nav-type="thumb" aria-label="" style="width: '.$thumbwidth.'px;" data-active="true" fast-image="yes" id="fast-main-'.$mainThumbHtmlcount.'">
+                    <div class="fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img" id="fast-loder-'.$mainThumbHtmlcount.'"><img src="'.$value['thumb'].'" alt="'.$value['caption'].'" class="fotorama__img" aria-hidden="false">
+                    </div>
+                </div>';
+                $mainThumbHtmlcount++;
+            }else{
+                $mainThumbHtml.='<div class="fotorama__nav__frame fotorama__nav__frame--thumb" tabindex="0" role="button" data-gallery-role="nav-frame" data-nav-type="thumb" aria-label="" style="width: '.$thumbwidth.'px;" fast-image="yes" id="fast-main-'.$mainThumbHtmlcount.'">
+                    <div class="fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img" id="fast-loder-'.$mainThumbHtmlcount.'"><img src="'.$value['thumb'].'" alt="'.$value['caption'].'" class="fotorama__img" aria-hidden="false">
+                    </div>
+                </div>';
+                $mainThumbHtmlcount++;
+            }
+        }
+    }
+?>
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+?>
+<style>
+#mainSlicker{position:relative;}
+.slick-left{display:none;border:1px solid #333;position:absolute;left:0;top:0;width:<?php echo $thumbwidth.'px';?>;height:300px;overflow:hidden;}
+.slick-main{border:1px solid #ccc;/*margin-left:<?php echo $thumbwidth.'px';?>;*/height:100%;}
+.slick-main .slick-dots li button{border:1px solid #ccc;}
+</style>
+
+<div id="mainSlicker">
+<div class="slick-main"></div>
+<div class="slick-left"></div>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'slick'
+    ],function($){
+        //init show image
+        var initData = <?php echo $images;?>;
+        getSliderDom(initData,1);
+        $('.slick-main').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
+        $('.product-options-wrapper').delegate('.swatch-option ','click',function(){
+            var select_str = '';
+            //1,get product id
+            select_str +='{"product_id":"' + $('.product-info-price .price-final_price').attr('data-product-id') + '"';
+            //2,get option attribute
+            var attribute_set = $('.swatch-opt .swatch-attribute');
+            for(var i=0; i < attribute_set.length; i++){
+                var current_attribute = attribute_set.eq(i).attr('attribute-code');
+                var current_id = attribute_set.eq(i).find('.selected').attr('option-id');
+                if(current_id || currend_id > 0 ){
+                    
+                    select_str += ',"attributes[' + current_attribute + ']":"' +current_id + '"}';
+                }
+            }
+            window.console.log(select_str);
+            // var new_obj = JSON.parse(select_str);
+            // window.console.log(new_obj);
+            ajaxImage(select_str);
+    
+        });
+        function getSliderDom(data,s){
+            var data = data;
+            var len = data.length;
+            if(len > 0){
+                var thumbHtml = '';
+                var normalHtml = '';
+                if(s==1){
+                    for(var i=0; i< data.length; i++){
+                        thumbHtml +='<div class="item"><img src="'+data[i].thumb+'" alt=""/></div>';
+                        normalHtml +='<div class="item"><img src="'+data[i].img+'" alt=""/></div>';
+                    }
+                    window.console.log("First init.");
+                }else{
+                    for(var i=0; i< data.length; i++){
+                        thumbHtml +='<div class="item"><img src="'+data[i][0].thumb+'" alt=""/></div>';
+                        normalHtml +='<div class="item"><img src="'+data[i][0].img+'" alt=""/></div>';
+                    }
+                    window.console.log("Selected.");
+                }
+                $('.slick-main').html(normalHtml);
+                //$('.slick-left').html(thumbHtml);
+            }
+        }
+        function reserSlideDom(){}
+        function ajaxImage(select_data){
+
+            if($.ajax()){
+                $.ajax({
+                    type:'post',
+                    async:true,
+                    url:'<?php echo $storeManager->getStore()->getBaseUrl().'swatches/ajax/media/' ?>',
+                    data:select_data,
+                    dataType:'json',
+                    beforeSend:function(){},
+                    complete:function(){},
+                    success:function(data){
+                        if(data.gallery.length > 0){
+
+                            var imageCollect = data.gallery;
+                            getSliderDom(imageCollect,2);
+
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
