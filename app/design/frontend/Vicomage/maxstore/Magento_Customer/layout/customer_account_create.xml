@@ -44,6 +44,12 @@
                             <argument name="width" xsi:type="string">50</argument>
                         </action>
                     </block>
+					
+			    <!--<referenceBlock name="customer_form_register">
+					<action method="setShowAddressFields">
+						<argument name="show.address.fields" xsi:type="boolean">true</argument>
+					</action>
+                </referenceBlock>-->
             </block>
             <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
                 <arguments>
@@ -52,14 +58,11 @@
                     </argument>
                 </arguments>
             </block>
+			
         </referenceContainer>
         <referenceContainer name="form.additional.info">
             <block class="Magento\Framework\View\Element\Template" name="form_additional_info_customer" template="Magento_Customer::additionalinfocustomer.phtml"/>
         </referenceContainer>
-		<referenceBlock name="customer_form_register">
-			<action method="setShowAddressFields">
-				<argument name="show.address.fields" xsi:type="boolean">true</argument>
-			</action>
-        </referenceBlock>
+		
     </body>
 </page>
