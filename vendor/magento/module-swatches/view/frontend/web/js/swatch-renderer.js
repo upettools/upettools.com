@@ -488,7 +488,7 @@ define([
          * @private
          */
         _EventListener: function () {
-
+            return;
             var $widget = this;
 
             $widget.element.on('click', '.' + this.options.classes.optionClass, function () {
