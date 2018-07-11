@@ -14,6 +14,7 @@ if ($block->hasRequiredOptions()) {
 @media all and (min-width:769px),print{
     #optionsBox{border:0;margin:0;padding:0;}
     #optionsBox-close{display:none;}
+    #optionsBox>.modal-dialog{margin: 0 auto;}
 }
 @media (max-width:768px),print{
     #optionsBox,#optionsBox-close{cursor: pointer;}
@@ -50,11 +51,36 @@ if ($block->hasRequiredOptions()) {
         background-color: #777777;
         color: #fff;
         float:right;}
+    #optionsMessage .adding{margin: 30px 0;}
+    #optionsMessage .added{margin: 30px 0 20px 0;color:#006400;-khtml-opacity:0.75;
+        -moz-opacity:0.75;opacity:0.75;filter:alpha(opacity=75);}
+    #optionsMessage .adding .fa-spinner{margin: 0 6px 0 0;}
+    #optionsMessage .added::before{-webkit-font-smoothing: antialiased;
+        font-size: 24px;
+        line-height: 24px;
+        color: #006400;
+        content: '\e60e';
+        font-family: 'luma-icons';
+        margin: -6px 0 0;
+        vertical-align: middle;
+        display: inline-block;
+        font-weight: normal;
+        overflow: hidden;
+        speak: none;
+        width: 40px;
+        text-align: center;}
+    #optionsMessage .addedBox a{
+        padding:4px 6px;
+        border-radius:5px;
+        color:#fff;
+        background:#0584bb;
+    }
 }
 </style>
 <div id="optionsBox" class="optionsBox">
     <div class="modal-dialog">
         <div id="optionsBox-close" class="optionsBox-close">Close</div>
+        <div id="optionsMessage" class="text-center optionsMessage"></div>
         <div class="product-options-wrapper" id="product-options-wrapper"<?php /* @escapeNotVerified */ echo $required; ?>>
             <div class="fieldset" tabindex="0">
                 <?php echo $block->getChildHtml('', true);?>
@@ -66,6 +92,7 @@ if ($block->hasRequiredOptions()) {
     require(
         [
             'jquery'
+
         ],function($){
             $(document).ready(function(){
                 $('#product-addtocart-button').click(function(){
@@ -75,10 +102,11 @@ if ($block->hasRequiredOptions()) {
                         });
                     }
                 });
-                
+                          
                 $(document).click(function (e){
                     if ($(e.target).hasClass("optionsBox")||
-                        $(e.target).hasClass("optionsBox-close")){
+                        $(e.target).hasClass("optionsBox-close")||
+                        $(e.target).hasClass("continue")){
                         $('#optionsBox').fadeOut();
                     }
                 });
