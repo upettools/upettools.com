@@ -147,7 +147,10 @@ define([
                     $('#optionsMessage').html(
                         '<div class="added">Product has been added to your shopping cart.</div>'+
                     '<div class="row addedBox"><div class="col-xs-6"><a class="continue" href="javascript:void(0);">Continue Shopping</a></div><div class="col-xs-6"><a href="/checkout/">Go to Checkout</a></div></div>');
-                    $('.swatch-options .selected').removeClass('selected');
+                    //init
+                    $('.swatch-options .selected').each(function(){
+                        $(this).removeClass('selected').closest('.swatch-attribute').removeAttr('option-selected');
+                    });
                     if (self.isLoaderEnabled()) {
                         $('body').trigger(self.options.processStop);
                     }
