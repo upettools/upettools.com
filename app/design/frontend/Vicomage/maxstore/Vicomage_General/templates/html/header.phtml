@@ -71,6 +71,10 @@
 		}
 		.header-container-fixed #fixedWholesale{display:none;}
 		#backtotop{bottom:40px;}
+		.page.messages{text-align:center;}
+		.message>*:first-child:before{
+			margin:0!important;position:initial!important;
+		}
 	}
 	@media only screen and (min-width: 769px) and (max-width: 898px), print {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
@@ -91,7 +95,7 @@
 		.navigation .submenu > li{border-top: 1px solid #ddd;}
 		.prolist-feature-top .title-page{margin:10px 0;}
 		.products-grid .product-item{margin-bottom:10px;}
-		.product-item-details{padding-top:0;}
+		.product-item-details{padding:0 0 20px;}
 		.product-item-name{margin:2px 0;}
 		.product-item-name, .product.name a{font-size:12px;}
 		.product-reviews-summary{margin:0;line-height:0;}
@@ -107,7 +111,7 @@
 		#backtotop{bottom:60px;right:14px;opacity:0.8;}
 		.catalog-product-view #backtotop{bottom: 114px;}
 		.zopim{top:initial;bottom:0!important;opacity:0.88;}
-		.catalog-product-view>.zopim{bottom: 70px!important;}
+		.catalog-product-view>.zopim{bottom: 72px!important;}
 		.page-header .wishlist-header a{font-size:20px;}
 		.page-header .wishlist-header .wishlist>a{position:relative;}
 		.page-header .wishlist-header .wishlist>a .flaticon-heart1{font-size:20px;line-height:14px;}
@@ -124,6 +128,18 @@
 		.nav-sections .header.links:nth-child(n+2) {display: none;}
 		.nav-sections .header.links .qty>i{font-style:normal;}
 		.vicomage-megamenu li.level0 .submenu .content-hot-category .block-cat .thumb .title_cat .content-cat{text-decoration:none;}
+		.products-grid .product-item-info:hover .btn-quickview, .products-grid .product-item-info.active .btn-quickview{
+			display:none;
+		}
+		.products-grid .product-item-info .product-item-inner{
+			opacity:1;visibility:visible;
+			transform: translate(0px, 0px);
+			-webkit-transform: translate(0px, 0px);
+			-moz-transform: translate(0px, 0px);
+			-ms-transform: translate(0px, 0px);
+			-o-transform: translate(0px, 0px);
+		}
+		.product-item-actions .actions-primary .tocart{background:none;}
 	}
 </style>
 <header class="page-header header-type<?php echo $header_type; ?>">
