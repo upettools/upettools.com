@@ -17,6 +17,9 @@ if ($block->hasRequiredOptions()) {
     #optionsBox>.modal-dialog{margin: 0 auto;}
 }
 @media (max-width:768px),print{
+    #product-options-wrapper.notVisible{
+        opacity: 0;visibility: hidden;position: absolute;bottom: -300px;
+    }
     #optionsBox,#optionsBox-close{cursor: pointer;}
     #optionsBox{
         position: fixed;
@@ -97,6 +100,9 @@ if ($block->hasRequiredOptions()) {
             $(document).ready(function(){
                 $('#product-addtocart-button').click(function(){
                     if($('div#product-options-wrapper').length > 0){
+                        
+                        $('#optionsMessage').html('');
+                        $('#product-options-wrapper').removeClass('notVisible');
                         $('#optionsBox').show(500,function(){
                             $('#optionsBox .modal-dialog').fadeIn(200);
                         });
@@ -111,7 +117,7 @@ if ($block->hasRequiredOptions()) {
                             $('#optionsMessage').html('');
                         });
                         setTimeout(function(){
-                            $('#product-options-wrapper').removeClass('hidden-xs');
+                            $('#product-options-wrapper').removeClass('notVisible');
                         },1000);
                     }
                 });

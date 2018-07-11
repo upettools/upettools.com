@@ -136,7 +136,7 @@ define([
                 dataType: 'json',
                 beforeSend: function() {
                     //adding to cart
-                    $('#product-options-wrapper').addClass('hidden-xs');
+                    $('#product-options-wrapper').addClass('notVisible');
                     $('#optionsMessage').html('<div class="adding"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i>The product is adding to your shopping cart.</div>');
                     if (self.isLoaderEnabled()) {
                         $('body').trigger(self.options.processStart);
