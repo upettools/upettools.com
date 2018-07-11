@@ -24,7 +24,7 @@ if ($block->hasRequiredOptions()) {
         right: 0;
         bottom: 71px;
         left: 0;
-        z-index: 1050;
+        z-index: 16000003;
         display: none;
         overflow: hidden;
         -webkit-overflow-scrolling: touch;
@@ -108,6 +108,7 @@ if ($block->hasRequiredOptions()) {
                         $(e.target).hasClass("optionsBox-close")||
                         $(e.target).hasClass("continue")){
                         $('#optionsBox').fadeOut();
+                        $('#product-options-wrapper').removeClass('hidden-xs');
                     }
                 });
             });
