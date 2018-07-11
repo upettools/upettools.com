@@ -107,7 +107,9 @@ if ($block->hasRequiredOptions()) {
                     if ($(e.target).hasClass("optionsBox")||
                         $(e.target).hasClass("optionsBox-close")||
                         $(e.target).hasClass("continue")){
-                        $('#optionsBox').fadeOut();
+                        $('#optionsBox').fadeOut(function(){
+                            $('#optionsMessage').html('');
+                        });
                         setTimeout(function(){
                             $('#product-options-wrapper').removeClass('hidden-xs');
                         },1000);
