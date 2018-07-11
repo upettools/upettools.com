@@ -13,7 +13,7 @@ if ($block->hasRequiredOptions()) {
 <style>
 @media all and (min-width:769px),print{
     #optionsBox{border:0;margin:0;padding:0;}
-    #optionsBox-close{display:none;}
+    #optionsBox-close,#optionsMessage{display:none;}
     #optionsBox>.modal-dialog{margin: 0 auto;}
 }
 @media (max-width:768px),print{
@@ -102,13 +102,15 @@ if ($block->hasRequiredOptions()) {
                         });
                     }
                 });
-                          
+               
                 $(document).click(function (e){
                     if ($(e.target).hasClass("optionsBox")||
                         $(e.target).hasClass("optionsBox-close")||
                         $(e.target).hasClass("continue")){
                         $('#optionsBox').fadeOut();
-                        $('#product-options-wrapper').removeClass('hidden-xs');
+                        setTimeout(function(){
+                            $('#product-options-wrapper').removeClass('hidden-xs');
+                        },1000);
                     }
                 });
             });
