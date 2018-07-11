@@ -143,14 +143,15 @@ define([
                     }
                 },
                 success: function(res) {
-                    //added to cart
-                    $('#optionsMessage').html(
-                        '<div class="added">Product has been added to your shopping cart.</div>'+
-                    '<div class="row addedBox"><div class="col-xs-6"><a class="continue" href="javascript:void(0);">Continue Shopping</a></div><div class="col-xs-6"><a href="/checkout/">Go to Checkout</a></div></div>');
                     //init
                     $('.swatch-opt .selected').each(function(){
                         $(this).click();
                     });
+                    $('#product-addtocart-button').blur();
+                    //added to cart
+                    $('#optionsMessage').html(
+                        '<div class="added">Product has been added to your shopping cart.</div>'+
+                    '<div class="row addedBox"><div class="col-xs-6"><a class="continue" href="javascript:void(0);">Continue Shopping</a></div><div class="col-xs-6"><a href="/checkout/">Go to Checkout</a></div></div>');
                     if (self.isLoaderEnabled()) {
                         $('body').trigger(self.options.processStop);
                     }
