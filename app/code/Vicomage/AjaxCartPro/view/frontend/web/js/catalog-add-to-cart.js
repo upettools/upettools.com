@@ -52,8 +52,10 @@ define([
             var self = this;
             if (form.has('input[type="file"]').length && form.find('input[type="file"]').val() !== '') {
                 self.element.off('submit');
+                //window.console.log('form submit');
                 form.submit();
             } else {
+                //window.console.log('ajax submit');
                 self.ajaxSubmit(form);
             }
         },
@@ -133,11 +135,18 @@ define([
                 type: 'post',
                 dataType: 'json',
                 beforeSend: function() {
+                    //adding to cart
+                    $('#product-options-wrapper').addClass('hidden-xs');
+                    $('#optionsMessage').html('<div class="adding"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i>The product is adding to your shopping cart.</div>');
                     if (self.isLoaderEnabled()) {
                         $('body').trigger(self.options.processStart);
                     }
                 },
                 success: function(res) {
+                    //added to cart
+                    $('#optionsMessage').html(
+                        '<div class="added">Product has been added to your shopping cart.</div>'+
+                    '<div class="row addedBox"><div class="col-xs-6"><a class="continue" href="javascript:void(0);">Continue Shopping</a></div><div class="col-xs-6"><a href="/checkout/">Go to Checkout</a></div></div>');
                     if (self.isLoaderEnabled()) {
                         $('body').trigger(self.options.processStop);
                     }
@@ -169,6 +178,12 @@ define([
 						window.cartSidebar(res.cart);	
 					}
                     self.enableAddToCartButton(form);
+                    //reset
+                    setTimeout(function(){
+                        $('#optionsMessage').html('');
+                        $('#product-options-wrapper').removeClass('hidden-xs');
+                        $('#optionsBox').fadeOut();
+                    },2000);
                 }
             });
         },
