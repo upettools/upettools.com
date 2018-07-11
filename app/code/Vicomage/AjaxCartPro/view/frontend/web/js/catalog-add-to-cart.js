@@ -149,7 +149,7 @@ define([
                     '<div class="row addedBox"><div class="col-xs-6"><a class="continue" href="javascript:void(0);">Continue Shopping</a></div><div class="col-xs-6"><a href="/checkout/">Go to Checkout</a></div></div>');
                     //init
                     $('.swatch-options .selected').each(function(){
-                        $(this).removeClass('selected').closest('.swatch-attribute').removeAttr('option-selected');
+                        $(this).click();
                     });
                     if (self.isLoaderEnabled()) {
                         $('body').trigger(self.options.processStop);
