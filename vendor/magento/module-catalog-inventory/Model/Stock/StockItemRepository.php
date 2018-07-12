@@ -166,25 +166,20 @@ class StockItemRepository implements StockItemRepositoryInterface
             }
             $typeId = $product->getTypeId() ?: $product->getTypeInstance()->getTypeId();
             $isQty = $this->stockConfiguration->isQty($typeId);
-			//$qty = $this->request->getPost('qty');
             if ($isQty) {
                 $isInStock = $this->stockStateProvider->verifyStock($stockItem);
                 if ($stockItem->getManageStock() && !$isInStock) {
                     $stockItem->setIsInStock(false)->setStockStatusChangedAutomaticallyFlag(true);
-					$stockItem->setQty(2000);
                 }
                 // if qty is below notify qty, update the low stock date to today date otherwise set null
                 $stockItem->setLowStockDate(null);
                 if ($this->stockStateProvider->verifyNotification($stockItem)) {
                     $stockItem->setLowStockDate($this->dateTime->gmtDate());
-					$stockItem->setQty(2000);
                 }
                 $stockItem->setStockStatusChangedAuto(0);
                 if ($stockItem->hasStockStatusChangedAutomaticallyFlag()) {
                     $stockItem->setStockStatusChangedAuto((int)$stockItem->getStockStatusChangedAutomaticallyFlag());
-					$stockItem->setQty(2000);
                 }
-				
             } else {
                 $stockItem->setQty(0);
             }
