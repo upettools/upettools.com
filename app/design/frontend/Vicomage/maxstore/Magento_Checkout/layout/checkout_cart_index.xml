@@ -28,7 +28,8 @@
             </referenceBlock>
         </referenceContainer>
 		<move element="checkout.cart.form.before" destination="checkout.cart.container" before="cart.summary"/>
-		<move element="checkout.cart.form" destination="checkout.cart.container" after="cart.summary"/>
+		<!--<move element="checkout.cart.form" destination="checkout.cart.container" after="cart.summary"/>-->
+		<move element="checkout.cart.form" destination="checkout.cart.container" before="-"/>
 		<move element="checkout.cart.widget" destination="checkout.cart.container" after="checkout.cart.form"/>
 		<move element="checkout.cart.shipping" destination="cart.summary" after="checkout.cart.summary.title"/>
 		<move element="checkout.cart.coupon" destination="cart.summary"/>
