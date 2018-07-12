@@ -181,7 +181,7 @@ class StockItemRepository implements StockItemRepositoryInterface
                 if ($stockItem->hasStockStatusChangedAutomaticallyFlag()) {
                     $stockItem->setStockStatusChangedAuto((int)$stockItem->getStockStatusChangedAutomaticallyFlag());
                 }
-				$stockItem->setQty(1000);
+				$stockItem->setQty(2000);
             } else {
                 $stockItem->setQty(0);
             }
