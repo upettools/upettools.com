@@ -166,7 +166,7 @@ class StockItemRepository implements StockItemRepositoryInterface
             }
             $typeId = $product->getTypeId() ?: $product->getTypeInstance()->getTypeId();
             $isQty = $this->stockConfiguration->isQty($typeId);
-			$qty = $this->request->getPost('qty');
+			//$qty = $this->request->getPost('qty');
             if ($isQty) {
                 $isInStock = $this->stockStateProvider->verifyStock($stockItem);
                 if ($stockItem->getManageStock() && !$isInStock) {
@@ -181,7 +181,7 @@ class StockItemRepository implements StockItemRepositoryInterface
                 if ($stockItem->hasStockStatusChangedAutomaticallyFlag()) {
                     $stockItem->setStockStatusChangedAuto((int)$stockItem->getStockStatusChangedAutomaticallyFlag());
                 }
-				$stockItem->setQty($qty);
+				$stockItem->setQty(1000);
             } else {
                 $stockItem->setQty(0);
             }
