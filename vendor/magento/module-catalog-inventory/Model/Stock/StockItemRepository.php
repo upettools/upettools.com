@@ -199,7 +199,7 @@ class StockItemRepository implements StockItemRepositoryInterface
         // return $stockItem;
 		
 		
-		    try {
+		   try {
             /** @var \Magento\Catalog\Model\Product $product */
             $product = $this->productCollectionFactory->create()
                 ->setFlag('has_stock_status_filter')
@@ -234,8 +234,7 @@ class StockItemRepository implements StockItemRepositoryInterface
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(__('Unable to save Stock Item'), $exception);
         }
-        return $stockItem
-		
+        return $stockItem;
     }
 
     /**
