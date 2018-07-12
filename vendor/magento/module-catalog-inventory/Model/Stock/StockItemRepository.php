@@ -153,55 +153,9 @@ class StockItemRepository implements StockItemRepositoryInterface
      */
     public function save(\Magento\CatalogInventory\Api\Data\StockItemInterface $stockItem)
     {
-        // try {
-            // /** @var \Magento\Catalog\Model\Product $product */
-            // $product = $this->getProductCollectionFactory()->create()
-                // ->setFlag('has_stock_status_filter')
-                // ->addIdFilter($stockItem->getProductId())
-                // ->addFieldToSelect('type_id')
-                // ->getFirstItem();
-
-            // if (!$product->getId()) {
-                // return $stockItem;
-            // }
-            // $typeId = $product->getTypeId() ?: $product->getTypeInstance()->getTypeId();
-            // $isQty = $this->stockConfiguration->isQty($typeId);
-            // if ($isQty) {
-                // $isInStock = $this->stockStateProvider->verifyStock($stockItem);
-                // if ($stockItem->getManageStock() && !$isInStock && !$stockItem->getIsInStock()) {
-                    // //$stockItem->setIsInStock(false)->setStockStatusChangedAutomaticallyFlag(true);
-                    // $stockItem->setIsInStock(true)->setStockStatusChangedAutomaticallyFlag(true);
-                // }
-                // // if qty is below notify qty, update the low stock date to today date otherwise set null
-                // $stockItem->setLowStockDate(null);
-                // if ($this->stockStateProvider->verifyNotification($stockItem)) {
-                    // $stockItem->setLowStockDate($this->dateTime->gmtDate());
-                // }
-                // $stockItem->setStockStatusChangedAuto(0);
-                // if ($stockItem->hasStockStatusChangedAutomaticallyFlag()) {
-                    // $stockItem->setStockStatusChangedAuto((int)$stockItem->getStockStatusChangedAutomaticallyFlag());
-                // }
-            // } else {
-                // $stockItem->setQty();
-            // }
-
-            // $stockItem->setWebsiteId($stockItem->getWebsiteId());
-            // $stockItem->setStockId($stockItem->getStockId());
-
-            // $this->resource->save($stockItem);
-
-            // $this->indexProcessor->reindexRow($stockItem->getProductId());
-            // $this->getStockRegistryStorage()->removeStockItem($stockItem->getProductId());
-            // $this->getStockRegistryStorage()->removeStockStatus($stockItem->getProductId());
-        // } catch (\Exception $exception) {
-            // throw new CouldNotSaveException(__('Unable to save Stock Item'), $exception);
-        // }
-        // return $stockItem;
-		
-		
-		   try {
+        try {
             /** @var \Magento\Catalog\Model\Product $product */
-            $product = $this->productCollectionFactory->create()
+            $product = $this->getProductCollectionFactory()->create()
                 ->setFlag('has_stock_status_filter')
                 ->addIdFilter($stockItem->getProductId())
                 ->addFieldToSelect('type_id')
@@ -212,8 +166,12 @@ class StockItemRepository implements StockItemRepositoryInterface
             }
             $typeId = $product->getTypeId() ?: $product->getTypeInstance()->getTypeId();
             $isQty = $this->stockConfiguration->isQty($typeId);
+			$qty = $this->request->getPost('qty');
             if ($isQty) {
-                $this->changeIsInStockIfNecessary($stockItem);
+                $isInStock = $this->stockStateProvider->verifyStock($stockItem);
+                if ($stockItem->getManageStock() && !$isInStock) {
+                    $stockItem->setIsInStock(false)->setStockStatusChangedAutomaticallyFlag(true);
+                }
                 // if qty is below notify qty, update the low stock date to today date otherwise set null
                 $stockItem->setLowStockDate(null);
                 if ($this->stockStateProvider->verifyNotification($stockItem)) {
@@ -223,6 +181,7 @@ class StockItemRepository implements StockItemRepositoryInterface
                 if ($stockItem->hasStockStatusChangedAutomaticallyFlag()) {
                     $stockItem->setStockStatusChangedAuto((int)$stockItem->getStockStatusChangedAutomaticallyFlag());
                 }
+				$stockItem->setQty($qty);
             } else {
                 $stockItem->setQty(0);
             }
@@ -231,6 +190,10 @@ class StockItemRepository implements StockItemRepositoryInterface
             $stockItem->setStockId($stockItem->getStockId());
 
             $this->resource->save($stockItem);
+
+            $this->indexProcessor->reindexRow($stockItem->getProductId());
+            $this->getStockRegistryStorage()->removeStockItem($stockItem->getProductId());
+            $this->getStockRegistryStorage()->removeStockStatus($stockItem->getProductId());
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(__('Unable to save Stock Item'), $exception);
         }
@@ -309,32 +272,4 @@ class StockItemRepository implements StockItemRepositoryInterface
         }
         return $this->stockRegistryStorage;
     }
-	
-	
-	
-    /**
-     * Change is_in_stock value if necessary.
-     *
-     * @param StockItemInterface $stockItem
-     *
-     * @return void
-     */
-    private function changeIsInStockIfNecessary(StockItemInterface $stockItem)
-    {
-        $isInStock = $this->stockStateProvider->verifyStock($stockItem);
-        if ($stockItem->getManageStock() && !$isInStock) {
-            $stockItem->setIsInStock(false)->setStockStatusChangedAutomaticallyFlag(true);
-        }
-
-        if ($stockItem->getManageStock()
-            && $isInStock
-            && !$stockItem->getIsInStock()
-            && $stockItem->getQty() > 0
-            && $stockItem->getOrigData(\Magento\CatalogInventory\Api\Data\StockItemInterface::QTY) <= 0
-            && $stockItem->getOrigData(\Magento\CatalogInventory\Api\Data\StockItemInterface::QTY) !== null
-        ) {
-            $stockItem->setIsInStock(true)->setStockStatusChangedAutomaticallyFlag(true);
-        }
-    }
-	
 }
