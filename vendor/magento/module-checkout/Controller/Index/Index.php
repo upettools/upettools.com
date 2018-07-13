@@ -28,7 +28,7 @@ class Index extends \Magento\Checkout\Controller\Onepage
         }
 
         if (!$this->_customerSession->isLoggedIn() && !$checkoutHelper->isAllowedGuestCheckout($quote)) {
-            $this->messageManager->addError(__('Guest checkout is disabled.'));
+            //$this->messageManager->addError(__('Guest checkout is disabled.'));
             return $this->resultRedirectFactory->create()->setPath('checkout/cart');
         }
 
