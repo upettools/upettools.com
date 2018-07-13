@@ -38,6 +38,8 @@
             background-repeat: no-repeat;
             background-size:100% 100%;
         }
+        .crosssell .title-page,.block.crosssell{margin-top:0;}
+
         /*checkout product table*/
         .cart.table-wrapper{margin:0;}
         .cart.table-wrapper .table{margin:0 0 10px 0;}
@@ -46,11 +48,17 @@
         .cart.table-wrapper .product-item-details{padding:0;}
         .cart.table-wrapper .product-item-name{margin: -3px 0 0;}
         .cart.table-wrapper .product-item-name+.item-options{margin:0;}
-        .cart.table-wrapper .product-item-name > a{display:inline-block;font-size:12px;text-transform: capitalize;color:#666666;}
+        .cart.table-wrapper .product-item-name > a{display:inline-block;font-size:12px;text-transform: capitalize;color:#666666;word-break: break-all;}
         .cart.table-wrapper .product-item-name+.item-options{color:#afcaca;}
         .cart.table-wrapper .item-options dt,.cart.table-wrapper .item-options dd{font-weight: normal;margin: 0;}
         .cart.table-wrapper .item-options dt{margin-right:2px;}
-        .cart.table-wrapper tbody>.item-info{position:relative;display:block;}
+        .cart.table-wrapper tbody>.item-info{position:relative;display:block;zoom:1;}
+        .cart.table-wrapper tbody>.item-info::after{content: ".";
+            clear: both;
+            display: block;
+            overflow: hidden;
+            font-size: 0;
+            height: 0;}
         .cart.table-wrapper .item .col.item{padding-bottom:14px;}
         .cart.table-wrapper tbody .col.price{position: absolute;right: 0;top: 8px;width: 60px;padding: 0;}
         .cart.table-wrapper tbody .col.price .price{white-space: normal;word-break: break-all;}
@@ -64,13 +72,17 @@
         .cart.table-wrapper .item-actions{display:block;padding:0;}
         .cart.table-wrapper .item-actions>td{float: right;display: block;width: 50px;margin: 0;padding: 0;box-sizing: border-box;}
         .cart.table-wrapper .actions-toolbar{margin:0;padding:0;min-height:initial;}
+        .cart.table-wrapper .actions-toolbar>.action-edit, .cart.table-wrapper .actions-toolbar>.action-delete{
+            top:initial;bottom:6px;
+        }
         .cart.table-wrapper .actions-toolbar>.action-edit{right:4px;}
+        .cart.table-wrapper .actions-toolbar .action-towishlist{display:none;}
         .cart-container .cart.actions .action{padding:6px 20px;}
         /*checkout*/
         .cart-container .form-cart{margin-bottom:10px;}
         .cart-container .form-cart .actions.main .continue{display:none;}
         .table.totals{margin:0;}
-        .cart-summary{margin:0;padding:0;}
+        .cart-summary{margin:0;padding:0;margin-bottom: 60px;}
         .cart-totals .grand .mark,.cart-totals .grand .amount{padding:5px 0;}
         .cart-summary .checkout-methods-items .item:nth-child(1){position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;margin: 0;padding: 10px 0 8px;background: #ffffff;
             border-top: 1px solid rgb(238, 238, 238);box-shadow: 0 -1px 2px rgba(238,238,238,1);}
