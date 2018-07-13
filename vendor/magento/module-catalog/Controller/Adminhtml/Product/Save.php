@@ -76,6 +76,19 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
         $this->productRepository = $productRepository;
         parent::__construct($context, $productBuilder);
     }
+	
+	
+	public function updateProductStockSku($sku,$qty) {
+		
+		// $sku = 'ABC123';
+		// $qty = 10;
+		$obj = \Magento\Framework\App\ObjectManager::getInstance();
+		$stockRegistry = $obj->get('\Magento\CatalogInventory\Api\StockRegistryInterface');		
+		$stockItem = $stockRegistry->getStockItemBySku($sku);
+		$stockItem->setQty($qty);
+		$stockItem->setIsInStock((bool)$qty); // this line
+		return $stockRegistry->updateStockItemBySku($sku, $stockItem);
+	}
 
     /**
      * Save product action
@@ -93,6 +106,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
         $productId = $this->getRequest()->getParam('id');
         $resultRedirect = $this->resultRedirectFactory->create();
         $data = $this->getRequest()->getPostValue();
+		//print_r($data['product']['quantity_and_stock_status']['qty']);exit;
         $productAttributeSetId = $this->getRequest()->getParam('set');
         $productTypeId = $this->getRequest()->getParam('type');
         if ($data) {
@@ -105,7 +119,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
                 if (isset($data['product'][$product->getIdFieldName()])) {
                     throw new \Magento\Framework\Exception\LocalizedException(__('Unable to save product'));
                 }
-
+				
                 $originalSku = $product->getSku();
                 $product->save();
                 $this->handleImageRemoveError($data, $product->getId());
@@ -116,6 +130,22 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
                 $productId = $product->getEntityId();
                 $productAttributeSetId = $product->getAttributeSetId();
                 $productTypeId = $product->getTypeId();
+				
+				if($productTypeId=="simple"){
+						$this->updateProductStockSku($product->getSku(),$data['product']['quantity_and_stock_status']['qty']);
+				 }else{
+					 
+					$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+					$repository = $objectManager->create('Magento\Catalog\Model\ProductRepository');
+					$product = $repository->getById($productId);
+
+					$postData = json_decode($data['product']['configurable-matrix-serialized']);
+
+					foreach ($postData as $obj) {
+						$this->updateProductStockSku($obj->sku,$obj->qty);
+					}
+							 
+				 }
 
                 $this->copyToStores($data, $productId);
 
