@@ -35,9 +35,21 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
             <div class="product-item-details">
                 <strong class="product-item-name">
                     <?php if ($block->hasProductUrl()):?>
-                        <a href="<?php /* @escapeNotVerified */ echo $block->getProductUrl() ?>"><?php echo $block->escapeHtml($block->getProductName()) ?></a>
+					     
+						 <?php if(strlen($block->escapeHtml($block->getProductName()))>29): ?>
+							 <a class="shortName" href="<?php /* @escapeNotVerified */ echo $block->getProductUrl() ?>"><?php echo substr($block->escapeHtml($block->getProductName()),0,29).'...'; ?></a>
+							 <a href="<?php /* @escapeNotVerified */ echo $block->getProductUrl() ?>"><?php echo $block->escapeHtml($block->getProductName()); ?></a>
+						 <?php else: ?>
+							 <a href="<?php /* @escapeNotVerified */ echo $block->getProductUrl() ?>"><?php echo $block->escapeHtml($block->getProductName()) ?></a>
+						 <?php endif; ?>
+                       
                     <?php else: ?>
-                        <?php echo $block->escapeHtml($block->getProductName()) ?>
+                        <?php if(strlen($block->escapeHtml($block->getProductName()))>29): ?>
+							 <p class="shortName"><?php echo substr($block->escapeHtml($block->getProductName()),0,29).'...'; ?></p>
+							 <?php echo $block->escapeHtml($block->getProductName()); ?>
+						 <?php else: ?>
+							 <?php echo $block->escapeHtml($block->getProductName()) ?>
+						 <?php endif; ?>
                     <?php endif; ?>
                 </strong>
                 <?php if ($_options = $block->getOptionList()):?>
