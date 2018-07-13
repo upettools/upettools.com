@@ -10,9 +10,77 @@
 ?>
 <?php $mergedCells = ($this->helper('Magento\Tax\Helper\Data')->displayCartBothPrices() ? 2 : 1); ?>
 <?php echo $block->getChildHtml('form_before') ?>
+<!-- new add at form -->
 <style>
     .cart-summary #block-discount,.cart-summary #block-reward-points{display: none;}
     .cart-summary-top{float: none;position: static;}
+    @media only screen and (max-width:768px), print{
+        /*general*/
+        .checkout-cart-index .page-footer{display:none;}
+        .breadcrumbs .items{padding-bottom:0;}
+        .page-title-wrapper{padding-left:0;}
+        .page-title-wrapper h1{display:none;font-size:15px;margin:6px 0;}
+        .footer-bottom{margin: 0 0 40px 0;}
+        .catalog-product-view>.zopim{bottom:60px!important;}
+        #viewAllItem{text-align:right;margin: 0 0 8px;font-style:italic;color:#808080;}
+        #viewAllItem .viewAll{display:inline-block;position:relative;padding: 2px 6px;font-size: 13px;font-style:normal;color: #333;background: #ffc439;border: 1px solid #cccccc;
+            cursor: pointer;vertical-align: bottom;border-radius:2px;box-shadow: 0px 2px 2px rgba(0,0,0,.2);}
+        #viewAllItem .viewAll:after{
+            content:' ';
+            position:absolute;
+            z-index:1;
+            bottom:-12px;
+            left:50%;
+            width:60px;
+            height:10px;
+            margin-left:-30px;
+            background-image:url('/pub/media/customize/arrowdown.png');
+            background-repeat: no-repeat;
+            background-size:100% 100%;
+        }
+        /*checkout product table*/
+        .cart.table-wrapper{margin:0;}
+        .cart.table-wrapper .table{margin:0 0 10px 0;}
+        .cart.table-wrapper .item .col.item{padding:5px 65px 10px 90px;}
+        .cart.table-wrapper .product-item-photo{left:0;top:5px;}
+        .cart.table-wrapper .product-item-details{padding:0;}
+        .cart.table-wrapper .product-item-name{margin: -3px 0 0;}
+        .cart.table-wrapper .product-item-name+.item-options{margin:0;}
+        .cart.table-wrapper .product-item-name > a{display:inline-block;font-size:12px;text-transform: capitalize;color:#666666;}
+        .cart.table-wrapper .product-item-name+.item-options{color:#afcaca;}
+        .cart.table-wrapper .item-options dt,.cart.table-wrapper .item-options dd{font-weight: normal;margin: 0;}
+        .cart.table-wrapper .item-options dt{margin-right:2px;}
+        .cart.table-wrapper .item .col.item{padding-bottom:14px;}
+        .cart.table-wrapper tbody .col.price{position: absolute;right: 0;top: 8px;width: 60px;padding: 0;}
+        .cart.table-wrapper tbody .col.price .price{white-space: normal;word-break: break-all;}
+        .cart.table-wrapper tbody .col.price:before{display:none;}
+        .cart.table-wrapper tbody .col.qty, 
+        .cart.table-wrapper tbody .col.subtotal{padding:0;text-align:right;/*width: auto;*/padding: 0 10px;}
+        .cart.table-wrapper tbody .col.qty .input-text{width:36px;height: 24px;padding:0;}
+        .cart.table-wrapper tbody .col.qty{text-align:left;margin-left:80px;width:auto;}
+        .cart.table-wrapper tbody .col.qty:before, .cart.table-wrapper tbody .col.subtotal:before{display:inline-block;font-size:12px;color:#797979;padding-bottom:6px;}
+        .cart.table-wrapper tbody .field.qty,.cart.table-wrapper tbody .col.subtotal .price-excluding-tax{display:inline-block;}
+        .cart.table-wrapper .item-actions{display:block;padding:0;}
+        .cart.table-wrapper .item-actions>td{float: right;display: block;width: 50px;margin: -30px 0 0;padding: 0;box-sizing: border-box;}
+        .cart.table-wrapper .actions-toolbar{margin:0;padding:0;}
+        .cart.table-wrapper .actions-toolbar>.action-edit{right:4px;}
+        .cart-container .cart.actions .action{padding:6px 20px;}
+        /*checkout*/
+        .cart-container .form-cart{margin-bottom:10px;}
+        .cart-container .form-cart .actions.main .continue{display:none;}
+        .table.totals{margin:0;}
+        .cart-summary{margin:0;padding:0;}
+        .cart-totals .grand .mark,.cart-totals .grand .amount{padding:5px 0;}
+        .cart-summary .checkout-methods-items .item:nth-child(1){position: fixed;left: 0;bottom: 0;width: 100%;z-index: 1000;margin: 0;padding: 10px 0 8px;background: #ffffff;
+            border-top: 1px solid rgb(238, 238, 238);box-shadow: 0 -1px 2px rgba(238,238,238,1);}
+        .cart-summary .checkout-methods-items .item:nth-child(1) .checkout{width:90%;padding: 6px 0;}
+        .cart.table-wrapper .cart>.item:nth-child(n+5){display:none;}
+        .cart.table-wrapper.view .cart>.item:nth-child(n+5){display:block;}
+
+    }
+    @media only screen and (max-width:340px), print{
+        .cart.table-wrapper tbody .col.qty{margin-left:60px;}
+    }
 </style>
 <form action="<?php /* @escapeNotVerified */ echo $block->getUrl('checkout/cart/updatePost') ?>"
           method="post"
@@ -20,6 +88,7 @@
           data-mage-init='{"validation":{}}'
           class="form form-cart">
     <?php echo $block->getBlockHtml('formkey'); ?>
+    <p id="viewAllItem">Some products are hidden. <a class="viewAll" href="javascript:void(0);">Show all items</a></p>
     <div class="cart table-wrapper<?php echo $mergedCells == 2 ? ' detailed' : ''; ?>">
         <table id="shopping-cart-table"
                class="cart items data table"
@@ -44,7 +113,7 @@
             <a class="action continue primary"
                href="<?php echo $block->escapeUrl($block->getContinueShoppingUrl()) ?>"
                title="<?php echo $block->escapeHtml(__('Continue Shopping')); ?>">
-                <span><?php /* @escapeNotVerified */ echo __('Continue Shopping') ?></span>
+                <span><?php /* @escapeNotVerified */ echo __('Continue<span class="hidden-xs"> Shopping</span>') ?></span>
             </a>
         <?php endif; ?>
         <button type="submit"
@@ -53,7 +122,7 @@
                 value="empty_cart"
                 title="<?php echo $block->escapeHtml(__('Clear Shopping Cart')); ?>"
                 class="action clear" id="empty_cart_button">
-            <span><?php /* @escapeNotVerified */ echo __('Clear Shopping Cart'); ?></span>
+            <span><?php /* @escapeNotVerified */ echo __('Clear<span class="hidden-xs"> Shopping</span> Cart'); ?></span>
         </button>
         <button type="submit"
                 name="update_cart_action"
@@ -61,11 +130,26 @@
                 value="update_qty"
                 title="<?php echo $block->escapeHtml(__('Update Shopping Cart')); ?>"
                 class="action update">
-            <span><?php /* @escapeNotVerified */ echo __('Update Shopping Cart'); ?></span>
+            <span><?php /* @escapeNotVerified */ echo __('Update<span class="hidden-xs"> Shopping</span> Cart'); ?></span>
         </button>
         <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
     </div>
 </form>
+<script>
+    require(
+        [
+            'jquery'
+        ],
+        function($){
+            $('#viewAllItem .viewAll').click(function(){
+                var $tableWrapper = $('.cart.table-wrapper');
+                if(!$tableWrapper.hasClass('view')){
+                    $('.cart.table-wrapper').addClass('view');
+                }
+            });
+        }
+    );
+</script>
 <?php echo $block->getChildHtml('checkout.cart.order.actions') ?>
 <?php echo $block->getChildHtml('shopping.cart.table.after'); ?>
 
