@@ -15,6 +15,9 @@
     .cart-summary #block-discount,.cart-summary #block-reward-points{display: none;}
     .cart-summary-top{float: none;position: static;}
 	.cart.table-wrapper .product-item-name .shortName{display:none;}
+    @media only screen and (min-width:769px), print{
+        #viewAllItem{display:none!important;}
+    }
     @media only screen and (max-width:768px), print{
         /*general*/
         .checkout-cart-index .page-footer{display:none;}
@@ -22,7 +25,7 @@
         .page-title-wrapper{padding-left:0;}
         .page-title-wrapper h1{display:none;font-size:15px;margin:6px 0;}
         .footer-bottom{margin: 0 0 40px 0;}
-        .checkout-cart-index>.zopim{bottom:60px!important;}
+        .checkout-cart-index>.zopim{top:initial;bottom:60px!important;}
         #viewAllItem{display:none;text-align:right;margin: 0 0 8px;font-style:italic;color:#808080;}
         #viewAllItem .viewAll{display:inline-block;position:relative;padding: 2px 6px;font-size: 13px;font-style:normal;color: #333;background: #ffc439;border: 1px solid #cccccc;
             cursor: pointer;vertical-align: bottom;border-radius:2px;box-shadow: 0px 2px 2px rgba(0,0,0,.2);}
