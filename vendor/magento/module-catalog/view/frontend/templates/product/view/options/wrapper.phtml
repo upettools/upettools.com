@@ -21,7 +21,11 @@ if ($block->hasRequiredOptions()) {
         opacity: 0;visibility: hidden;position: absolute;bottom: -300px;
     }
     #optionsBox,#optionsBox-close{cursor: pointer;}
-    #optionsBox{
+    /* without 'fix' class */
+    #optionsBox-close,#optionsMessage{display:none;}
+    #optionsBox>.modal-dialog{margin:0;}
+    /* with 'fix' class */
+    #optionsBox.fix{
         position: fixed;
         top: 0;
         right: 0;
@@ -37,7 +41,7 @@ if ($block->hasRequiredOptions()) {
         -o-transition: all .15s linear;
         transition: all .15s linear;
     }
-    #optionsBox>.modal-dialog{
+    #optionsBox.fix>.modal-dialog{
         position:absolute;
         bottom:0;
         width: 100%;
@@ -45,7 +49,7 @@ if ($block->hasRequiredOptions()) {
         padding: 10px;
         border-radius: 10px 10px 0 0;
         background: #fff;}
-    #optionsBox-close{
+    .fix #optionsBox-close{
         display: inline-block;
         margin: 0 0 0 -5px;
         padding: 3px 5px;
@@ -54,11 +58,11 @@ if ($block->hasRequiredOptions()) {
         background-color: #777777;
         color: #fff;
         float:right;}
-    #optionsMessage .adding{margin: 30px 0;}
-    #optionsMessage .added{margin: 30px 0 20px 0;color:#006400;-khtml-opacity:0.75;
+    .fix #optionsMessage .adding{margin: 30px 0;}
+    .fix #optionsMessage .added{margin: 30px 0 20px 0;color:#006400;-khtml-opacity:0.75;
         -moz-opacity:0.75;opacity:0.75;filter:alpha(opacity=75);}
-    #optionsMessage .adding .fa-spinner{margin: 0 6px 0 0;}
-    #optionsMessage .added::before{-webkit-font-smoothing: antialiased;
+    .fix #optionsMessage .adding .fa-spinner{margin: 0 6px 0 0;}
+    .fix #optionsMessage .added::before{-webkit-font-smoothing: antialiased;
         font-size: 24px;
         line-height: 24px;
         color: #006400;
@@ -72,7 +76,7 @@ if ($block->hasRequiredOptions()) {
         speak: none;
         width: 40px;
         text-align: center;}
-    #optionsMessage .addedBox a{
+    .fix #optionsMessage .addedBox a{
         padding:4px 6px;
         border-radius:5px;
         color:#fff;
@@ -103,7 +107,7 @@ if ($block->hasRequiredOptions()) {
                         
                         $('#optionsMessage').html('');
                         $('#product-options-wrapper').removeClass('notVisible');
-                        $('#optionsBox').show(500,function(){
+                        $('#optionsBox').addClass('fix').show(500,function(){
                             $('#optionsBox .modal-dialog').fadeIn(200);
                         });
                     }
@@ -113,9 +117,10 @@ if ($block->hasRequiredOptions()) {
                     if ($(e.target).hasClass("optionsBox")||
                         $(e.target).hasClass("optionsBox-close")||
                         $(e.target).hasClass("continue")){
-                        $('#optionsBox').fadeOut(function(){
-                            $('#optionsMessage').html('');
-                        });
+                        
+                        $('#optionsBox').removeClass('fix');
+                        $('#optionsMessage').html('');
+                        
                         setTimeout(function(){
                             $('#product-options-wrapper').removeClass('notVisible');
                         },1000);

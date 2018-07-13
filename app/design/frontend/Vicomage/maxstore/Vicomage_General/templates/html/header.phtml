@@ -88,7 +88,7 @@
 		#switcher-language-nav a{display:inline-block;font-weight:normal;}
 		#switcher-language-nav a.lang{padding:5px 15px;display:none;}
 		#switcher-language-nav a.lang::before {content: '\e608';font-family: 'luma-icons';-webkit-font-smoothing: antialiased;font-size: 8px;
-		line-height: 20px;color: inherit;margin: 0;vertical-align: top;display: inline-block;font-weight: normal;overflow: hidden;speak: none;text-align: center;}
+			line-height: 20px;color: inherit;margin: 0;vertical-align: top;display: inline-block;font-weight: normal;overflow: hidden;speak: none;text-align: center;}
 		#switcher-currency-nav ul.dropdown{box-shadow:none;background:none;}
 		#switcher-currency-nav .options.active ul.dropdown{position:initial;}
 		.page-header .switcher .options ul.dropdown li:hover{background:none;}
@@ -97,7 +97,7 @@
 		.products-grid .product-item{margin-bottom:10px;}
 		.product-item-details{padding:0 0 20px;}
 		.product-item-name{margin:2px 0;}
-		.product-item-name, .product.name a{font-size:12px;}
+		.product-item-name, .product.name a{font-size:12px;font-weight:normal;}
 		.product-reviews-summary{margin:0;line-height:0;}
 		.rating-summary .rating-result[title="0%"] {display: none;}
 		.form-customer-create .actions-toolbar .secondary a.action ,
@@ -128,17 +128,8 @@
 		.nav-sections .header.links:nth-child(n+2) {display: none;}
 		.nav-sections .header.links .qty>i{font-style:normal;}
 		.vicomage-megamenu li.level0 .submenu .content-hot-category .block-cat .thumb .title_cat .content-cat{text-decoration:none;}
-		.products-grid .product-item-info:hover .btn-quickview, .products-grid .product-item-info.active .btn-quickview{
-			display:none;
-		}
-		.products-grid .product-item-info .product-item-inner{
-			opacity:1;visibility:visible;
-			transform: translate(0px, 0px);
-			-webkit-transform: translate(0px, 0px);
-			-moz-transform: translate(0px, 0px);
-			-ms-transform: translate(0px, 0px);
-			-o-transform: translate(0px, 0px);
-		}
+		.products-grid .product-item-info:hover .btn-quickview, .products-grid .product-item-info.active .btn-quickview{display:none;}
+		.products-grid .product-item-info:hover .product-item-inner{visibility: hidden;opacity: 0;}
 		.product-item-actions .actions-primary .tocart{background:none;}
 	}
 </style>
