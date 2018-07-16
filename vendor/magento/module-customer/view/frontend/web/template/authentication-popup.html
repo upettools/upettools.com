@@ -5,10 +5,14 @@
  */
  -->
 
-<div class="block-authentication"
+<div class="block-authentication block-customize"
      data-bind="afterRender: setModalElement, blockLoader: isLoading"
      style="display: none">
-    <div class="block block-new-customer"
+     <ul class="tabs clearfix">
+         <li class="sign current">Sign in</li>
+         <li class="new">New Customer</li>
+    </ul>
+    <div class="block block-new-customer hidden-xs"
          data-bind="attr: {'data-label': $t('or')}">
         <div class="block-title">
             <strong id="block-new-customer-heading"

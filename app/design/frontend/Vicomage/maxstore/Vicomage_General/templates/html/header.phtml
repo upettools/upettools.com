@@ -75,11 +75,13 @@
 		.message>*:first-child:before{
 			margin:0!important;position:initial!important;
 		}
+		.block-customize .tabs{display:none;}
 	}
 	@media only screen and (min-width: 769px) and (max-width: 898px), print {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
 	}
 	@media only screen and (max-width: 768px), print{
+		/*header*/
 		.page-header .header-search {top: 25px;left: 60px;}
 		.page-header .switcher .options ul.dropdown{left: 0;}
 		.page-header.header-type1 .header-right{z-index:51;}
@@ -92,7 +94,13 @@
 		#switcher-currency-nav ul.dropdown{box-shadow:none;background:none;}
 		#switcher-currency-nav .options.active ul.dropdown{position:initial;}
 		.page-header .switcher .options ul.dropdown li:hover{background:none;}
+		/*menu*/
+		.vicomage-megamenu.navigation li.link-home,.vicomage-megamenu.navigation li.fullwidth,
+		.vicomage-megamenu.navigation li.link-home+.dropdown>a.level-top,.vicomage-megamenu.navigation li.link-home+.dropdown>.open-children-toggle{display:none;}
+		.vicomage-megamenu.navigation li.link-home+.dropdown>.submenu{display:block!important;padding-left:5px;}
 		.navigation .submenu > li{border-top: 1px solid #ddd;}
+		.vicomage-megamenu.navigation li.ui-menu-item>.open-children-toggle{height: 34px;background: rgba(0, 0, 0, 0.06);}
+		.navigation .parent>.level-top:after{right:14px;}
 		.prolist-feature-top .title-page{margin:10px 0;}
 		.products-grid .product-item{margin-bottom:10px;}
 		.product-item-details{padding:0 0 20px;}
@@ -110,14 +118,14 @@
 		.vicomage-slider .slick-active .slide-caption .caption3{text-transform: capitalize;font-size: 14px;font-weight: normal;}
 		#backtotop{bottom:60px;right:14px;opacity:0.8;}
 		.catalog-product-view #backtotop{bottom: 114px;}
-		.zopim{top:initial;bottom:0!important;opacity:0.88;}
+		.zopim{position: fixed!important;top:initial!important;bottom:0!important;opacity:0.88;}
 		.catalog-product-view>.zopim{bottom: 72px!important;}
 		.page-header .wishlist-header a{font-size:20px;}
 		.page-header .wishlist-header .wishlist>a{position:relative;}
 		.page-header .wishlist-header .wishlist>a .flaticon-heart1{font-size:20px;line-height:14px;}
 		.wishlist-header .qty{position:absolute;top: -5px;right: -12px;min-width:20px;height:20px;
-		line-height:20px;text-align:center;background:#4c6689;color:#fff;font-size:12px;
-		border-radius: 50%;overflow: hidden;}
+			line-height:20px;text-align:center;background:#4c6689;color:#fff;font-size:12px;
+			border-radius: 50%;overflow: hidden;}
 		.wishlist-header .qty>span{font-size:12px;}
 		.wishlist-header .qty>i{display:none;}
 
@@ -131,6 +139,20 @@
 		.products-grid .product-item-info:hover .btn-quickview, .products-grid .product-item-info.active .btn-quickview{display:none;}
 		.products-grid .product-item-info:hover .product-item-inner{visibility: hidden;opacity: 0;}
 		.product-item-actions .actions-primary .tocart{background:none;}
+		/*checkout sign in*/
+		.block-customize .tabs{margin:0;padding:0;}
+		.block-customize .tabs li{list-style:none;display:inline-block;float:left;width:48%;margin:0;padding:10px 0;text-align:center;line-height:30px;color:#333333;
+			background:#ffffff;border:1px solid #ccc;cursor:pointer;-webkit-transition: all 0.1s linear;transition: all 0.1s linear;}
+		.block-customize .tabs li:nth-child(2){border-left:none;}
+		.block-customize .tabs li.current{background: #4c6689;color: #fff;}
+		.block-authentication.block-customize .block[class]+.block::before{display:none;}
+		.block-authentication .tabs+.block[class]{margin-top: 10px;padding-top: 10px;border-top: 1px solid #c1c1c1;}
+		.block-authentication.block-customize .block[class]+.block{margin-top:10px;padding-top:10px;}
+		.block-customize .form .fieldset>.field{margin: 0 0 10px;}
+		.block-customize .fieldset{margin: 0 0 20px;}
+		.block-customize.block-authentication .actions-toolbar>.secondary{padding-top:0;}
+		.block-customize.block-authentication .block-title strong{font-weight:500;text-transform:initial;}
+
 	}
 </style>
 <header class="page-header header-type<?php echo $header_type; ?>">

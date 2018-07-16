@@ -116,3 +116,35 @@ $footer_type = $this->getConfig('vicomage_general_config/footer/footer_type');
 
 </div>
 <a id="backtotop" href="#top" style="display: block;" class=""><span class="fa fa-angle-up"></span></a>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(document).ready(function() {
+            $('.mobile-collapsible .heading:gt(0)').click(function(){
+                _checkHidden();
+                $(this).closest('.mobile-collapsible').find('.toggle-content').toggleClass('hidden-xs');
+            });
+           /*tabs at go to checkout*/
+            $(document).on('click','.block-customize .tabs li',function(){
+                if(!$(this).hasClass('current')){
+                    $(this).addClass('current').siblings().removeClass('current');
+                    if($(this).hasClass('sign')){
+                        $('.block-customize .block-customer-login').removeClass('hidden-xs').siblings('.block-new-customer').addClass('hidden-xs');
+                    }else if($(this).hasClass('new')){
+                        $('.block-customize .block-new-customer').removeClass('hidden-xs').siblings('.block-customer-login').addClass('hidden-xs');
+                    }
+                }
+            });
+           
+            function _checkHidden(){//hide all list
+                $('.mobile-collapsible .toggle-content:gt(0)').each(function(){
+                    if(!$(this).hasClass('hidden-xs')){
+                        $(this).addClass('hidden-xs');
+                    }
+                });
+            }
+        });
+        
+    });
+</script>
