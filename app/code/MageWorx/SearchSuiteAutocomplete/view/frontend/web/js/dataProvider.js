@@ -18,7 +18,9 @@ define([
     };
 
     $.Product = function (data) {
-        this.name = data.name;
+        this.name = data.name.substr(0,30) + '...';//.Substring(0,30) + '...';
+        window.console.log(typeof data.name);
+        window.console.log(data.name);
         this.sku = data.sku;
         this.image = data.image;
         this.reviews_rating = data.reviews_rating;
