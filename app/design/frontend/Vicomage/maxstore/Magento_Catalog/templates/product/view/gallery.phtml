@@ -23,13 +23,23 @@
 	$fullViewType = $vico_helper->getConfig('vicomage_general_config/product/full_view_type');
 	$allowFullScreen = is_null($fullViewType)?$block->getVar("gallery/allowfullscreen"):(($fullViewType!='pop_up')?'true':'false');
 	$usezoomimage = $product_config['use_zoom_image'];
+	
+	$product = $block->getProduct();
+	$imageHelper = $this->helper('Magento\Catalog\Helper\Image');
+	if(!$product->getImage() || $product->getImage() == "no_selection" ){
+		$image = $imageHelper->getDefaultPlaceholderUrl('image');
+	}else{
+		$image = $imageHelper->init($product,'product_page_image_medium')
+		->constrainOnly(true)->keepAspectRatio(true)->keepFrame(true)
+		->setImageFile($product->getImage())
+		->getUrl();
+	}
 ?>
 
 <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
-    <div data-role="loader" class="loading-mask">
+    <div data-role="loader" class="loading-mask" >
         <div class="loader">
-            <img src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
-                 alt="<?php /* @escapeNotVerified */ echo __('Loading...') ?>">
+            <img src="<?php /* @escapeNotVerified */ echo $image; ?>">
         </div>
     </div>
 </div>
