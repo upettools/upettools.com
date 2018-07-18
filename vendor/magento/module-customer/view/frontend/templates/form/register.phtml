@@ -239,6 +239,7 @@ require([
         ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
     <?php endif ?>
     }).find('input:text').attr('autocomplete', 'off');
+    setFormCustomize();
     //show referce email
     $('#show_email_referce').click(function(){ $(this).addClass('hidden'); $('#hide_email_referce,#hide_email_text').removeClass('hidden');$('.field.email_referce').toggleClass('hidden');});
     $('#hide_email_referce').click(function(){
@@ -311,6 +312,7 @@ require([
         var event = event || window.event;
         event.preventDefault(); // Compatible standard Browsers
         window.event.returnValue = false; // Compatible IE6~8
+        saveFormCustomize();
         if($('#email_referee').val().length > 0 && !$('#check_email_referee').hasClass('hidden')){ //error referee email
             dataForm.mage('validation', {
             ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
@@ -322,6 +324,30 @@ require([
         }
 
     });
+    /**
+    *   save first name lastname email_address
+    */
+    function saveFormCustomize(){
+        var form_obj = {
+            'firstname': $('#form-validate #firstname').val(),
+            'lastname': $('#form-validate #lastname').val(),
+            'email_address': $('#form-validate #email_address').val()
+        };
+        var form_str = JSON.stringify(form_obj);
+        sessionStorage._formcustomzie = form_str;
+    }
+    /**
+    *   reset firstname lastname email_address
+    */
+    function setFormCustomize(){
+        var reg_obj;
+        if(sessionStorage._formcustomzie){
+            reg_obj = JSON.parse(sessionStorage._formcustomzie);
+            $('#form-validate #firstname').val(reg_obj.firstname);
+            $('#form-validate #lastname').val(reg_obj.lastname);
+            $('#form-validate #email_address').val(reg_obj.email_address);
+        }
+    }
 });
 </script>
 <?php if ($block->getShowAddressFields()): ?>
