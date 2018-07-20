@@ -19,6 +19,8 @@ if ($block->hasRequiredOptions()) {
 }
 @media (max-width:768px),print{
     #product-options-wrapper .fieldset>.price-box .price{color:#4c6689;font-size: 22px;line-height: 22px;}
+    #product-options-wrapper .fieldset>.price-box .old-price{display:inline;}
+    #product-options-wrapper .fieldset>.price-box .old-price .price{font-size: 14px;text-decoration: line-through;}
     #product-options-wrapper.notVisible{
         opacity: 0;visibility: hidden;position: absolute;bottom: -300px;
     }
