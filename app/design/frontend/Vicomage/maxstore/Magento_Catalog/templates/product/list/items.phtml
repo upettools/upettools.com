@@ -441,15 +441,18 @@ require([
 		'jquery'
 		],function($){
 			$(document).ready(function(){
-				var $_upsell = $('.related-wrapper .upsell-wrapper');
-				if($_upsell.length > 0){
-					var _upsellHtml = '<div class="upsell-wrapper">' + $_upsell.html() + '</div>';
-					$_upsell.remove();
-					if(!$('.product-view-content>.upsell-wrapper') || $('.product-view-content>.upsell-wrapper').length < 0){
-						$('.product-view-content>.related-wrapper').after( _upsellHtml );
-						$('.upsell-wrapper').addClass('move');
+				
+				(function (){
+					var $_upsell = $('.related-wrapper .upsell-wrapper');
+					if($_upsell.length > 0){
+						var _upsellHtml = '<div class="upsell-wrapper">' + $_upsell.html() + '</div>';
+						$_upsell.remove();
+						if($('.product-view-content>.upsell-wrapper').length == 0){
+							$('.product-view-content>.related-wrapper').after( _upsellHtml );
+							$('.upsell-wrapper').addClass('beenmoved');
+						}
 					}
-				}
+				})();
 			});
 		});
 </script>
