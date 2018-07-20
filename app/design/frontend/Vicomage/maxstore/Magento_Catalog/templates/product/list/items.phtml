@@ -57,7 +57,7 @@ switch ($type = $block->getType()) {
 				$class = $type;
 
 				$image = 'related_products_list';
-				$title = __('Related Products');
+				$title = __('RELATED RECOMMENDATIONS');//Related Products
 				$items = $block->getItems();
 				$limit = 0;
 				$limit_product = $limit_product_related;
@@ -396,7 +396,7 @@ require([
 	if(count_items > 6){
 		count_items = 6;
 	}
-	$("#productsliderelated").css({'width':count_items*140 + 'px'});
+	//$("#productsliderelated").css({'width':count_items*140 + 'px'});
 	$("#productslide<?php echo $type ?>").slick({
 			dots: false,
 			arrows: true,
