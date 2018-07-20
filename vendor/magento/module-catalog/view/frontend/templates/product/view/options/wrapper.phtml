@@ -11,12 +11,14 @@ if ($block->hasRequiredOptions()) {
 }
 ?>
 <style>
+#product-options-wrapper .fieldset>.price-box{display:none;}
 @media all and (min-width:769px),print{
     #optionsBox{border:0;margin:0;padding:0;}
     #optionsBox-close,#optionsMessage{display:none;}
     #optionsBox>.modal-dialog{margin: 0 auto;}
 }
 @media (max-width:768px),print{
+    #product-options-wrapper .fieldset>.price-box .price{color:#4c6689;font-size: 22px;line-height: 22px;}
     #product-options-wrapper.notVisible{
         opacity: 0;visibility: hidden;position: absolute;bottom: -300px;
     }
@@ -25,6 +27,12 @@ if ($block->hasRequiredOptions()) {
     #optionsBox-close,#optionsMessage{display:none;}
     #optionsBox>.modal-dialog{margin:0;}
     /* with 'fix' class */
+    #optionsBox.fix .product-options-wrapper{padding-top:40px;}
+    #optionsBox.fix #product-options-wrapper .fieldset>.price-box{
+        display:block;
+        position:absolute;
+        top:20px;
+    }
     #optionsBox.fix{
         position: fixed;
         top: 0;
@@ -90,6 +98,7 @@ if ($block->hasRequiredOptions()) {
         <div id="optionsBox-close" class="optionsBox-close">Close</div>
         <div id="optionsMessage" class="text-center optionsMessage"></div>
         <div class="product-options-wrapper" id="product-options-wrapper"<?php /* @escapeNotVerified */ echo $required; ?>>
+
             <div class="fieldset" tabindex="0">
                 <?php echo $block->getChildHtml('', true);?>
             </div>
