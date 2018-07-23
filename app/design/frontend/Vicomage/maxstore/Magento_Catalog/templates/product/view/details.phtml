@@ -181,7 +181,6 @@ require([
 			var $item = $(this);
 			var _content = $item.attr("aria-controls");
 			var _title = $item.find('.switch').text();
-			window.console.log(_content + '/' + _title);
 			$('#details-wrapper .details-content .title').html('<i class="fa fa-arrow-left" aria-hidden="true"></i>' + _title);
 			$('.product.data.items>.item.content').each(function(){
 				if($(this).attr('id') == _content){
