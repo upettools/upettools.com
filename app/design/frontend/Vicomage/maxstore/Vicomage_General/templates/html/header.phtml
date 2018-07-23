@@ -77,6 +77,15 @@
 			margin:0!important;position:initial!important;
 		}
 		.block-customize .tabs{display:none;}
+		.block-authentication.block-customize>.block-new-customer{-webkit-order:1;-ms-order:1;order:1;padding: 10px 0 0 40px;border-left: 1px solid #c1c1c1;}
+		.block-authentication.block-customize>.block-new-customer::before{height: 36px;line-height: 34px;
+			margin: -19px 0 0 -18px;min-width: 36px;background: #fff;border: 1px solid #c1c1c1;border-radius: 50%;
+			box-sizing: border-box;color: #c1c1c1;content: attr(data-label);display: inline-block;
+			letter-spacing: normal;padding: 0 .2rem;position: absolute;text-align: center;text-transform: uppercase;left: 50%;top: 50%;}
+		.block-authentication.block-customize>.block[class]+.block-customer-login{-webkit-order:0;-ms-order:0;order:0;padding: 10px 30px 0 0;border-left:0;}
+		.block-authentication.block-customize>.block[class]+.block-customer-login::before{display:none;}
+		.block-authentication .actions-toolbar>.primary{float:left;}
+		.block-authentication .actions-toolbar>.secondary{margin:0 0 0 2rem;}
 	}
 	@media only screen and (min-width: 769px) and (max-width: 898px), print {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
