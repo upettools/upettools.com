@@ -151,6 +151,13 @@
         </div>
         <?php endif; ?>
     </div>
+	<div class="details-wrapper" id="details-wrapper">
+		<div class="details-content">
+			<div class="title"></div>
+			<div class="content"></div>
+		</div>
+		<div class="datails-overlay"></div>
+	</div>
 <?php endif; ?>
 <?php if(isset($product_config['move_tab']) && $product_config['move_tab']): ?>
 <script type="text/javascript">
@@ -163,3 +170,37 @@ require([
 });
 </script>
 <?php endif; ?>
+<script>
+	require([
+		'jquery'
+	],function($){
+		/**
+		* show details on modal
+		*/
+		$('.product.info.detailed').on('click','.item.title',function(){
+			var $item = $(this);
+			var _content = $item.attr("aria-controls");
+			var _title = $item.find('.switch').text();
+			window.console.log(_content + '/' + _title);
+			$('#details-wrapper .details-content .title').html('<i class="fa fa-arrow-left" aria-hidden="true"></i>' + _title);
+			$('.product.data.items>.item.content').each(function(){
+				if($(this).attr('id') == _content){
+					$('#details-wrapper .details-content .content').html($(this).html());
+				}
+			});
+			$('#details-wrapper').addClass('active');
+		});
+		$('#details-wrapper .datails-overlay').click(function(){
+			hideTabsModal();
+		});
+		$(document).on('click','#details-wrapper .details-content .title .fa-arrow-left',function(){
+			hideTabsModal();
+		});
+		function hideTabsModal(){
+			$('#details-wrapper').addClass('inactive');
+			setTimeout(function(){
+				$('#details-wrapper').removeClass('inactive active');
+			},300);
+		}
+	});
+</script>
