@@ -86,6 +86,7 @@
 		.block-authentication.block-customize>.block[class]+.block-customer-login::before{display:none;}
 		.block-authentication .actions-toolbar>.primary{float:left;}
 		.block-authentication .actions-toolbar>.secondary{margin:0 0 0 2rem;}
+		.account-list .fa{display: none;}
 	}
 	@media only screen and (min-width: 769px) and (max-width: 898px), print {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
@@ -101,12 +102,24 @@
 		.page-header .header-logo .nav-toggle,
 		.page-header.header-type1 .header-right{top: 12px;}
 		.columns .column.main{padding-bottom:0;}
-		#switcher-language-nav,#switcher-currency-nav {border-bottom:1px solid #d1d1d1;}
+		.account-list a .fa{display: block;margin-bottom: 4px;font-size: 24px;color:#0584bb;}
+		.account-list.notLogin{display:flex;-webkit-box-pack: center;justify-content: center;}
+		.account-list.notLogin a{margin: 0 15px;text-align: center;}
+		/*switcher*/
+		.nav-sections .switcher:before,
+		.nav-sections .switcher:after{display: table;content: " ";}
+		.nav-sections .switcher:after{clear: both;}
+		#switcher-language-nav{display:none;}
+		#switcher-language-nav,#switcher-currency-nav {padding: 14px 15px;border-bottom:1px solid #e2e5f1;box-shadow: 0 0 1px rgba(0,0,0,0.04);}
+		#switcher-currency-nav .switcher-title{display:inline-block!important;font-weight: normal;color: #7e859b;font-size: 13px;}
+		.page-header .switcher .options{float:right;text-align:right;}
+		.switcher-trigger strong,.page-header .switcher .options ul.dropdown a{font-size:13px;padding: 0;}
+		.page-header .switcher-currency.switcher .options.active{margin-bottom: 24px;}
 		#switcher-language-nav a{display:inline-block;font-weight:normal;}
 		#switcher-language-nav a.lang{padding:5px 15px;display:none;}
 		#switcher-language-nav a.lang::before {content: '\e608';font-family: 'luma-icons';-webkit-font-smoothing: antialiased;font-size: 8px;
 			line-height: 20px;color: inherit;margin: 0;vertical-align: top;display: inline-block;font-weight: normal;overflow: hidden;speak: none;text-align: center;}
-		#switcher-currency-nav ul.dropdown{box-shadow:none;background:none;}
+		#switcher-currency-nav ul.dropdown{box-shadow:none;background:none;border:none;min-width: initial;margin: 0;}
 		#switcher-currency-nav .options.active ul.dropdown{position:initial;}
 		.page-header .switcher .options ul.dropdown li:hover{background:none;}
 		/*search*/
@@ -136,10 +149,16 @@
 		/*menu*/
 		.vicomage-megamenu.navigation li.link-home,.vicomage-megamenu.navigation li.fullwidth,
 		.vicomage-megamenu.navigation li.link-home+.dropdown>a.level-top,.vicomage-megamenu.navigation li.link-home+.dropdown>.open-children-toggle{display:none;}
-		.vicomage-megamenu.navigation li.link-home+.dropdown>.submenu{display:block!important;padding-left:5px;}
-		.vicomage-megamenu.navigation .submenu li a{text-transform:capitalize;}
+		.vicomage-megamenu.navigation li.link-home+.dropdown>.submenu{display:block!important;padding:0;}
+		.vicomage-megamenu.navigation .submenu li a{text-transform:capitalize;padding:14px 0;}
 		.navigation .submenu > li{border-top: 1px solid #ddd;}
-		.vicomage-megamenu.navigation li.ui-menu-item>.open-children-toggle{height: 34px;background: rgba(0, 0, 0, 0.06);}
+		.navigation .submenu > li:nth-child(1){border-top:none;}
+		.vicomage-megamenu.navigation li.ui-menu-item>.open-children-toggle{height: 100%;}
+		.navigation .parent>.level-top:after,
+		.navigation .parent>.level-top.ui-state-active:after{content: '\e609';top: 16px;}
+		.vicomage-megamenu.navigation .submenu{display:none!important;}
+		.nav-sections .header.links a, .nav-sections .header.links a:hover{font-size: 12px;padding:8px 0;color: #5b5c5f;}
+		.nav-sections .header.links li:last-child>a{border-bottom:none;}
 		.navigation .parent>.level-top:after{right:14px;}
 		.prolist-feature-top .title-page{margin:10px 0;}
 		.products-grid .product-item{margin-bottom:10px;}
@@ -257,7 +276,8 @@
 
 									$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 									$customerSession = $objectManager->get('Magento\Framework\App\Http\Context');
-									$isLoggedIn = $customerSession->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH); ?>
+									$isLoggedIn = $customerSession->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH); 
+									$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');?>
 								<?php if($isLoggedIn){ ?>
 									<div class="actions dropdown options links-header-options">
 										<div class="action toggle links-header-trigger" id="links-header-trigger">
@@ -289,9 +309,11 @@
 										</div>
 									</div>
 								<?php } else { ?>
-									<div class="account-list header links">
-										<a class="login-link" href="<?php echo $this->getUrl('customer/account/login') ?>"><?php echo __('Login') ?></a><span class="line-padding">/</span>
-										<a class="register-link" href="<?php echo $this->getUrl('customer/account/create') ?>"><?php echo __('Register') ?></a> 
+									<div class="account-list header links notLogin">
+										<a class="visible-xs home-link" href="<?php echo $storeManager->getStore()->getBaseUrl(); ?>"><i class="fa fa-home" aria-hidden="true"></i><?php echo __('Home') ?></a>
+										<a class="login-link" href="<?php echo $this->getUrl('customer/account/login') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><?php echo __('Sign In') ?></a><span class="line-padding">/</span>
+										<a class="register-link" href="<?php echo $this->getUrl('customer/account/create') ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo __('Sign Up') ?></a> 
+										<a class="visible-xs cart-link" href="<?php echo $storeManager->getStore()->getBaseUrl().'checkout/cart/' ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
 									</div>
 								<?php } ?>
 								
