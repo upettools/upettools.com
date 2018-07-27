@@ -92,17 +92,19 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             $logo=$om->get('Magento\Theme\Block\Html\Header\Logo');
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $customerSession = $objectManager->get('Magento\Framework\App\Http\Context');
-            $customerSessionLogin = $objectManager->get('Magento\Customer\Model\Session');
+            //$customerSessionLogin = $objectManager->get('Magento\Customer\Model\Session');
             $isLoggedIn = $customerSession->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH); 
             $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+			$customerSessionLogin = $objectManager->create('Magento\Customer\Model\SessionFactory')->create();
         ?>
         <div class="customize-header">
             <div class="img">
                 <img src="<?php /* @escapeNotVerified */ echo $logo->getLogoSrc() ?>" alt="<?php /* @escapeNotVerified */ echo $logo->getLogoAlt() ?>"/>  
             </div>
             <p class="greeting">Hi, 
-                <?php if($customerSessionLogin->isLoggedIn()):?>
-                    <?php echo $customerSessionLogin->getCustomer()->getFirstname().' '.$customerSessionLogin->getCustomer()->getLastname(); ?>
+                <?php if($isLoggedIn):?>
+				    <?php //echo $customerSessionLogin->getCustomer()->getId(); ?>
+                    <?php  echo $customerSessionLogin->getCustomer()->getFirstname().' '.$customerSessionLogin->getCustomer()->getLastname(); ?>
                 <?php else:?>
                     We Are Upettools
                 <?php endif; ?>
