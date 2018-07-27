@@ -103,8 +103,8 @@
 		.page-header.header-type1 .header-right{top: 12px;}
 		.columns .column.main{padding-bottom:0;}
 		.account-list a .fa{display: block;margin-bottom: 4px;font-size: 24px;color:#0584bb;}
-		.account-list.notLogin{display:flex;-webkit-box-pack: center;justify-content: center;}
-		.account-list.notLogin a{margin: 0 15px;text-align: center;}
+		.account-list.notLogin,.account-list.hasLogin{display:flex;-webkit-box-pack: center;justify-content: center;}
+		.account-list.notLogin a,.account-list.hasLogin a{margin: 0 15px;text-align: center;}
 		/*switcher*/
 		.nav-sections .switcher:before,
 		.nav-sections .switcher:after{display: table;content: " ";}
@@ -114,7 +114,7 @@
 		#switcher-currency-nav .switcher-title{display:inline-block!important;font-weight: normal;color: #7e859b;font-size: 13px;}
 		.page-header .switcher .options{float:right;text-align:right;}
 		.switcher-trigger strong,.page-header .switcher .options ul.dropdown a{font-size:13px;padding: 0;}
-		.page-header .switcher-currency.switcher .options.active{margin-bottom: 24px;}
+		.page-header .switcher-currency.switcher .options.active{}
 		#switcher-language-nav a{display:inline-block;font-weight:normal;}
 		#switcher-language-nav a.lang{padding:5px 15px;display:none;}
 		#switcher-language-nav a.lang::before {content: '\e608';font-family: 'luma-icons';-webkit-font-smoothing: antialiased;font-size: 8px;
@@ -150,14 +150,14 @@
 		.vicomage-megamenu.navigation li.link-home,.vicomage-megamenu.navigation li.fullwidth,
 		.vicomage-megamenu.navigation li.link-home+.dropdown>a.level-top,.vicomage-megamenu.navigation li.link-home+.dropdown>.open-children-toggle{display:none;}
 		.vicomage-megamenu.navigation li.link-home+.dropdown>.submenu{display:block!important;padding:0;}
-		.vicomage-megamenu.navigation .submenu li a{text-transform:capitalize;padding:14px 0;}
+		.vicomage-megamenu.navigation .submenu li a{text-transform:capitalize;padding:14px 0;font-size:13px;font-family: 'Helvetica Neue';}
 		.navigation .submenu > li{border-top: 1px solid #ddd;}
 		.navigation .submenu > li:nth-child(1){border-top:none;}
 		.vicomage-megamenu.navigation li.ui-menu-item>.open-children-toggle{height: 100%;}
 		.navigation .parent>.level-top:after,
-		.navigation .parent>.level-top.ui-state-active:after{content: '\e609';top: 16px;}
+		.navigation .parent>.level-top.ui-state-active:after{content: '\e608';top: 16px;}
 		.vicomage-megamenu.navigation .submenu{display:none!important;}
-		.nav-sections .header.links a, .nav-sections .header.links a:hover{font-size: 12px;padding:8px 0;color: #5b5c5f;}
+		.nav-sections .header.links a, .nav-sections .header.links a:hover{font-size: 12px;padding:8px 0;color: #5b5c5f;font-family: 'Helvetica Neue';}
 		.nav-sections .header.links li:last-child>a{border-bottom:none;}
 		.navigation .parent>.level-top:after{right:14px;}
 		.prolist-feature-top .title-page{margin:10px 0;}
@@ -180,7 +180,8 @@
 		.slick-slider:hover .slick-prev, 
 		.slick-slider:hover .slick-next{display:none!important;}
 		/*hide non-sense links*/
-		.nav-sections .header.links:nth-child(n+2) {display: none;}
+		.nav-sections .header.links:nth-child(n+3) {display: none;}
+		.nav-sections .header.links.notLogin+.header.links{display:none;}
 		.nav-sections .header.links .qty>i{font-style:normal;}
 		.vicomage-megamenu li.level0 .submenu .content-hot-category .block-cat .thumb .title_cat .content-cat{text-decoration:none;}
 		.products-grid .product-item-info:hover .btn-quickview, .products-grid .product-item-info.active .btn-quickview{display:none;}
@@ -219,6 +220,8 @@
 			box-shadow:0 -2px 4px rgba(0,0,0,0.1),2px 0 1px rgba(0,0,0,0.1),0 2px 4px rgba(0,0,0,0.1),-2px 0 1px rgba(0,0,0,0.1);}
 		.account-nav.block-collapsible-nav .item a{text-transform: capitalize;}
 		.account .page-title-wrapper h1{margin:0;}
+		/*category page*/
+		.catalog-category-view .page-main .columns>.sidebar{display:none;}
 	}
 	@media only screen and (max-width: 480px), print{
 		.page-header .header-logo .logo{margin:10px 0;}
@@ -311,8 +314,8 @@
 								<?php } else { ?>
 									<div class="account-list header links notLogin">
 										<a class="visible-xs home-link" href="<?php echo $storeManager->getStore()->getBaseUrl(); ?>"><i class="fa fa-home" aria-hidden="true"></i><?php echo __('Home') ?></a>
-										<a class="login-link" href="<?php echo $this->getUrl('customer/account/login') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><?php echo __('Sign In') ?></a><span class="line-padding">/</span>
-										<a class="register-link" href="<?php echo $this->getUrl('customer/account/create') ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo __('Sign Up') ?></a> 
+										<a class="login-link" href="<?php echo $this->getUrl('customer/account/login') ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo __('Sign In') ?></a><span class="line-padding">/</span>
+										<a class="register-link" href="<?php echo $this->getUrl('customer/account/create') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><?php echo __('Sign Up') ?></a> 
 										<a class="visible-xs cart-link" href="<?php echo $storeManager->getStore()->getBaseUrl().'checkout/cart/' ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
 									</div>
 								<?php } ?>
