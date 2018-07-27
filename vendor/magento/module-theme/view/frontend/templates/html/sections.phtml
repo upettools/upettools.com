@@ -102,7 +102,7 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
                 <img src="<?php /* @escapeNotVerified */ echo $logo->getLogoSrc() ?>" alt="<?php /* @escapeNotVerified */ echo $logo->getLogoAlt() ?>"/>  
             </div>
             <p class="greeting">Hi, 
-                <?php if($isLoggedIn):?>
+                <?php if($customerSessionLogin->isLoggedIn()):?>
 				    <?php //echo $customerSessionLogin->getCustomer()->getId(); ?>
                     <?php  echo $customerSessionLogin->getCustomer()->getFirstname().' '.$customerSessionLogin->getCustomer()->getLastname(); ?>
                 <?php else:?>
