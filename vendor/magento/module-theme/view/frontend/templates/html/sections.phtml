@@ -21,7 +21,8 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
     @media only screen and (min-width: 769px), print{
         .header-menu .nav-sections>.customize-header,
         .header-menu .nav-sections>.choose-sections,
-        .account-list.header.links.hasLogin{display:none;}
+        .account-list.header.links.hasLogin{display:none!important;}
+        .header-menu .nav-sections>.section-items{display: block!important;}
     }
     @media only screen and (max-width: 768px), print{
         .header-menu>.nav-sections{background-color: #f7f7fa;}
@@ -62,16 +63,22 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
         .customize-section>.childMenu{margin: 15px 0 0 0;padding:0;}
         .customize-section>.childMenu>li{position:relative;border-top: 1px solid #ddd;word-wrap: break-word;
             list-style: none none;list-style-type: none;list-style-position: initial;list-style-image: none;margin-bottom: 0;}
-        .customize-section>.childMenu>li>a{display: block;position: relative;padding:14px 0;line-height: normal;font-size:14px;font-family: 'Helvetica Neue';}
-        .menu-section.customize-section>.childMenu>li>a{padding-left:30px;}
+        .customize-section>.childMenu>li>a,
+        .customize-section>.childMenu>li>strong{display: block;position: relative;padding:14px 0;line-height: normal;font-size:14px;font-family: 'Helvetica Neue';font-weight:normal;}
+        .menu-section.customize-section>.childMenu>li>a,
+        .menu-section.customize-section>.childMenu>li>strong{padding-left:30px;}
         /*account icon*/
-        .menu-section.customize-section>.childMenu>li>a:before{display: inline-block;content: "\f104";position: absolute;left: 0;font: normal normal normal 16px/1 FontAwesome;
+        .menu-section.customize-section>.childMenu>li>a:before,
+        .menu-section.customize-section>.childMenu>li:nth-child(2) strong:before,
+        .menu-section.customize-section>.childMenu>li:nth-child(5) strong:before{display: inline-block;content: "\f104";position: absolute;left: 0;font: normal normal normal 16px/1 FontAwesome;
             font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;color:#0584bb;}
         .menu-section.customize-section>.childMenu>li:nth-child(1)>a:before{content: "\f007";}
-        .menu-section.customize-section>.childMenu>li:nth-child(2)>a:before{content: "\f07a";}
+        .menu-section.customize-section>.childMenu>li:nth-child(2)>a:before,
+        .menu-section.customize-section>.childMenu>li:nth-child(2) strong:before{content: "\f07a";}
         .menu-section.customize-section>.childMenu>li:nth-child(3)>a:before{content: "\f004";}
         .menu-section.customize-section>.childMenu>li:nth-child(4)>a:before{content: "\f066";}
-        .menu-section.customize-section>.childMenu>li:nth-child(5)>a:before{content: "\f09d";}
+        .menu-section.customize-section>.childMenu>li:nth-child(5)>a:before,
+        .menu-section.customize-section>.childMenu>li:nth-child(5) strong:before{content: "\f09d";}
         .menu-section.customize-section>.childMenu>li:nth-child(6)>a:before{content: "\f08b";}
         .customize-section>.childMenu>li:nth-child(1){border-top:none;}
         .customize-section>.childMenu>li.parent>a:after{-webkit-font-smoothing: antialiased;
