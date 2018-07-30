@@ -312,9 +312,11 @@
 										</div>
 									</div>
 								<?php } else { ?>
-									<div class="account-list header links">
-										<a class="login-link" href="<?php echo $this->getUrl('customer/account/login') ?>"><?php echo __('Login') ?></a><span class="line-padding">/</span>
-										<a class="register-link" href="<?php echo $this->getUrl('customer/account/create') ?>"><?php echo __('Register') ?></a> 
+									<div class="account-list header links notLogin">
+										<a class="visible-xs home-link" href="<?php echo $storeManager->getStore()->getBaseUrl(); ?>"><i class="fa fa-home" aria-hidden="true"></i><?php echo __('Home') ?></a>
+										<a class="login-link" href="<?php echo $this->getUrl('customer/account/login') ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo __('Sign In') ?></a><span class="line-padding">/</span>
+										<a class="register-link" href="<?php echo $this->getUrl('customer/account/create') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><?php echo __('Sign Up') ?></a> 
+										<a class="visible-xs cart-link" href="<?php echo $storeManager->getStore()->getBaseUrl().'checkout/cart/' ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
 									</div>
 								<?php } ?>
 								
