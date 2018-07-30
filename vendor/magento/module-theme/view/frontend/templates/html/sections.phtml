@@ -91,10 +91,7 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
         .customize-section>.childMenu>li>.subchildmenu.submenu{display:none;}
     }
 </style>
-<?php if ($detailedInfoGroup = $block->getGroupChildNames($group, 'getChildHtml')):?>
-    <div class="sections <?php /* @escapeNotVerified */ echo $groupCss ?>">
-        <?php $layout = $block->getLayout(); ?>
-        <?php 
+<?php 
             $om = \Magento\Framework\App\ObjectManager::getInstance(); 
             $logo=$om->get('Magento\Theme\Block\Html\Header\Logo');
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -104,6 +101,10 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
 			$customerSessionLogin = $objectManager->create('Magento\Customer\Model\SessionFactory')->create();
         ?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames($group, 'getChildHtml')):?>
+    <div class="sections <?php /* @escapeNotVerified */ echo $groupCss ?>">
+        <?php $layout = $block->getLayout(); ?>
+        <?php if($isLoggedIn): ?>
         <div class="customize-header">
             <div class="img">
                 <img src="<?php /* @escapeNotVerified */ echo $logo->getLogoSrc() ?>" alt="<?php /* @escapeNotVerified */ echo $logo->getLogoAlt() ?>"/>  
@@ -124,6 +125,7 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
                 <?php endif; ?>
             </p>
         </div>
+		
         <div class="section-items <?php /* @escapeNotVerified */ echo $groupCss ?>-items  customize-sections" data-mage-init='<?php /* @escapeNotVerified */ echo $groupBehavior ?>'>
             <?php foreach ($detailedInfoGroup as $key => $name):?>
                 <?php
@@ -151,6 +153,7 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             <?php endforeach;?>
         </div>
         <div class="choose-sections"></div>
+		<?php endif; ?>
     </div>
     <script type="text/javascript">
         require([
