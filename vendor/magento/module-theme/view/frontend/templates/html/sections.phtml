@@ -110,8 +110,12 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             </div>
             <p class="greeting">Hi, 
                 <?php if($customerSessionLogin->isLoggedIn()):?>
+				<?php
+                  $customer = $objectManager->create('Magento\Customer\Model\Customer')->load($customerSessionLogin->getCustomer()->getId());
+				  echo $customer->getFirstname().' '.$customer->getLastname();
+				?>
 				    <?php //echo $customerSessionLogin->getCustomer()->getId(); ?>
-                    <?php  echo $customerSessionLogin->getCustomer()->getFirstname().' '.$customerSessionLogin->getCustomer()->getLastname(); ?>
+                    <?php // echo $customerSessionLogin->getCustomer()->getFirstname().' '.$customerSessionLogin->getCustomer()->getLastname(); ?>
                 <?php else:?>
                     We Are Upettools
                 <?php endif; ?>
