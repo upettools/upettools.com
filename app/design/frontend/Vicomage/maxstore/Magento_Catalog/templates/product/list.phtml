@@ -122,7 +122,6 @@ $_product_label_config = $this->helper('Vicomage\General\Helper\Data')->getConfi
                         </a>
 						<?php // Product Label ?>
 						<?php echo $themeHelper->getProductLabel($_product) ?>
-						<a class="vicomage-quickview btn-quickview" data-quickview-url="<?php echo $this->getUrl('vicomage_quickview/catalog_product/view/'); ?>id/<?php echo $_product->getId(); ?>" href="javascript:void(0);"><span><i class="fa fa-eye"></i><?php /* @escapeNotVerified */ echo __('Quick View') ?></span></a>
 						 <?php if($viewMode == 'grid' ): ?>
 						<div class="product-inner-grid">
 							<?php if($_category_config['actions']): ?>
