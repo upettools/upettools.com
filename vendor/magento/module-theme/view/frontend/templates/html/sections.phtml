@@ -109,10 +109,13 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
                 <img src="<?php /* @escapeNotVerified */ echo $logo->getLogoSrc() ?>" alt="<?php /* @escapeNotVerified */ echo $logo->getLogoAlt() ?>"/>  
             </div>
             <p class="greeting">Hi, 
-                <?php if($customerSessionLogin->isLoggedIn()):?>
+                <?php if($isLoggedIn):?>
+				<strong class="" data-bind="scope: 'customer'">
+					<span data-bind="text: customer().fullname ? customer().firstname  : ''"></span>
+				</strong>
 				<?php
-                  $customer = $objectManager->create('Magento\Customer\Model\Customer')->load($customerSessionLogin->getCustomer()->getId());
-				  echo $customer->getFirstname().' '.$customer->getLastname();
+                  //$customer = $objectManager->create('Magento\Customer\Model\Customer')->load($customerSessionLogin->getCustomer()->getId());
+				  //echo $customer->getFirstname().' '.$customer->getLastname();
 				?>
 				    <?php //echo $customerSessionLogin->getCustomer()->getId(); ?>
                     <?php // echo $customerSessionLogin->getCustomer()->getFirstname().' '.$customerSessionLogin->getCustomer()->getLastname(); ?>
