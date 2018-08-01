@@ -89,6 +89,8 @@
 		.block-authentication .actions-toolbar>.primary{float:left;}
 		.block-authentication .actions-toolbar>.secondary{margin:0 0 0 2rem;}
 		.account-list .fa{display: none;}
+		/*section-hot-deal*/
+		.section-prolist-feature .prolist-feature-middle{display: none;}
 	}
 	@media only screen and (min-width: 769px) and (max-width: 898px), print {
 		.header-container-fixed #mainMenu>li:first-child{display: none;}
@@ -166,13 +168,14 @@
 		.products-grid .product-item{margin-bottom:10px;}
 		.product-item-details{padding:0 0 20px;}
 		.product-item-name{margin:2px 0;}
-		.product-item-name, .product.name a{font-size:12px;font-weight:normal;}
+		.product-item-name, .product.name a{font-size:12px;font-weight:normal;color: #404553;}
 		.product-reviews-summary{margin:0;line-height:0;}
 		.rating-summary .rating-result[title="0%"] {display: none;}
 		.form-customer-create .actions-toolbar .secondary a.action ,
 		.form-password-forget .actions-toolbar .secondary a.action{color: #fff;}
 		.page-header .switcher .options .action.toggle:after{line-height:20px;}
-		.product-label {top: 5px;left: 8px;}
+		.product-label.sale-label{top: 5px;left: 8px;}
+		.product-label.new-label{top: 30px;left: 8px;}
 		#vigomobile-slider{display: block;}
 		#vigohome1-slide{display: none;}
 		.vicomage-slider .slick-slide[data-slick-index="0"] .text-slide .caption1{color: #c24343;text-shadow: -1px 0px 1px #fff, 2px -1px 2px rgba(0,0,0,.8);}
@@ -209,6 +212,29 @@
 		.catalog-product-view #backtotop{bottom: 114px;}
 		.zopim{position: fixed!important;top:initial!important;bottom:0!important;opacity:0.88;}
 		.catalog-product-view>.zopim{bottom: 72px!important;}
+		/*home page vigoproduct and category page*/
+		.prolist-feature-top .vigoproduct,.prolist-feature-bottom .vigoproduct,.section-hot-deal .vigoproduct{}
+		.prolist-feature-top .vigoproduct .title-page,
+		.section-prolist.section-prolist-feature .prolist-feature-bottom .vigoproduct .title-page,
+		.section-hot-deal .vigoproduct .title-page{display: block;margin: 0;padding: 0 8px;text-align: left;}
+		.prolist-feature-top .vigoproduct .title-page .subtitle,
+		.section-prolist.section-prolist-feature .prolist-feature-bottom .vigoproduct .title-page .subtitle,
+		.section-hot-deal .vigoproduct .title-page .subtitle{font-size: 16px;font-family: 'Proxima Nova','Helvetica Neue',Arial,sans-serif;text-transform: capitalize;color:#404553;
+			padding: 4px 10px 4px 2px;border-bottom: 2px solid #0584bb;}
+		.vigoproduct .title-page .subtitle::before{display: none;}
+		.vigoproduct .products-custom.products-grid,
+		.vigoproduct .products-custom .products{margin: 0;}
+		.prolist-feature-top .vigoproduct .products-custom .products{margin: 0;}
+		.prolist-feature-top .vigoproduct .products-grid .products .product-item,
+		.prolist-feature-bottom .products-grid .product-item,
+		.section-hot-deal .deal-right .products .product-item{padding: 8px 8px 12px;}
+		.prolist-feature-top .vigoproduct .products-grid .products .product-item .product-item-info,
+		.prolist-feature-bottom .products-grid .product-item .product-item-info,
+		.section-hot-deal .deal-right .products .product-item .product-item-info{padding: 8px 4px 12px;box-sizing: border-box;box-shadow: 0 0 1px rgba(0,0,0,0.2);}
+		.prolist-feature-top .vigoproduct .products-grid .products .product-item .product-item-info .product-item-details,
+		.prolist-feature-bottom .products-grid .product-item .product-item-info .product-item-details,
+		.section-hot-deal .deal-right .products .product-item .product-item-info .product-item-details{padding: 0;}
+		.section-hot-deal .deal-right{padding: 10px 15px 0;border-bottom: none;}
 		/*search page*/
 		.search.results .toolbar .toolbar-amount{position:static;}
 		/*mobile nav*/
@@ -226,6 +252,30 @@
 		.account .page-title-wrapper h1{margin:0;}
 		/*category page*/
 		.catalog-category-view .page-main .columns>.sidebar{display:none;}
+		/*prolist-feature-middle*/
+		.section-hot-deal .deal-left{display: none;}
+		.section-prolist-feature .prolist-feature-middle{display: block;margin: 0 -15px 10px;border-bottom: 1px solid #ddd;}
+		.prolist-feature-middle .deal-left{padding: 20px 0 20px;background-position: center center;background-repeat: no-repeat;background-size: cover;}
+		.prolist-feature-middle .main-title{display: none;}
+		.prolist-feature-middle .deal-left .super-title{display: inline-block;margin: 0 0 10px;padding: 4px;color: #b31414;border: 1px solid;
+			font-family: Helvetica;font-size: 26px;box-shadow: 0 0 2px rgba(179,20,20,.8);
+			text-shadow: -1px 0px 1px #fff, 2px -1px 2px rgba(0,0,0,.5);background: rgba(255,255,255,.85);}
+		.prolist-feature-middle .deal-left .deal-left-content{text-align: right;padding: 0 20px 0 0;}
+		.prolist-feature-middle .deal-left .btn-shop-now{position: static;padding: 2px 4px;text-transform: capitalize;font-style: italic;font-weight: 600;}
+		.prolist-feature-middle .deal-left .deal_price{margin: 0 0 10px;}
+		.prolist-feature-middle .deal-left .deal_price,.prolist-feature-middle .deal-left .deal_price span{display:block;}
+		.prolist-feature-middle .deal-left .deal_price .price-box>span{display: inline-block;}
+		.prolist-feature-middle .deal-left .old-price .price-label{display: none;}
+		.prolist-feature-middle .deal-left .deal_price .price{position:static!important;}
+		.prolist-feature-middle .deal-left .special-price .price-container .price{font-size: 20px;color: #333;}
+		.prolist-feature-middle .deal-left .old-price .price-container .price{font-size:14px;font-weight: 500;text-decoration: line-through;}
+		.prolist-feature-middle .deal-left .second{display: none;}
+		.prolist-feature-middle .deal-left .cp-countdown{}
+		.prolist-feature-middle .deal-left .cp-countdown>span{font-weight: 600;padding:2px 4px;border: 1px solid #333;}
+		.prolist-feature-middle .deal-left .cp-countdown span>span{color: #808080;font-weight: 500;}
+		.prolist-feature-middle .deal-left .cp-countdown>span:nth-child(1){border-radius: 5px 0 0 5px;}
+		.prolist-feature-middle .deal-left .cp-countdown>span:nth-child(3){border-radius: 0 5px 5px 0;}
+		.prolist-feature-middle .deal-left .shop_now_link{display: block;margin: 10px 0 0 0;}
 	}
 	@media only screen and (max-width: 480px), print{
 		.page-header .header-logo .logo{margin:10px 0;}

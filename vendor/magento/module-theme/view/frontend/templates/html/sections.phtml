@@ -157,8 +157,9 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             'jquery'
         ],function($){
             $(document).ready(function(){
-                
+
                 if(_isMobile()){
+                    updateDealLeft();//move hot deal left
                     var $newSections = $('.choose-sections');
                     var $customize = $('.customize-sections');
                     _renderSection('.header-menu>.nav-sections');
@@ -238,6 +239,10 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
                 function _hideChildMenu(){
                     $newSections.hide();
                     $customize.show();
+                }
+                //update hot-deal-content deal-left
+                function updateDealLeft(){
+                    $('.section-prolist-feature .prolist-feature-middle').html($('.hot-deal-content .deal-left').detach());
                 }
             });
         });
