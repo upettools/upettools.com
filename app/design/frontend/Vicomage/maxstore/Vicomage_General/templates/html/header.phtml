@@ -235,6 +235,8 @@
 		.prolist-feature-bottom .products-grid .product-item .product-item-info .product-item-details,
 		.section-hot-deal .deal-right .products .product-item .product-item-info .product-item-details{padding: 0;}
 		.section-hot-deal .deal-right{padding: 10px 15px 0;border-bottom: none;}
+		.page-products .product-item-info{box-sizing: border-box;box-shadow: 0 0 1px rgba(0,0,0,0.2);padding: 8px 4px 12px;}
+		.page-products .product-item-details{padding: 0;}
 		/*search page*/
 		.search.results .toolbar .toolbar-amount{position:static;}
 		/*mobile nav*/
@@ -252,6 +254,7 @@
 		.account .page-title-wrapper h1{margin:0;}
 		/*category page*/
 		.catalog-category-view .page-main .columns>.sidebar{display:none;}
+		.breadcrumbs .item:not(:last-child):after{margin: 0 2px;}
 		/*prolist-feature-middle*/
 		.section-hot-deal .deal-left{display: none;}
 		.section-prolist-feature .prolist-feature-middle{display: block;margin: 0 -15px 10px;border-bottom: 1px solid #ddd;}
@@ -276,6 +279,31 @@
 		.prolist-feature-middle .deal-left .cp-countdown>span:nth-child(1){border-radius: 5px 0 0 5px;}
 		.prolist-feature-middle .deal-left .cp-countdown>span:nth-child(3){border-radius: 0 5px 5px 0;}
 		.prolist-feature-middle .deal-left .shop_now_link{display: block;margin: 10px 0 0 0;}
+		/*social-login*/
+		.mfp-content{margin: 40px auto;}
+		#social-login-popup .fieldset{margin: 0 0 5px;}
+		.social-login-title h2{font-size: 20px;}
+		.mfp-content .block .block-title{font-weight:600;}
+		.social-login .form-customer-login .action.create,
+		.social-login .form-customer-create .action.back
+		{padding: 5px;font-family: 'Roboto', sans-serif;background: #4c6689;border-radius: 4px;}
+		.social-login .block .block-title::before{display: none;}
+		.social-login .form-customer-create .fieldset>.field>.label, 
+		.social-login .form-customer-create .fieldset>.fields>.field>.label{text-transform: capitalize;}
+		.social-login .form-customer-create .fieldset>.field,
+		.social-login .form-customer-create .fieldset>.fields>.field{margin: 0 0 5px;}
+		.social-login .form-customer-create .field.field-name-firstname,
+		.social-login .form-customer-create .field.field-name-lastname,
+		.social-login .form-customer-create .field.password,
+		.social-login .form-customer-create .field.confirmation{display: inline-block;width: 46%;}
+		.social-login .form-customer-create .field.field-name-lastname,
+		.social-login .form-customer-create .field.confirmation{margin:0 0 0 7%;}
+		.social-login .form-customer-create input{height: 30px;}
+		.social-login .form-customer-create input[name=is_subscribed]{height: initial;}
+		.social-login .form-customer-create input[name=is_subscribed]+label{vertical-align: text-bottom;}
+		.form-customer-create #check_email_referee,
+		.form-customer-create #update_email_referee,
+		.form-customer-create .action.captcha-reload{padding: 4px 8px;}
 	}
 	@media only screen and (max-width: 480px), print{
 		.page-header .header-logo .logo{margin:10px 0;}

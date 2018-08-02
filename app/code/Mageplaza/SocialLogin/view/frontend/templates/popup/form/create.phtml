@@ -31,6 +31,7 @@
     #check_notice.warning{background: #fdf0d5;color: #6f4400;}
     #check_notice.success{background: #e5efe5;color: #006400;}
     #check_notice>.fa{margin-right:10px;}
+    .email_referce .check_text{margin: 4px 0;font-size: 12px;line-height: 20px;}
 </style>
 <div class="social-login block-container create" style="display: none">
     <div class="social-login-title">
@@ -54,15 +55,6 @@
                                    data-validate="{required:true, 'validate-email':true}"/>
                         </div>
                     </div>
-                    <div class="field email_referce">
-                        <label for="email_referee" class="label"><span>Referee Email</span></label>
-                        <div class="control">
-                            <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="Referee Email" class="input-text" >
-                        </div>
-                        <p style="font-size: 10px;line-height: 20px;">Make sure to check the referee email address after you fill.</p>
-                        <a id="check_email_referee" href="javascript:void(0);">Check email</a>
-                        <a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
-                    </div>
                     <?php if ($block->isNewsletterEnabled()): ?>
                         <div class="field choice newsletter">
                             <input type="checkbox" class="checkbox" name="is_subscribed"
@@ -72,6 +64,15 @@
                         </div>
                         <?php echo $block->getChildHtml('customer.form.register.newsletter') ?>
                     <?php endif ?>
+                    <div class="field email_referce">
+                        <label for="email_referee" class="label"><span>Referee Email</span></label>
+                        <div class="control">
+                            <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="Referee Email" class="input-text" >
+                        </div>
+                        <p class="check_text">Make sure to check the referee email address after you fill.</p>
+                        <a id="check_email_referee" href="javascript:void(0);">Check email</a>
+                        <a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
+                    </div>
                     <?php $_dob = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
                     <?php if ($_dob->isEnabled()): ?>
                         <?php echo $_dob->setDate($block->getFormData()->getDob())->toHtml() ?>
