@@ -11,7 +11,7 @@
                     <item name="sortOrder" xsi:type="number">333</item>
                     <item name="dataType" xsi:type="string">string</item>
                     <item name="formElement" xsi:type="string">textarea</item>
-                    <item name="label" translate="true" xsi:type="string">Recommend Products Sku(More than one by(,))</item>
+                    <item name="label" translate="true" xsi:type="string">Recommend Products Sku(More(,))</item>
                 </item>
             </argument>
         </field>
