@@ -71,7 +71,7 @@
 		?>
 		<div class="vigoproduct customize_popular">
 			<div class="title-page">
-				<h2 class="subtitle">Most Popular</h2>
+				<h2 class="subtitle"><?php echo __('Most Popular') ?></h2>
 			</div>
 			<div class="products wrapper products-custom grid products-grid">
 				<div class="products list items product-items clearfix" id="productslidepopular">
@@ -80,13 +80,14 @@
 							$objectManager =  \Magento\Framework\App\ObjectManager::getInstance();   
 							$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');			
 							$productRepository = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
+							$productCurrency = $objectManager->get('\Magento\Framework\Pricing\Helper\Data');
 							$_productRecommend = $productRepository->get("".$sku."");
 							$_popularNameOrigin = $_productRecommend->getName();
 							$_popularName = substr($_popularNameOrigin,0,46).'...';
 							$_popularPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
 							$_popularImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
-							$_popularImageSrc = 'http://127.0.0.1/upettools.com/pub/static/frontend/Vicomage/maxstore/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg';
 							$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html';
+
 						?>
 						<div class="item product product-item">
 							<div class="product-item-info">
@@ -106,7 +107,7 @@
 									<div class="price-box price-final_price" data-role="priceBox">
 										<span class="price-container price-final_price tax weee">
 											<span id="product-price-3319" data-price-amount="1" data-price-type="finalPrice" class="price-wrapper ">
-												<span class="price"><?php echo $_popularPrice; ?></span>   
+												<span class="price"><?php echo $productCurrency->currency($_popularPrice, true, false); ?></span>   
 											</span>
 										</span>
 									</div>
@@ -115,7 +116,7 @@
 						</div>
 					<?php endforeach;?>
 				</div>
-			</div<
+			</div>
 		</div>
     </div>
 	<script>
