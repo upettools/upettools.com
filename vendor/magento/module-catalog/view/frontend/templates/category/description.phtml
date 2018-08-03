@@ -24,7 +24,33 @@
 	.vigoproduct.customize_popular{}
 	.vigoproduct.customize_popular .products-grid .product-item:nth-child(3n+1){clear:none;}
 	@media only screen and (min-width: 769px), print{
-		.vigoproduct.customize_popular .products-grid .product-item{width: 25%;}
+		.vigoproduct.customize_popular .products-grid .product-item{width: 20%;}
+		.customize_popular.vigoproduct .title-page{margin: 0;text-align: left;}
+		.customize_popular.vigoproduct .title-page .subtitle{text-transform: capitalize;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+			padding: 4px 10px 4px 2px;border-bottom: 2px solid #0584bb;}
+		.customize_popular.vigoproduct .title-page .subtitle:before{display:none;}
+		.customize_popular.vigoproduct .slick-arrow{width: 40px; height: 70px;}
+		.customize_popular.vigoproduct .slick-prev{left: -35px;}
+		.customize_popular.vigoproduct .slick-next{right: -35px;}
+		.customize_popular.vigoproduct .product-item .product-item-info{position: relative;}
+		.customize_popular.vigoproduct .product-item .product-item-details{
+			opacity: 0;visibility: hidden;position: absolute;background: rgba(76, 102, 137,.9);border-radius: 2px 2px 0 0;
+			right: 0;left: 0;bottom: 0;z-index: 2;padding: 0;margin: 0;border-top: 0;visibility: hidden;
+			transition: all .2s ease 0s;-webkit-transition: all .2s ease 0s;
+			-moz-transition: all .2s ease 0s;-ms-transition: all .2s ease 0s;-o-transition: all .2s ease 0s;
+			transform: translate(0px,50px);-webkit-transform: translate(0px,50px);
+			-moz-transform: translate(0px,50px);-ms-transform: translate(0px,50px);-o-transform: translate(0px,50px);}
+		.customize_popular.vigoproduct .product-item:hover .product-item-details{
+			opacity: 1;visibility: visible;
+			transition: all .2s ease 0s;-webkit-transition: all .2s ease 0s;
+			-moz-transition: all .2s ease 0s;-ms-transition: all .2s ease 0s;-o-transition: all .2s ease 0s;
+			transform: translate(0px,0px);-webkit-transform: translate(0px,0px);
+			-moz-transform: translate(0px,0px);-ms-transform: translate(0px,0px);-o-transform: translate(0px,0px);
+			display:block;}
+		.customize_popular.vigoproduct .product-item .product-item-details .product-item-link,
+		.customize_popular.vigoproduct .product-item .product-item-details .price{color:#fff;}
+		.customize_popular.vigoproduct .product-item .product-item-details .product-item-link{font-size: 12px;}
+		.customize_popular.vigoproduct .product-item .product-item-details .product-item-link:hover{text-decoration: none;}
 	}
 	@media only screen and (max-width: 768px), print{
 		.customize_popular.vigoproduct .title-page{display: block;margin: 0;padding: 0 8px;text-align: left;}
@@ -41,7 +67,6 @@
         <?php /* @escapeNotVerified */ //echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $up_category_recommend_product, 'up_category_recommend_product') ?>
 		<?php 
 			$skus = $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $up_category_recommend_product, 'up_category_recommend_product');
-			//$skus = 'BT1005,BT1006,BT1007,BT1009';
 			$skuArr = explode(',',$skus);
 		?>
 		<div class="vigoproduct customize_popular">
@@ -57,30 +82,31 @@
 							$productRepository = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
 							$_productRecommend = $productRepository->get("".$sku."");
 							$_popularNameOrigin = $_productRecommend->getName();
-							$_popolarName = substr($_popularNameOrigin,0,46).'...';
-							$_popolarPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
-							$_popolarImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
+							$_popularName = substr($_popularNameOrigin,0,46).'...';
+							$_popularPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
+							$_popularImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
+							$_popularImageSrc = 'http://127.0.0.1/upettools.com/pub/static/frontend/Vicomage/maxstore/en_US/Magento_Catalog/images/product/placeholder/small_image.jpg';
 							$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html';
 						?>
 						<div class="item product product-item">
 							<div class="product-item-info">
 								<div class="product-img-hover">
-									<a title="<?php  echo $_popolarName; ?>" href="<?php echo $_popularLink?>" 
+									<a title="<?php  echo $_popularName; ?>" href="<?php echo $_popularLink?>" 
 										class="product photo product-item-photo" tabindex="-1">
-										<img class="product-image-photo default_image" src="<?php echo $_popolarImageSrc; ?>" />
+										<img class="product-image-photo default_image" src="<?php echo $_popularImageSrc; ?>" />
 									</a>
 								</div>
 								<div class="product details product-item-details products-textlink clearfix">
 									<strong class="product name product-item-name">
-										<a class="product-item-link" style="text-transform:none;" title="<?php echo $_popolarName;?>"
+										<a class="product-item-link" style="text-transform:none;" title="<?php echo $_popularName;?>"
 											href="<?php echo $_popularLink; ?>">
-											<?php echo $_popolarName;?>
+											<?php echo $_popularName;?>
 										</a>
 									</strong>
 									<div class="price-box price-final_price" data-role="priceBox">
 										<span class="price-container price-final_price tax weee">
 											<span id="product-price-3319" data-price-amount="1" data-price-type="finalPrice" class="price-wrapper ">
-												<span class="price"><?php echo $_popolarPrice; ?></span>   
+												<span class="price"><?php echo $_popularPrice; ?></span>   
 											</span>
 										</span>
 									</div>
@@ -102,12 +128,12 @@
 				arrows: true,
 				infinite: false,
 				speed: 300,
-				slidesToShow: 4,
+				slidesToShow: 5,
 				slidesToScroll: 2,
 				responsive: [
 					{
 					breakpoint: 1200,
-					settings: {slidesToShow: 4}
+					settings: {slidesToShow: 5}
 					},
 					{
 					breakpoint: 992,
