@@ -19,25 +19,118 @@
         <?php /* @escapeNotVerified */ echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?>
     </div>
 <?php endif; ?>
-
+<style>
+	/*customize_popular*/
+	.vigoproduct.customize_popular{}
+	.vigoproduct.customize_popular .products-grid .product-item:nth-child(3n+1){clear:none;}
+	@media only screen and (min-width: 769px), print{
+		.vigoproduct.customize_popular .products-grid .product-item{width: 25%;}
+	}
+	@media only screen and (max-width: 768px), print{
+		.customize_popular.vigoproduct .title-page{display: block;margin: 0;padding: 0 8px;text-align: left;}
+		.customize_popular.vigoproduct .title-page .subtitle{
+			font-size: 16px;font-family: 'Proxima Nova','Helvetica Neue',Arial,sans-serif;text-transform: capitalize;
+    		color: #404553;padding: 4px 10px 4px 2px;border-bottom: 2px solid #0584bb;}
+		.customize_popular.vigoproduct .products-grid .products .product-item{padding: 8px 8px 12px;}
+		.slick-prev, .slick-next,.slick-slider:hover .slick-prev, .slick-slider:hover .slick-next {display: none!important;}
+		.customize_popular.vigoproduct .products-grid .product-item:nth-child(2n+1){clear: none;}
+	}
+</style>
 <?php if ($up_category_recommend_product = $block->getCurrentCategory()->getUpCategoryRecommendProduct()): ?>
     <div class="category-description">
         <?php /* @escapeNotVerified */ //echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $up_category_recommend_product, 'up_category_recommend_product') ?>
 		<?php 
 			$skus = $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $up_category_recommend_product, 'up_category_recommend_product');
+			//$skus = 'BT1005,BT1006,BT1007,BT1009';
 			$skuArr = explode(',',$skus);
 		?>
-		 <?php foreach ($skuArr as $sku):?>
-                <?php 
-				    $objectManager =  \Magento\Framework\App\ObjectManager::getInstance();   
-					$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');			
-					$productRepository = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
-					$_productRecommend = $productRepository->get("".$sku."");
-					echo $_productRecommend->getName().'<br/>';
-					echo $_productRecommend->getFinalPrice().'<br/>';
-					echo $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage().'<br/>';
-					echo $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html'.'<br/>';
-				?>
-            <?php endforeach;?>
+		<div class="vigoproduct customize_popular">
+			<div class="title-page">
+				<h2 class="subtitle">Most Popular</h2>
+			</div>
+			<div class="products wrapper products-custom grid products-grid">
+				<div class="products list items product-items clearfix" id="productslidepopular">
+					<?php foreach ($skuArr as $sku):?>
+					<?php 
+							$objectManager =  \Magento\Framework\App\ObjectManager::getInstance();   
+							$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');			
+							$productRepository = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
+							$_productRecommend = $productRepository->get("".$sku."");
+							$_popularNameOrigin = $_productRecommend->getName();
+							$_popolarName = substr($_popularNameOrigin,0,46).'...';
+							$_popolarPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
+							$_popolarImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
+							$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html';
+						?>
+						<div class="item product product-item">
+							<div class="product-item-info">
+								<div class="product-img-hover">
+									<a title="<?php  echo $_popolarName; ?>" href="<?php echo $_popularLink?>" 
+										class="product photo product-item-photo" tabindex="-1">
+										<img class="product-image-photo default_image" src="<?php echo $_popolarImageSrc; ?>" />
+									</a>
+								</div>
+								<div class="product details product-item-details products-textlink clearfix">
+									<strong class="product name product-item-name">
+										<a class="product-item-link" style="text-transform:none;" title="<?php echo $_popolarName;?>"
+											href="<?php echo $_popularLink; ?>">
+											<?php echo $_popolarName;?>
+										</a>
+									</strong>
+									<div class="price-box price-final_price" data-role="priceBox">
+										<span class="price-container price-final_price tax weee">
+											<span id="product-price-3319" data-price-amount="1" data-price-type="finalPrice" class="price-wrapper ">
+												<span class="price"><?php echo $_popolarPrice; ?></span>   
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php endforeach;?>
+				</div>
+			</div<
+		</div>
     </div>
+	<script>
+		require([
+			'jquery',
+			'slick'
+		],function($){
+			$("#productslidepopular").slick({
+				dots: false,
+				arrows: true,
+				infinite: false,
+				speed: 300,
+				slidesToShow: 4,
+				slidesToScroll: 2,
+				responsive: [
+					{
+					breakpoint: 1200,
+					settings: {slidesToShow: 4}
+					},
+					{
+					breakpoint: 992,
+					settings: {slidesToShow: 4}
+					},
+					{
+					breakpoint: 768,
+					settings: {slidesToShow: 2}
+					},
+					{
+					breakpoint: 640,
+					settings: {slidesToShow: 2}
+					},
+					{
+					breakpoint: 480,
+					settings: {slidesToShow: 2}
+					},
+					{
+					breakpoint: 360,
+					settings: {slidesToShow: 2}
+					}
+				]
+			});
+		});
+	</script>
 <?php endif; ?>
