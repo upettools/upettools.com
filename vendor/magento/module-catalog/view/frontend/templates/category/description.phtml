@@ -64,11 +64,17 @@
 </style>
 <?php if ($up_category_recommend_product = $block->getCurrentCategory()->getUpCategoryRecommendProduct()): ?>
     <div class="category-description">
-        <?php /* @escapeNotVerified */ //echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $up_category_recommend_product, 'up_category_recommend_product') ?>
+	
 		<?php 
 			$skus = $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $up_category_recommend_product, 'up_category_recommend_product');
 			$skuArr = explode(',',$skus);
+			$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+			$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');			
+			$productRepository = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
+			$productCurrency = $objectManager->get('\Magento\Framework\Pricing\Helper\Data');
+            $productExSku = $objectManager->get('Magento\Catalog\Model\Product');
 		?>
+		
 		<div class="vigoproduct customize_popular">
 			<div class="title-page">
 				<h2 class="subtitle"><?php echo __('Most Popular') ?></h2>
@@ -76,45 +82,44 @@
 			<div class="products wrapper products-custom grid products-grid">
 				<div class="products list items product-items clearfix" id="productslidepopular">
 					<?php foreach ($skuArr as $sku):?>
-					<?php 
-							$objectManager =  \Magento\Framework\App\ObjectManager::getInstance();   
-							$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');			
-							$productRepository = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
-							$productCurrency = $objectManager->get('\Magento\Framework\Pricing\Helper\Data');
-							$_productRecommend = $productRepository->get("".$sku."");
-							$_popularNameOrigin = $_productRecommend->getName();
-							$_popularName = substr($_popularNameOrigin,0,46).'...';
-							$_popularPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
-							$_popularImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
-							$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html';
-
-						?>
-						<div class="item product product-item">
-							<div class="product-item-info">
-								<div class="product-img-hover">
-									<a title="<?php  echo $_popularName; ?>" href="<?php echo $_popularLink?>" 
-										class="product photo product-item-photo" tabindex="-1">
-										<img class="product-image-photo default_image" src="<?php echo $_popularImageSrc; ?>" />
-									</a>
-								</div>
-								<div class="product details product-item-details products-textlink clearfix">
-									<strong class="product name product-item-name">
-										<a class="product-item-link" style="text-transform:none;" title="<?php echo $_popularName;?>"
-											href="<?php echo $_popularLink; ?>">
-											<?php echo $_popularName;?>
+					
+						<?php if($productExSku->getIdBySku($sku)):?>
+							  <?php 
+									$_productRecommend = $productRepository->getById($productExSku->getIdBySku($sku));
+									$_popularNameOrigin = $_productRecommend->getName();
+									$_popularName = substr($_popularNameOrigin,0,46).'...';
+									$_popularPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
+									$_popularImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
+									$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html';
+							  ?>
+						
+							<div class="item product product-item">
+								<div class="product-item-info">
+									<div class="product-img-hover">
+										<a title="<?php  echo $_popularName; ?>" href="<?php echo $_popularLink?>" 
+											class="product photo product-item-photo" tabindex="-1">
+											<img alt="<?php echo $_popularName; ?>" class="product-image-photo default_image" src="<?php echo $_popularImageSrc; ?>" />
 										</a>
-									</strong>
-									<div class="price-box price-final_price" data-role="priceBox">
-										<span class="price-container price-final_price tax weee">
-											<span id="product-price-3319" data-price-amount="1" data-price-type="finalPrice" class="price-wrapper ">
-												<span class="price"><?php echo $productCurrency->currency($_popularPrice, true, false); ?></span>   
+									</div>
+									<div class="product details product-item-details products-textlink clearfix">
+										<strong class="product name product-item-name">
+											<a class="product-item-link" style="text-transform:none;" title="<?php echo $_popularName;?>"
+												href="<?php echo $_popularLink; ?>">
+												<?php echo $_popularName;?>
+											</a>
+										</strong>
+										<div class="price-box price-final_price" data-role="priceBox">
+											<span class="price-container price-final_price tax weee">
+												<span id="product-price-3319" data-price-amount="1" data-price-type="finalPrice" class="price-wrapper ">
+													<span class="price"><?php echo $productCurrency->currency($_popularPrice, true, false); ?></span>   
+												</span>
 											</span>
-										</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					<?php endforeach;?>
+					    <?php endif; ?>
+				<?php endforeach;?>
 				</div>
 			</div>
 		</div>
