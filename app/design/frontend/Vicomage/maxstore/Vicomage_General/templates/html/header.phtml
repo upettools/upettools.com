@@ -73,6 +73,20 @@
 			background: linear-gradient(to bottom,#0f688e,#0f80af);
 		}
 		.header-container-fixed #fixedWholesale{display:none;}
+		/*go quickly*/
+		.header-goQuickly{}
+		.header-goQuickly .quicklyBox{position: relative;margin: 0 0 0 -40px;}
+		.header-goQuickly .quicklyContent{position: absolute;left: 0;top: 0;width: 100%;font-size:12px;
+			border: solid 1px #ddd;border-top: none;background: rgba(247, 247, 247, .9);border-radius: 0 0 6px 6px;
+			box-shadow: 0 5px 8px rgba(0,0,0,.15);overflow: hidden;}
+		.quicklyContent .title{display: inline-block;vertical-align: middle;background: #d2d2d2;/*#eee;*/font-weight:bold;color: #444;padding: 9px 10px;}
+		.quicklyContent .title .fa{display: inline-block;vertical-align: text-bottom;font-size: 16px;margin-left: 6px;color: #aaa; line-height: 1;}
+		.quicklyContent .links{display: inline-block;vertical-align: middle;list-style: none;padding: 0;margin: 0;}
+		.quicklyContent .links li{display: inline-block;margin: 0;vertical-align: middle;padding: 9px 10px;position: relative;}
+		.quicklyContent .links li:not(:first-child):before{content: '';display: block;width: 1px;height: 16px;background-color: #b9b9b9;position: absolute;left: -1px;top: 50%;margin-top: -8px;}
+		.quicklyContent .links li a{color:#666;}
+		.quicklyContent .links li a:hover{color: #4c6689;text-decoration: underline;}
+		.header-container-fixed .header-goQuickly .quicklyContent{background: #fff;box-shadow: 0 1px 2px rgba(0,0,0,.1);border-top: solid 1px rgba(221, 221, 221,.2);}
 		#backtotop{bottom:40px;}
 		.page.messages{text-align:center;}
 		.message>*:first-child:before{
@@ -109,6 +123,7 @@
 		.account-list a .fa{display: block;margin-bottom: 4px;font-size: 24px;color:#0584bb;}
 		.account-list.notLogin,.account-list.hasLogin{display:flex;-webkit-box-pack: center;justify-content: center;}
 		.account-list.notLogin a,.account-list.hasLogin a{margin: 0 15px;text-align: center;}
+		.header-goQuickly{display: none;}
 		/*switcher*/
 		.nav-sections .switcher:before,
 		.nav-sections .switcher:after{display: table;content: " ";}
@@ -441,6 +456,18 @@
 				</div>
 			</div>
 			<a id="fixedWholesale" href="/dropshipping-and-wholesale">Wholesale and Dropshipping</a>
+		</div>
+		<div class="header-goQuickly">
+			<div class="container">
+				<div class="quicklyBox">
+					<div class="quicklyContent">
+						<div class="title">Go quickly to <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></div>
+						<ul class="links">
+							<li><a href="javascript:void(0);"></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
