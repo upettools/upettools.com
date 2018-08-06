@@ -154,6 +154,12 @@
         <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
     </div>
 </form>
+<!-- new modal -->
+<style>
+.remove_confirm{z-index: 900;}
+.remove_confirm+.modals-overlay{z-index: 899;}
+.remove_confirm .modal-footer button:not(:first-child){margin-left:5px;}
+</style>
 <script>
     require(
         [
@@ -169,6 +175,78 @@
             if($('#shopping-cart-table tbody.item').length > 2){
                 $('#viewAllItem').show();
             }
+            jQuery(document).ready(function(){
+                $('#shopping-cart-table .action-delete').click(function(){
+                    var $del = $(this);
+                    if(!$del.hasClass('recover')){
+                        var _data_post = $del.attr('data-post-attr');
+                        var _m = '_remove';
+                        var _c = 'Are you sure you would like to remove this item from the shopping cart?';
+                        var _f = '<button class="action-secondary action-dismiss" type="button" data-role="action"><span>Cancel</span></button>' +
+                                    '<button class="action-primary action-accept" type="button" data-role="action"><span>OK</span></button>';
+                        var _newRemove = new newModal(_m, _c, _f);
+                        _newRemove.show();
+                        $('.' + _m).on('click','.action-accept',function(){
+                            _newRemove.hide();
+                            _newRemove.destroy();
+                            $del.attr({'data-post': _data_post});
+                            $del.addClass('recover').click();
+                        }).on('click','.action-close,.action-dismiss',function(){
+                            _newRemove.hide();
+                            _newRemove.destroy();
+                        });
+                    }
+                });
+            });
+            /**
+            *   new object to show modal
+            *   mark: className
+            *   content: modal content
+            *   footer: footer button
+            **/
+            function newModal(mark,content,footer){
+                this.mark = mark;
+                this.content = content;
+                this.footer = footer;
+                this.init = function(){
+                    var _html = 
+                                '<aside class="modal-popup remove_confirm '+ mark +'" tabindex="0">'+
+                                    '<div class="modal-inner-wrap" data-role="focusable-scope">' + 
+                                        '<header class="modal-header">' +
+                                            '<button class="action-close" data-role="closeBtn" type="button"><span>Close</span></button>' +
+                                        '</header>' +
+                                        '<div class="modal-content" data-role="content"><div>' + content + '</div></div>' +
+                                        '<footer class="modal-footer">' + footer + '</footer>' +
+                                    '</div>' +
+                                '</aside>';
+                    $('.modals-wrapper').append(_html);
+                };
+                this.show = function(){
+                    this.init();
+                    var $el = $('.' + mark);
+                    $el.after('<div class="modals-overlay"></div>');
+                    if(!$('body').hasClass('_has-modal')){
+                        $('body').addClass('_has-modal');//unknown mark
+                    }
+                    setTimeout(function(){
+                        $el.addClass('_show');
+                    },200);
+                };
+                this.hide = function(){
+                    var $el = $('.' + mark);
+                    $el.removeClass('_show');
+                    setTimeout(function(){
+                        $el.next('.modals-overlay').fadeOut();
+                    },400);
+                    $('body').removeClass('_has-modal');//unknown mark
+                };
+                this.destroy = function(){
+                    var $el = $('.' + mark);
+                    $el.next('.modals-overlay').remove();
+                    $el.remove();
+                };
+            }
+            
         }
     );
 </script>

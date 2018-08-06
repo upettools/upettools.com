@@ -8,10 +8,10 @@
 
 /** @var $block \Magento\Checkout\Block\Cart\Item\Renderer\Actions\Remove */
 ?>
-<a href="#"
+<a href="javascript:void(0);"
    title="<?php echo $block->escapeHtml(__('Remove item')); ?>"
    class="action action-delete"
-   data-post='<?php /* @escapeNotVerified */ echo $block->getDeletePostJson(); ?>'>
+   data-post-attr='<?php /* @escapeNotVerified */ echo $block->getDeletePostJson(); ?>'>
     <span>
         <?php /* @escapeNotVerified */ echo __('Remove item')?>
     </span>
