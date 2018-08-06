@@ -462,9 +462,7 @@
 				<div class="quicklyBox">
 					<div class="quicklyContent">
 						<div class="title">Go quickly to <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></div>
-						<ul class="links">
-							<li><a href="javascript:void(0);"></a></li>
-						</ul>
+						<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('quickly-links')->toHtml();?>			
 					</div>
 				</div>
 			</div>
