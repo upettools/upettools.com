@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require 'config_export.php';
 
 error_reporting(E_ALL | E_STRICT);
 header("Content-Type: text/html;charset=utf-8");
