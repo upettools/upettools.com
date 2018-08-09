@@ -20,18 +20,18 @@
  */
 ?>
 <style>
-    #check_email_referee,#update_email_referee{    
+    #check_email_referee_1,#update_email_referee_1{    
         display: inline-block;
         background: #4c6689;
         color: #fff;
-        padding: 10px 20px;
-        margin: 2px 0 0 0;
+        padding: 4px 8px;
+        margin: 10px 0 0 0;
         border-radius: 2px;}
-    #check_notice{ display: inline-block;margin: 10px 0 0 0;padding: 10px 20px;}
-    #check_notice.warning{background: #fdf0d5;color: #6f4400;}
-    #check_notice.success{background: #e5efe5;color: #006400;}
-    #check_notice>.fa{margin-right:10px;}
-    .email_referce .check_text{margin: 4px 0;font-size: 12px;line-height: 20px;}
+    #check_notice_1{ display: block;margin: 10px 0 0 0;padding: 4px 8px;}
+    #check_notice_1.warning{background: #fdf0d5;color: #6f4400;}
+    #check_notice_1.success{background: #e5efe5;color: #006400;}
+    #check_notice_1>.fa{margin-right:10px;}
+    .email_referce_1 .check_text_1{margin: 4px 0;font-size: 12px;line-height: 20px;}
 </style>
 <div class="social-login block-container create" style="display: none">
     <div class="social-login-title">
@@ -64,14 +64,14 @@
                         </div>
                         <?php echo $block->getChildHtml('customer.form.register.newsletter') ?>
                     <?php endif ?>
-                    <div class="field email_referce">
+                    <div class="field email_referce_1">
                         <label for="email_referee" class="label"><span>Referee Email</span></label>
                         <div class="control">
                             <input type="email" name="email_referee" autocomplete="email_referee" id="email_referee" value="" title="Referee Email" class="input-text" >
                         </div>
-                        <p class="check_text">Make sure to check the referee email address after you fill.</p>
-                        <a id="check_email_referee" href="javascript:void(0);">Check email</a>
-                        <a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
+                        <p class="check_text_1">Fill in the referrer's email address and both of you will get reward points.</p>
+                        <a id="check_email_referee_1" href="javascript:void(0);">Check email</a>
+                        <a id="update_email_referee_1" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice_1"></span>
                     </div>
                     <?php $_dob = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
                     <?php if ($_dob->isEnabled()): ?>
@@ -246,30 +246,30 @@
                         $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
                     ?>
                     setSocialFormCustomize();
-                    $('#check_email_referee').click(function(){
-                        if(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test($('#email_referee').val())){
+                    $('#check_email_referee_1').click(function(){
+                        if(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test($('.email_referce_1 #email_referee').val())){
                         if($.ajax){
                             $.ajax({
                                 type: 'get',
                                 async: true,
                                 url: "<?php echo $storeManager->getStore()->getBaseUrl().'points/verification/emailReferee' ?>",
-                                data: {email_referee:$('#email_referee').val()},
+                                data: {email_referee:$('.email_referce_1 #email_referee').val()},
                                 dataType: "json",
                                 beforeSend: function(){
-                                    $('#check_notice').removeClass('success').addClass('warning').html('<i class="fa fa-spin fa-spinner" aria-hidden="true"></i>Checking now...');
+                                    $('#check_notice_1').removeClass('success').addClass('warning').html('<i class="fa fa-spin fa-spinner" aria-hidden="true"></i>Checking now...');
                                 },
                                 complete: function(){},
                                 success: function(data){
                                     var _status = data.status;
                                     if(_status == '1'){
-                                        $('#check_notice').removeClass('warning').addClass('success').html('<i class="fa fa-check-circle" aria-hidden="true"></i>Congratulations, email address verification passed!');
-                                        $('#email_referee').attr('readonly','readonly');
-                                        $('#check_email_referee').addClass('hidden');$('#update_email_referee').removeClass('hidden');
+                                        $('#check_notice_1').removeClass('warning').addClass('success').html('<i class="fa fa-check-circle" aria-hidden="true"></i>Congratulations, email address verification passed!');
+                                        $('.email_referce_1 #email_referee').attr('readonly','readonly');
+                                        $('#check_email_referee_1').addClass('hidden');$('#update_email_referee_1').removeClass('hidden');
                                     }else if(_status == '0'){
-                                        $('#check_notice').removeClass('success').addClass('warning')
+                                        $('#check_notice_1').removeClass('success').addClass('warning')
                                         .html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Unfortunately, the email address verification failed!');
                                     }else{
-                                        $('#check_notice').removeClass('success').addClass('warning')
+                                        $('#check_notice_1').removeClass('success').addClass('warning')
                                         .html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Unfortunately, the email address verification function has gone wrong!!!');
                                     }
                                 },
@@ -282,28 +282,46 @@
                                     window.alert("error : your browser not supported ajax now !");
                             }
                         }else{
-                            $('#check_notice').removeClass('success').addClass('warning')
+                            $('#check_notice_1').removeClass('success').addClass('warning')
                             .html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please check the email address !');
                         }
                     }); 
-                    $('#update_email_referee').click(function(){
+                    $('#update_email_referee_1').click(function(){
                         $(this).addClass('hidden');
-                        $('#check_email_referee').removeClass('hidden');
-                        $('#email_referee').removeAttr('readonly');
+                        $('#check_email_referee_1').removeClass('hidden');
+                        $('.email_referce_1 #email_referee').removeAttr('readonly');
                     });
                     $('#button-create-social').click(function(event){
                         var event = event || window.event;
                         event.preventDefault(); // Compatible standard Browsers
                         window.event.returnValue = false; // Compatible IE6~8
                         saveSoialFormCustomize();
-                        if($('#email_referee').val().length > 0 && !$('#check_email_referee').hasClass('hidden')){ //error referee email
-                            event.preventDefault();
-                            window.event.returnValue = false;
-                            $('#email_referee').val('').focus();
-                        }else if($('#email_referee').val().length <= 0 || $('#check_email_referee').hasClass('hidden')){
+                        //user has fill referee email, but not validate or validate fail
+                        if($('.email_referce_1 #email_referee').val().length > 0 && !$('#check_email_referee_1').hasClass('hidden')){ //error referee email
+
+                            $('#check_notice_1').removeClass('success').addClass('warning').html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please check the email address !');
+                            _createDevTest("已填写"+ $('.email_referce_1 #email_referee').val() +"， 未通过验证");
+                            $('.email_referce_1 #email_referee').val('');
+                            //1,user do not fill email or 2,referee email validate success
+                        }else if($('.email_referce_1 #email_referee').val().length <= 0 || $('#check_email_referee_1').hasClass('hidden')){
+
                             //$('#social-form-create').submit();
+                            if($('.email_referce_1 #email_referee').val().length <= 0){
+                                _createDevTest("未填写推荐人邮件");
+                            }else if($('#check_email_referee_1').hasClass('hidden')){
+                                _createDevTest("已填写"+ $('.email_referce_1 #email_referee').val() +"， 已通过验证");
+                            }
                         }
                     });
+                    /**
+                    *   dev test
+                    **/
+                    var _createDev = false;
+                    function _createDevTest(text){
+                        if( _createDev && window.console.log ){
+                            window.console.log(text);
+                        }
+                    }
                     /**
                     *   save first name lastname email_address
                     */

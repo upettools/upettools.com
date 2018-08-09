@@ -18,17 +18,37 @@
 <?php /* Extensions placeholder */ ?>
 <?php echo $block->getChildHtml('customer.form.register.extra')?>
 <style>
-    .field.notice{ border: 1px solid #ea9246;padding: 10px 8px;font-size: 14px;font-family: Gadugi;}
+    .form-create-account input{height:30px;}
+    .form-create-account input[type="checkbox"]{height: initial;}
+    .form .fieldset{margin: 0 0 20px;}
+    .form .field input[type="email"]{width: 46%;}
+    .form .field.field-name-firstname,.form .field.field-name-lastname,
+    .form .field.password,.form .field.confirmation,
+    .form .field.captcha input.input-text{display: inline-block;width: 46%;vertical-align: top;}
+    .form .field.field-name-lastname,.form .field.confirmation{margin-left:7%;}
+    .field.notice{ border: 1px solid #ea9246;padding: 4px 8px;font-size: 14px;font-family: Gadugi;}
     #show_email_referce,#check_email_referee,#update_email_referee,#hide_email_referce{ display: inline-block;background: #4c6689;
     color: #fff;padding: 10px 20px;border-radius: 2px;} 
     #show_email_referce{margin: 5px 0;}
-    #hide_email_referce{background: #333;margin: 5px 5px 5px 0;padding: 4px 10px;border-radius: 4px;}
-    
+    #hide_email_referce{background: #9c9c9c;margin: 5px 5px 5px 0;padding: 4px 8px;border-radius: 2px;}
     #check_email_referee,#update_email_referee{margin: 10px 0 0 0;}
     #check_notice{ display: inline-block;margin-left: 30px;padding: 10px 20px;}
     #check_notice.warning{background: #fdf0d5;color: #6f4400;}
     #check_notice.success{background: #e5efe5;color: #006400;}
     #check_notice>.fa{margin-right:10px;}
+    @media only screen and (max-width: 768px) , print{
+        .form-create-account .fieldset>.legend{margin: 0;}
+        .form-create-account .fieldset>.field{margin: 0 0 10px;}
+        .form .field.field-name-lastname{margin: 0 0 0 7%;}
+        .form-create-account .fieldset{margin: 0;}
+        .form .field.password{display: block; width: 80%;}
+        .form .field input[type="email"]{width: 80%;}
+        .form .field.confirmation{margin-left: 0;}
+        .fieldset>.field>.label, .fieldset>.fields>.field>.label{margin: 0 0 2px;}
+        #show_email_referce,#check_email_referee,#update_email_referee,#hide_email_referce{padding: 4px 8px;}
+        #check_notice{display: block;margin: 10px 0 0 0;padding: 10px 8px;}
+
+    }
 </style>
 <form class="form create account form-create-account" action="<?php echo $block->escapeUrl($block->getPostActionUrl()) ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
     <?php /* @noEscape */ echo $block->getBlockHtml('formkey'); ?>
@@ -145,14 +165,18 @@
     <fieldset class="fieldset create account" data-hasrequired="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('* Required Fields')) ?>">
         <legend class="legend"><span><?php echo $block->escapeHtml(__('Sign-in Information')) ?></span></legend><br>
 		
-		 <div class="field notice">
-            <p>Notice: if someone has recommended you to register 'upettools.com', 
-            you can help him (or her) to get points by click the below button to fill his(or her) email address,
-            and also you can recommend others to get your points.<br/>
-                <span style="color:#0373bd;font-style: italic;">Make sure to check the referee email address.<br/>And we will verify your information and recharge points to your account within two business days.</span>
+        <div class="field required">
+            <label for="email_address" class="label"><span><?php echo $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input type="email" name="email" autocomplete="email" id="email_address" value="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
+            </div>
+        </div>
+        <div class="field notice">
+            <p><b>Get Reward Points.</b><p>Notice: Fill in the referrer's email address and both of you will get reward points.</p>
+                <span class="hidden" style="color:#0373bd;font-style: italic;">Make sure to check the referee email address.<br/>And we will verify your information and recharge points to your account within two business days.</span>
             </p>
             <a id="show_email_referce" href="javascript:void(0);">FILL REFERCE EMAIL</a>
-            <div>
+            <div class="hidden">
                 <a id="hide_email_referce" class="hidden" href="javascript:void(0);">NO REFERCE EMAIL</a><span id="hide_email_text" class="hidden">If you don't have referee email, please click button to hide it.</span>
             </div>
             <div class="field email_referce hidden">
@@ -165,13 +189,6 @@
                 <a id="check_email_referee" href="javascript:void(0);">Check email</a><a id="update_email_referee" class="hidden" href="javascript:void(0);">Edit</a><span id="check_notice"></span>
             </div>
          </div>
-		
-        <div class="field required">
-            <label for="email_address" class="label"><span><?php echo $block->escapeHtml(__('Email')) ?></span></label>
-            <div class="control">
-                <input type="email" name="email" autocomplete="email" id="email_address" value="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?php echo $this->helper(\Magento\Framework\EscapeHelper::class)->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
-            </div>
-        </div>
         <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
             <label for="password" class="label"><span><?php echo $block->escapeHtml(__('Password')) ?></span></label>
             <div class="control">
@@ -241,18 +258,18 @@ require([
     }).find('input:text').attr('autocomplete', 'off');
     setFormCustomize();
     //show referce email
-    $('#show_email_referce').click(function(){ $(this).addClass('hidden'); $('#hide_email_referce,#hide_email_text').removeClass('hidden');$('.field.email_referce').toggleClass('hidden');});
+    $('#show_email_referce').click(function(){ $(this).addClass('hidden'); $('#check_email_referee,#hide_email_referce,#hide_email_text').removeClass('hidden');$('.field.email_referce').toggleClass('hidden');});
     $('#hide_email_referce').click(function(){
         //init
         $(this).addClass('hidden');
         $('#hide_email_text').addClass('hidden');
         $('#show_email_referce,check_email_referee').removeClass('hidden');
         $('.field.email_referce').toggleClass('hidden');
-        $('#email_referee').val('');
+        $('.email_referce #email_referee').val('');
         if(!$('#update_email_referee').hasClass('hidden')){ 
             $('#update_email_referee').addClass('hidden');
         }
-        $('#email_referee').removeAttr('readonly');
+        $('.email_referce #email_referee').removeAttr('readonly');
         $('#check_notice').removeClass('warning success').html('');
     });
     <?php 
@@ -261,13 +278,13 @@ require([
     ?>
     //validate email
     $('#check_email_referee').click(function(){
-        if(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test($('#email_referee').val()) ){
+        if(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test($('.email_referce #email_referee').val()) ){
         if($.ajax){
             $.ajax({
                 type: 'get',
                 async: true,
                 url: "<?php echo $storeManager->getStore()->getBaseUrl().'points/verification/emailReferee' ?>",
-                data: {email_referee:$('#email_referee').val()},
+                data: {email_referee:$('.email_referce #email_referee').val()},
                 dataType: "json",
                 beforeSend: function(){
                     $('#check_notice').removeClass('success').addClass('warning').html('<i class="fa fa-spin fa-spinner" aria-hidden="true"></i>Checking now...');
@@ -277,7 +294,7 @@ require([
                     var _status = data.status;
                     if(_status == '1'){
                         $('#check_notice').removeClass('warning').addClass('success').html('<i class="fa fa-check-circle" aria-hidden="true"></i>Congratulations, email address verification passed!');
-                        $('#email_referee').attr('readonly','readonly');
+                        $('.email_referce #email_referee').attr('readonly','readonly');
                         $('#check_email_referee').addClass('hidden');$('#update_email_referee').removeClass('hidden');
                     }else if(_status == '0'){
                         $('#check_notice').removeClass('success').addClass('warning')
@@ -300,30 +317,47 @@ require([
             .html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please check the email address !');
         }
     });
-    // $('#email_referee').blur(function(){
+    // $('.email_referce #email_referee').blur(function(){
     //     $('#check_email_referee').click();
     // });
     $('#update_email_referee').click(function(){
         $(this).addClass('hidden');
         $('#check_email_referee').removeClass('hidden');
-        $('#email_referee').removeAttr('readonly');
+        $('.email_referce #email_referee').removeAttr('readonly');
+        $('#check_notice').removeClass('success warning');
     });
     $('#form-validate .submit').click(function(event){
         var event = event || window.event;
         event.preventDefault(); // Compatible standard Browsers
         window.event.returnValue = false; // Compatible IE6~8
         saveFormCustomize();
-        if($('#email_referee').val().length > 0 && !$('#check_email_referee').hasClass('hidden')){ //error referee email
+        if($('.email_referce #email_referee').val().length > 0 && !$('#check_email_referee').hasClass('hidden')){ //error referee email
             dataForm.mage('validation', {
             ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
              }).find('input:text').attr('autocomplete', 'off');
-            $('#email_referee').focus();
-        }else if($('#email_referee').val().length <= 0 || $('#check_email_referee').hasClass('hidden')){
+            //$('.email_referce #email_referee').focus();
+            devTest("已填写"+ $('.email_referce #email_referee').val() +"， 但未通过验证");
+            $('.email_referce #email_referee').val('');
             
+        }else if($('.email_referce #email_referee').val().length <= 0 || $('#check_email_referee').hasClass('hidden')){
+            if($('.email_referce #email_referee').val().length <= 0 ){
+                devTest("长度不大于0， 未填写推荐人邮件");
+            }else if($('#check_email_referee').hasClass('hidden')){
+                devTest("已填写"+ $('.email_referce #email_referee').val()  +"， 并验证推荐邮件");
+            }
             $('#form-validate').submit();
         }
 
     });
+    /**
+    *   dev test
+    **/
+    var _dev = false;
+    function devTest(text){
+        if( _dev && window.console.log ){
+            window.console.log(text);
+        }
+    }
     /**
     *   save first name lastname email_address
     */
