@@ -403,7 +403,7 @@ define([
 
                 if (type === 0) {
                     // Text
-                    html += '<div class="' + optionClass + ' text u" ' + attr + '>' + (value ? value : label) +
+                    html += '<div class="' + optionClass + ' text" ' + attr + '>' + (value ? value : label) +
                         '</div>';
                 } else if (type === 1) {
                     // Color
@@ -418,9 +418,7 @@ define([
                         '</div>';
                 } else if (type === 3) {
                     // Clear
-                    //html += '<div class="' + optionClass + '" ' + attr + '></div>';
-                    html += '<div class="' + optionClass + ' text updategrunt" ' + attr + '>' + (value ? value : label) +
-                    '</div>';
+                    html += '<div class="' + optionClass + '" ' + attr + '></div>';
                 } else {
                     // Defaualt
                     html += '<div class="' + optionClass + '" ' + attr + '>' + label + '</div>';
