@@ -66,8 +66,14 @@ require(['jquery'],function($){
         if($_current.find('.subchildmenu').length > 0){
             //window.console.log('It is not the bottom of category.');
             $('#narrow-by-list .filter-options-item').each(function(){
-                if($(this).find('.filter-options-title').text() == 'Size'|| $(this).find('.filter-options-title').text() == 'Color')
-                $(this).addClass('hidden');
+                if(
+                    $(this).find('.filter-options-title').text() == 'Category'|| 
+                    ($(this).find('.filter-options-title').text() == 'Brand' || $(this).find('.filter-options-title').text() == 'Price')
+                ){
+                    
+                }else{
+                    $(this).addClass('hidden');
+                }
             });
         }
     });
