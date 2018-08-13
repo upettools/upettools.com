@@ -29,7 +29,8 @@ $columns = $block->getColumns();
     .products-grid.wishlist .product-item{padding: 8px 12px;}
     .products-grid.wishlist .product-item-photo{margin-right: 10px;}
     .products-grid.wishlist .product-item-name{font-size: 1.4rem;}
-    .products-grid.wishlist .product-item .price-box{text-align: right;}
+    .products-grid.wishlist .product-item .price-box{/*text-align: right;*/}
+    .products-grid.wishlist .product-item .product-item-details{margin-left: 95px;}
     .products-grid.wishlist .product-item-comment{margin: 4px;height: 32px;}
     .products-grid.wishlist .product-item .box-tocart{margin: 4px 4px 0 10px;padding: 0;}
     .products-grid.wishlist .product-item-actions .action.tocart{height: 32px;padding: 0px 8px;text-transform: capitalize;}
@@ -37,19 +38,8 @@ $columns = $block->getColumns();
     .products-grid.wishlist .product-item-actions .action.delete{ margin: 10px 5px 0 0;}
     .products-grid.wishlist .product-item-actions .action.delete span{display: none;}
     .products-grid.wishlist .product-item-actions .action.delete:before{
-        -webkit-font-smoothing: antialiased;
-    font-size: 15px;
-    line-height: 18px;
-    color: #8f8f8f;
-    content: '\e604';
-    font-family: 'luma-icons';
-    vertical-align: middle;
-    display: inline-block;
-    font-weight: normal;
-    overflow: hidden;
-    speak: none;
-    text-align: center;
-    }
+        -webkit-font-smoothing: antialiased;font-size: 15px;line-height: 18px;color: #8f8f8f;content: '\e604';font-family: 'luma-icons';
+        vertical-align: middle;display: inline-block;font-weight: normal;overflow: hidden;speak: none;text-align: center;}
 }
 </style>
 <div class="products-grid wishlist">
