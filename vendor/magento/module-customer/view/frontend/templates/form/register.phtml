@@ -20,12 +20,12 @@
 <style>
     .form-create-account input{height:30px;}
     .form-create-account input[type="checkbox"]{height: initial;}
-    .form .fieldset{margin: 0 0 20px;}
-    .form .field input[type="email"]{width: 46%;}
-    .form .field.field-name-firstname,.form .field.field-name-lastname,
-    .form .field.password,.form .field.confirmation,
-    .form .field.captcha input.input-text{display: inline-block;width: 46%;vertical-align: top;}
-    .form .field.field-name-lastname,.form .field.confirmation{margin-left:7%;}
+    .form-create-account .fieldset{margin: 0 0 20px;}
+    .form-create-account .field input[type="email"]{width: 46%;}
+    .form-create-account .field.field-name-firstname,.form .field.field-name-lastname,
+    .form-create-account .field.password,.form .field.confirmation,
+    .form-create-account .field.captcha input.input-text{display: inline-block;width: 46%;vertical-align: top;}
+    .form-create-account .field.field-name-lastname,.form .field.confirmation{margin-left:7%;}
     .field.notice{ border: 1px solid #ea9246;padding: 4px 8px;font-size: 14px;font-family: Gadugi;}
     #show_email_referce,#check_email_referee,#update_email_referee,#hide_email_referce{ display: inline-block;background: #4c6689;
     color: #fff;padding: 10px 20px;border-radius: 2px;} 
@@ -39,15 +39,14 @@
     @media only screen and (max-width: 768px) , print{
         .form-create-account .fieldset>.legend{margin: 0;}
         .form-create-account .fieldset>.field{margin: 0 0 10px;}
-        .form .field.field-name-lastname{margin: 0 0 0 7%;}
+        .form-create-account .field.field-name-lastname{margin: 0 0 0 7%;}
         .form-create-account .fieldset{margin: 0;}
-        .form .field.password{display: block; width: 80%;}
-        .form .field input[type="email"]{width: 80%;}
-        .form .field.confirmation{margin-left: 0;}
-        .fieldset>.field>.label, .fieldset>.fields>.field>.label{margin: 0 0 2px;}
+        .form-create-account .field.password{display: block; width: 80%;}
+        .form-create-account .field input[type="email"]{width: 80%;}
+        .form-create-account .field.confirmation{margin-left: 0;}
+        .form-create-account .fieldset>.field>.label, .form-create-account .fieldset>.fields>.field>.label{margin: 0 0 2px;}
         #show_email_referce,#check_email_referee,#update_email_referee,#hide_email_referce{padding: 4px 8px;}
         #check_notice{display: block;margin: 10px 0 0 0;padding: 10px 8px;}
-
     }
 </style>
 <form class="form create account form-create-account" action="<?php echo $block->escapeUrl($block->getPostActionUrl()) ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
