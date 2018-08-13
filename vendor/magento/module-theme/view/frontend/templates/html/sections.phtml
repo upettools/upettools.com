@@ -38,7 +38,14 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             box-shadow: 0 1px 1px rgba(0,0,0,0.04);}
         .nav-sections-item-title[aria-controls="store.menu"],
         .nav-sections-item-title[aria-controls="store.settings"]{box-shadow: 0 -1px 1px rgba(0,0,0,0.04);}
-        .nav-sections-item-title[aria-controls="store.settings"]+.nav-sections-item-content{margin-bottom: 40px;}
+        .nav-sections-item-title[aria-controls="store.settings"]+.nav-sections-item-content{/*margin-bottom: 40px;*/}
+        .nav-sections-item-content ul.contact{list-style: none;margin: 0; padding: 0;border-bottom: 1px solid #e2e5f1;}
+        .nav-sections-item-content ul.contact li{display: inline-block;float: left;width: 49%;box-sizing: border-box;margin: 0;padding: 14px 15px;}
+        .nav-sections-item-content ul.contact li:nth-child(1){border-right: 1px solid #e2e5f1;}
+        .nav-sections-item-content ul.contact li a{color: #7e859b;}
+        .nav-sections-item-content ul.contact li span{margin-left:12px;}
+        .nav-sections-item-content ul.contact li .fa-phone-square{font-size: 15px;}
+        .nav-sections-item-content[id="store.settings"]+.nav-sections-item-content{margin-bottom: 40px;}
         .nav-sections-item-title[aria-controls="store.menu"]{padding:16px 15px 0;}
         .nav-sections-item-title[aria-controls="store.menu"] a{color: #7e859b;text-transform: uppercase;font-weight: 700;-webkit-letter-spacing: 0.01em;
             -moz-letter-spacing: 0.01em;-ms-letter-spacing: 0.01em;letter-spacing: 0.01em;font-size: 0.83333rem;}
@@ -149,6 +156,13 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
                     <?php endif;?>
                 </div>
             <?php endforeach;?>
+            <!-- New add at mobile footer -->
+            <div class="section-item-content nav-sections-item-content" data-role="content" role="tabpanel" aria-hidden="true">
+                <ul class="contact clearfix">
+                    <li><a href="mailto:sales@upettools.com"><i class="fa fa-envelope" aria-hidden="true"></i><span>E-mail to us</span></a></li>
+                    <li><a href="tel:+86-13510148968"><i class="fa fa-phone-square" aria-hidden="true"></i><span>Contact</span></a></li>
+                </ul>
+            </div>
         </div>
         <div class="choose-sections"></div>
     </div>
@@ -159,7 +173,7 @@ $groupBehavior = $block->getGroupBehaviour() ? $block->getGroupBehaviour() : '{"
             $(document).ready(function(){
 
                 if(_isMobile()){
-                    updateDealLeft();//move hot deal left
+                    updateDealLeft();//move hot deal
                     var $newSections = $('.choose-sections');
                     var $customize = $('.customize-sections');
                     _renderSection('.header-menu>.nav-sections');
