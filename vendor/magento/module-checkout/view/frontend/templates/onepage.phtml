@@ -7,9 +7,25 @@
 // @codingStandardsIgnoreFile
 ?>
 <style>
+    .opc-estimated-wrapper,
+    .opc-wrapper .methods-shipping{padding: 8px 15px;}
+    .opc-estimated-wrapper .minicart-wrapper{right: 15px;}
+    /*shipping-new-address-form*/
+    #shipping-new-address-form{}
     @media only screen and (max-width:768px), print {
         .shipping-information{padding:15px 15px 40px;}
         #payment{padding:0 15px;}
+        /*shipping-new-address-form*/
+        #shipping-new-address-form input{height: 30px;}
+        #shipping-new-address-form input[type="checkbox"]{height: initial;}
+        .form #shipping-new-address-form.fieldset>.field{ margin-bottom: 5px;}
+        #shipping-new-address-form.fieldset>.field>.label, 
+        #shipping-new-address-form.fieldset>.fields>.field>.label{ text-transform: capitalize;}
+        #shipping-new-address-form>.field:nth-child(1){ display: inline-block; width: 46%; vertical-align: top;}
+        #shipping-new-address-form>.field:nth-child(2){ display: inline-block; width: 46%; vertical-align: top; margin-left: 7%;}
+        /*checkout-step-shipping_method*/
+        td.col-method{text-align: center;}
+        .table-checkout-shipping-method tbody td{padding-top: 5px;padding-bottom: 5px;}
     }
 </style>
 <div id="checkout" data-bind="scope:'checkout'" class="checkout-container">

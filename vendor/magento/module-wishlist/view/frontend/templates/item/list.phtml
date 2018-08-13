@@ -11,7 +11,47 @@
 /** @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block */
 $columns = $block->getColumns();
 ?>
-
+<style>
+.products-grid.wishlist .product-item-name{text-transform: capitalize;color: #666666;}
+.products-grid.wishlist .product-item .comment-box,
+.products-grid.wishlist .product-item .box-tocart{margin: 0 0 10px;padding: 0 10px;}
+.products-grid.wishlist .product-item-actions .action.tocart{padding: 0 10px;height: 40px;font-weight: normal;text-decoration: none;}
+.products-grid.wishlist+.actions-toolbar button{border-radius: 3px;}
+.products-grid.wishlist .product-item .box-tocart input.qty{margin: 0 ;padding: 0 4px;width: 40px;height: 40px;}
+.products-grid.wishlist .product-item .box-tocart .field.qty{float: left;margin: 0 ;}
+.products-grid.wishlist .product-item .box-tocart .field.qty+.product-item-actions{display: inline-block; margin-top: 0;}
+.products-grid.wishlist .product-item .box-tocart+.product-item-actions{padding: 0 12px;text-align: left;}
+.products-grid.wishlist+.actions-toolbar>.primary .action{padding: 10px 8px;}
+@media only screen and (min-width：769px) , print{
+    .products-grid.wishlist .product-item-name{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+}
+@media only screen and (max-width: 768px) , print{
+    .products-grid.wishlist .product-item{padding: 8px 12px;}
+    .products-grid.wishlist .product-item-photo{margin-right: 10px;}
+    .products-grid.wishlist .product-item-name{font-size: 1.4rem;}
+    .products-grid.wishlist .product-item .price-box{text-align: right;}
+    .products-grid.wishlist .product-item-comment{margin: 4px;height: 32px;}
+    .products-grid.wishlist .product-item .box-tocart{margin: 4px 4px 0 10px;padding: 0;}
+    .products-grid.wishlist .product-item-actions .action.tocart{height: 32px;padding: 0px 8px;text-transform: capitalize;}
+    .products-grid.wishlist .product-item-actions .action.edit{ margin: 10px 15px 0 10px;} 
+    .products-grid.wishlist .product-item-actions .action.delete{ margin: 10px 5px 0 0;}
+    .products-grid.wishlist .product-item-actions .action.delete span{display: none;}
+    .products-grid.wishlist .product-item-actions .action.delete:before{
+        -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 18px;
+    color: #8f8f8f;
+    content: '\e604';
+    font-family: 'luma-icons';
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+    }
+}
+</style>
 <div class="products-grid wishlist">
     <?php $iterator = 1; ?>
     <?php if (count($block->getItems())): ?>
