@@ -37,7 +37,11 @@
                        data-toggle="switch"
                        href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
                        id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
-                        <?php /* @escapeNotVerified */ echo $label; ?>
+					    <?php if($label == 'Details'): ?>
+							<?php echo 'Description'; ?>
+						<?php else: ?>
+                        	<?php /* @escapeNotVerified */ echo $label; ?>
+						<?php endif; ?>
                     </a>
                 </div>
                 <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content" style="<?php if($key > 0) echo 'display:none;';?>">
@@ -175,7 +179,8 @@ require([
 		'jquery'
 	],function($){
 		/**
-		* show details on modal
+		 *  show details with modal
+		 *	@Jerry
 		*/
 		$('.product.info.detailed').on('click','.item.title',function(){
 			var $item = $(this);
@@ -201,5 +206,31 @@ require([
 				$('#details-wrapper').removeClass('inactive active');
 			},300);
 		}
+		$(document).ready(function(){
+			/**
+			 * 	fix upsell
+			 *	@Jerry
+			*/
+			(function (){
+				var $_upsell = $('.related-wrapper .upsell-wrapper');
+				if($_upsell.length > 0){
+					var _upsellHtml = '<div class="upsell-wrapper">' + $_upsell.html() + '</div>';
+					$_upsell.remove();
+					if($('.product-view-content>.upsell-wrapper').length == 0){
+						$('.product-view-content>.related-wrapper').after( _upsellHtml );
+						$('.upsell-wrapper').addClass('beenmoved');
+					}
+				}
+			})();
+			/**
+			 *  remove relate to bottom
+			 * 	@Jerry
+			*/
+			(function (){
+				if($(window).width() <= 768){
+					$('.product-view .product-tab-bg').after($('.product-view-content .related-wrapper').detach());
+				}
+			})();
+		});
 	});
 </script>
