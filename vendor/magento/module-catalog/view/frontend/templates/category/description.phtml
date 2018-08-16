@@ -91,7 +91,7 @@
 									$_popularPrice =  number_format(round($_productRecommend->getFinalPrice(),2),2);
 									$_popularImageSrc = $storeManager->getStore()->getBaseUrl().'media/catalog/product'.$_productRecommend->getSmallImage();
 									//$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getUrlKey().'.html';
-									$_popularLink = $storeManager->getStore()->getBaseUrl().$_productRecommend->getProductUrl();
+									$_popularLink = $_productRecommend->getProductUrl();
 							  ?>
 						
 							<div class="item product product-item">
